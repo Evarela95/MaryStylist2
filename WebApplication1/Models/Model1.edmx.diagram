@@ -42,6 +42,14 @@
         <AssociationConnector Association="BD_MARYSTYLISModel.FK_PromocionesServicios_Servicios" ManuallyRouted="false" />
         <AssociationConnector Association="BD_MARYSTYLISModel.FK_Reseñas_Usuarios" ManuallyRouted="false" />
         <AssociationConnector Association="BD_MARYSTYLISModel.FK_Usuarios_Roles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.C__MigrationHistory" Width="1.5" PointX="10.375" PointY="9.75" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.AspNetRoles" Width="1.5" PointX="10.375" PointY="5.5" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.AspNetUserClaims" Width="1.5" PointX="14.875" PointY="6.625" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.AspNetUserLogins" Width="1.5" PointX="14.875" PointY="4" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.AspNetUsers" Width="1.5" PointX="12.625" PointY="4.375" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

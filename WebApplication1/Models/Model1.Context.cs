@@ -46,6 +46,11 @@ namespace WebApplication1.Models
         public virtual DbSet<Servicios> Servicios { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
     
         public virtual int RegistroUsuario(string nombre_Usuario, string contrasena, string nombre, string apellido, string correo, string telefono, Nullable<int> puntos, Nullable<int> id_Rol)
         {
