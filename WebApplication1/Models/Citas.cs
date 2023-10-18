@@ -23,13 +23,13 @@ namespace WebApplication1.Models
         public int Id_Cita { get; set; }
         public System.DateTime Fecha_Cita { get; set; }
         public System.TimeSpan Hora_Cita { get; set; }
-        public int Id_Usuario { get; set; }
+        public string Id_Usuario { get; set; }
         public int Id_Servicio { get; set; }
         public int Id_Empleado { get; set; }
     
+        public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Empleados Empleados { get; set; }
         public virtual Servicios Servicios { get; set; }
-        public virtual Usuarios Usuarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Facturas> Facturas { get; set; }
     }

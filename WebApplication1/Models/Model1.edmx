@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BD_MARYSTYLISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="BD_MARYSTYLISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -65,6 +65,10 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Nombre_Usuario" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Apellido_Usuario" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Puntos_Usuario" Type="int" Nullable="false" />
+          <Property Name="Rol_Id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Citas">
           <Key>
@@ -73,7 +77,7 @@
           <Property Name="Id_Cita" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Fecha_Cita" Type="date" Nullable="false" />
           <Property Name="Hora_Cita" Type="time" Precision="7" Nullable="false" />
-          <Property Name="Id_Usuario" Type="int" Nullable="false" />
+          <Property Name="Id_Usuario" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Id_Servicio" Type="int" Nullable="false" />
           <Property Name="Id_Empleado" Type="int" Nullable="false" />
         </EntityType>
@@ -93,6 +97,22 @@
           <Property Name="Id_Producto" Type="int" Nullable="false" />
           <Property Name="Cantidad" Type="tinyint" Nullable="false" />
           <Property Name="Id_Factura" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetalleFacturaPromProdu">
+          <Key>
+            <PropertyRef Name="Id_Detalle_PromProdu" />
+          </Key>
+          <Property Name="Id_Detalle_PromProdu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Factura" Type="int" Nullable="false" />
+          <Property Name="Id_Promo_Producto" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetalleFacturaPromServ">
+          <Key>
+            <PropertyRef Name="Id_Detalle_PromServ" />
+          </Key>
+          <Property Name="Id_Detalle_PromServ" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Factura" Type="int" Nullable="false" />
+          <Property Name="Id_Promo_Servicio" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DetalleFacturaServicios">
           <Key>
@@ -148,6 +168,24 @@
           <Property Name="Id_Producto" Type="int" Nullable="false" />
           <Property Name="Foto_Producto" Type="image" Nullable="false" />
           <Property Name="Nombre_Foto_Producto" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ImagenesPromosProd">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Promo_Producto" Type="int" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ImageData" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ImagenesPromosServ">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Promo_Servicio" Type="int" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ImageData" Type="varbinary(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="ImagenesServicios">
           <Key>
@@ -209,7 +247,7 @@
           <Property Name="Id_Resena" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Comentario" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Calificacion" Type="tinyint" />
-          <Property Name="Id_Usuario" Type="int" Nullable="false" />
+          <Property Name="Id_Usuario" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -237,20 +275,30 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <EntityType Name="Usuarios">
-          <Key>
-            <PropertyRef Name="Id_Usuario" />
-          </Key>
-          <Property Name="Id_Usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre_Usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Contrasena" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Nombre" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Apellido" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Correo" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Telefono" Type="nvarchar" MaxLength="15" Nullable="false" />
-          <Property Name="Puntos" Type="int" />
-          <Property Name="Id_Rol" Type="int" Nullable="false" />
-        </EntityType>
+        <Association Name="FK_AspNetUsers_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id_Rol" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="Rol_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Citas_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Citas" Type="Self.Citas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Citas">
+              <PropertyRef Name="Id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Citas_Empleados">
           <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
           <End Role="Citas" Type="Self.Citas" Multiplicity="*" />
@@ -272,18 +320,6 @@
             </Principal>
             <Dependent Role="Citas">
               <PropertyRef Name="Id_Servicio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Citas_Usuarios">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
-          <End Role="Citas" Type="Self.Citas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuarios">
-              <PropertyRef Name="Id_Usuario" />
-            </Principal>
-            <Dependent Role="Citas">
-              <PropertyRef Name="Id_Usuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -391,6 +427,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DetalleFacturaPromProdu_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
+          <End Role="DetalleFacturaPromProdu" Type="Self.DetalleFacturaPromProdu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="Id_Factura" />
+            </Principal>
+            <Dependent Role="DetalleFacturaPromProdu">
+              <PropertyRef Name="Id_Factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleFacturaPromProdu_PromocionesProductos">
+          <End Role="PromocionesProductos" Type="Self.PromocionesProductos" Multiplicity="1" />
+          <End Role="DetalleFacturaPromProdu" Type="Self.DetalleFacturaPromProdu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PromocionesProductos">
+              <PropertyRef Name="Id_Promo_Producto" />
+            </Principal>
+            <Dependent Role="DetalleFacturaPromProdu">
+              <PropertyRef Name="Id_Promo_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleFacturaPromServ_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
+          <End Role="DetalleFacturaPromServ" Type="Self.DetalleFacturaPromServ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="Id_Factura" />
+            </Principal>
+            <Dependent Role="DetalleFacturaPromServ">
+              <PropertyRef Name="Id_Factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleFacturaPromServ_PromocionesServicios">
+          <End Role="PromocionesServicios" Type="Self.PromocionesServicios" Multiplicity="1" />
+          <End Role="DetalleFacturaPromServ" Type="Self.DetalleFacturaPromServ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PromocionesServicios">
+              <PropertyRef Name="Id_Promo_Servicio" />
+            </Principal>
+            <Dependent Role="DetalleFacturaPromServ">
+              <PropertyRef Name="Id_Promo_Servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DetalleFacturaServicios_Facturas">
           <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
           <End Role="DetalleFacturaServicios" Type="Self.DetalleFacturaServicios" Multiplicity="*" />
@@ -453,6 +537,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ImagenesPromosProd_PromocionesProductos_Id_Promo_Producto">
+          <End Role="PromocionesProductos" Type="Self.PromocionesProductos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ImagenesPromosProd" Type="Self.ImagenesPromosProd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PromocionesProductos">
+              <PropertyRef Name="Id_Promo_Producto" />
+            </Principal>
+            <Dependent Role="ImagenesPromosProd">
+              <PropertyRef Name="Id_Promo_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ImagenesPromosServ_PromocionesServicios_Id_Promo_Servicio">
+          <End Role="PromocionesServicios" Type="Self.PromocionesServicios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ImagenesPromosServ" Type="Self.ImagenesPromosServ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PromocionesServicios">
+              <PropertyRef Name="Id_Promo_Servicio" />
+            </Principal>
+            <Dependent Role="ImagenesPromosServ">
+              <PropertyRef Name="Id_Promo_Servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ImagenesServicios_Servicios">
           <End Role="Servicios" Type="Self.Servicios" Multiplicity="1" />
           <End Role="ImagenesServicios" Type="Self.ImagenesServicios" Multiplicity="*" />
@@ -501,41 +613,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Reseñas_Usuarios">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+        <Association Name="FK_Reseñas_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Reseñas" Type="Self.Reseñas" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Usuarios">
-              <PropertyRef Name="Id_Usuario" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Reseñas">
               <PropertyRef Name="Id_Usuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Usuarios_Roles">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Roles">
-              <PropertyRef Name="Id_Rol" />
-            </Principal>
-            <Dependent Role="Usuarios">
-              <PropertyRef Name="Id_Rol" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="RegistroUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="nombre_Usuario" Type="nvarchar" Mode="In" />
-          <Parameter Name="contrasena" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
-          <Parameter Name="Apellido" Type="nvarchar" Mode="In" />
-          <Parameter Name="Correo" Type="nvarchar" Mode="In" />
-          <Parameter Name="Telefono" Type="nvarchar" Mode="In" />
-          <Parameter Name="Puntos" Type="int" Mode="In" />
-          <Parameter Name="Id_Rol" Type="int" Mode="In" />
-        </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -576,12 +666,16 @@
           <EntitySet Name="Citas" EntityType="Self.Citas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Detalle_Ganancias_Facturas" EntityType="Self.Detalle_Ganancias_Facturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleFacturaProducto" EntityType="Self.DetalleFacturaProducto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleFacturaPromProdu" EntityType="Self.DetalleFacturaPromProdu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleFacturaPromServ" EntityType="Self.DetalleFacturaPromServ" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleFacturaServicios" EntityType="Self.DetalleFacturaServicios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GananciaDiaria" EntityType="Self.GananciaDiaria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImagenesEmpleados" EntityType="Self.ImagenesEmpleados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImagenesProductos" EntityType="Self.ImagenesProductos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImagenesPromosProd" EntityType="Self.ImagenesPromosProd" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImagenesPromosServ" EntityType="Self.ImagenesPromosServ" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImagenesServicios" EntityType="Self.ImagenesServicios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Planilla" EntityType="Self.Planilla" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
@@ -591,17 +685,20 @@
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Servicios" EntityType="Self.Servicios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AspNetUsers_Roles" Association="Self.FK_AspNetUsers_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Citas_AspNetUsers" Association="Self.FK_Citas_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Citas" EntitySet="Citas" />
+          </AssociationSet>
           <AssociationSet Name="FK_Citas_Empleados" Association="Self.FK_Citas_Empleados">
             <End Role="Empleados" EntitySet="Empleados" />
             <End Role="Citas" EntitySet="Citas" />
           </AssociationSet>
           <AssociationSet Name="FK_Citas_Servicios" Association="Self.FK_Citas_Servicios">
             <End Role="Servicios" EntitySet="Servicios" />
-            <End Role="Citas" EntitySet="Citas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Citas_Usuarios" Association="Self.FK_Citas_Usuarios">
-            <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Citas" EntitySet="Citas" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -636,6 +733,22 @@
             <End Role="Productos" EntitySet="Productos" />
             <End Role="DetalleFacturaProducto" EntitySet="DetalleFacturaProducto" />
           </AssociationSet>
+          <AssociationSet Name="FK_DetalleFacturaPromProdu_Facturas" Association="Self.FK_DetalleFacturaPromProdu_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="DetalleFacturaPromProdu" EntitySet="DetalleFacturaPromProdu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleFacturaPromProdu_PromocionesProductos" Association="Self.FK_DetalleFacturaPromProdu_PromocionesProductos">
+            <End Role="PromocionesProductos" EntitySet="PromocionesProductos" />
+            <End Role="DetalleFacturaPromProdu" EntitySet="DetalleFacturaPromProdu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleFacturaPromServ_Facturas" Association="Self.FK_DetalleFacturaPromServ_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="DetalleFacturaPromServ" EntitySet="DetalleFacturaPromServ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleFacturaPromServ_PromocionesServicios" Association="Self.FK_DetalleFacturaPromServ_PromocionesServicios">
+            <End Role="PromocionesServicios" EntitySet="PromocionesServicios" />
+            <End Role="DetalleFacturaPromServ" EntitySet="DetalleFacturaPromServ" />
+          </AssociationSet>
           <AssociationSet Name="FK_DetalleFacturaServicios_Facturas" Association="Self.FK_DetalleFacturaServicios_Facturas">
             <End Role="Facturas" EntitySet="Facturas" />
             <End Role="DetalleFacturaServicios" EntitySet="DetalleFacturaServicios" />
@@ -656,6 +769,14 @@
             <End Role="Productos" EntitySet="Productos" />
             <End Role="ImagenesProductos" EntitySet="ImagenesProductos" />
           </AssociationSet>
+          <AssociationSet Name="FK_ImagenesPromosProd_PromocionesProductos_Id_Promo_Producto" Association="Self.FK_ImagenesPromosProd_PromocionesProductos_Id_Promo_Producto">
+            <End Role="PromocionesProductos" EntitySet="PromocionesProductos" />
+            <End Role="ImagenesPromosProd" EntitySet="ImagenesPromosProd" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ImagenesPromosServ_PromocionesServicios_Id_Promo_Servicio" Association="Self.FK_ImagenesPromosServ_PromocionesServicios_Id_Promo_Servicio">
+            <End Role="PromocionesServicios" EntitySet="PromocionesServicios" />
+            <End Role="ImagenesPromosServ" EntitySet="ImagenesPromosServ" />
+          </AssociationSet>
           <AssociationSet Name="FK_ImagenesServicios_Servicios" Association="Self.FK_ImagenesServicios_Servicios">
             <End Role="Servicios" EntitySet="Servicios" />
             <End Role="ImagenesServicios" EntitySet="ImagenesServicios" />
@@ -672,19 +793,82 @@
             <End Role="Servicios" EntitySet="Servicios" />
             <End Role="PromocionesServicios" EntitySet="PromocionesServicios" />
           </AssociationSet>
-          <AssociationSet Name="FK_Reseñas_Usuarios" Association="Self.FK_Reseñas_Usuarios">
-            <End Role="Usuarios" EntitySet="Usuarios" />
+          <AssociationSet Name="FK_Reseñas_AspNetUsers" Association="Self.FK_Reseñas_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Reseñas" EntitySet="Reseñas" />
           </AssociationSet>
-          <AssociationSet Name="FK_Usuarios_Roles" Association="Self.FK_Usuarios_Roles">
-            <End Role="Roles" EntitySet="Roles" />
-            <End Role="Usuarios" EntitySet="Usuarios" />
-          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BD_MARYSTYLISModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nombre_Usuario" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Apellido_Usuario" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Puntos_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="Rol_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_AspNetUsers_Roles" FromRole="AspNetUsers" ToRole="Roles" />
+          <NavigationProperty Name="Citas" Relationship="Self.FK_Citas_AspNetUsers" FromRole="AspNetUsers" ToRole="Citas" />
+          <NavigationProperty Name="Reseñas" Relationship="Self.FK_Reseñas_AspNetUsers" FromRole="AspNetUsers" ToRole="Reseñas" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
         <EntityType Name="Citas">
           <Key>
             <PropertyRef Name="Id_Cita" />
@@ -692,12 +876,12 @@
           <Property Name="Id_Cita" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Fecha_Cita" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Hora_Cita" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="Id_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="Id_Usuario" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Id_Servicio" Type="Int32" Nullable="false" />
           <Property Name="Id_Empleado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Citas_AspNetUsers" FromRole="Citas" ToRole="AspNetUsers" />
           <NavigationProperty Name="Empleados" Relationship="Self.FK_Citas_Empleados" FromRole="Citas" ToRole="Empleados" />
           <NavigationProperty Name="Servicios" Relationship="Self.FK_Citas_Servicios" FromRole="Citas" ToRole="Servicios" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Citas_Usuarios" FromRole="Citas" ToRole="Usuarios" />
           <NavigationProperty Name="Facturas" Relationship="Self.FK_Facturas_Citas" FromRole="Citas" ToRole="Facturas" />
         </EntityType>
         <EntityType Name="Detalle_Ganancias_Facturas">
@@ -720,6 +904,26 @@
           <Property Name="Id_Factura" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Facturas" Relationship="Self.FK_DetalleFacturaProducto_Facturas" FromRole="DetalleFacturaProducto" ToRole="Facturas" />
           <NavigationProperty Name="Productos" Relationship="Self.FK_DetalleFacturaProducto_Productos" FromRole="DetalleFacturaProducto" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="DetalleFacturaPromProdu">
+          <Key>
+            <PropertyRef Name="Id_Detalle_PromProdu" />
+          </Key>
+          <Property Name="Id_Detalle_PromProdu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Factura" Type="Int32" Nullable="false" />
+          <Property Name="Id_Promo_Producto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_DetalleFacturaPromProdu_Facturas" FromRole="DetalleFacturaPromProdu" ToRole="Facturas" />
+          <NavigationProperty Name="PromocionesProductos" Relationship="Self.FK_DetalleFacturaPromProdu_PromocionesProductos" FromRole="DetalleFacturaPromProdu" ToRole="PromocionesProductos" />
+        </EntityType>
+        <EntityType Name="DetalleFacturaPromServ">
+          <Key>
+            <PropertyRef Name="Id_Detalle_PromServ" />
+          </Key>
+          <Property Name="Id_Detalle_PromServ" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Factura" Type="Int32" Nullable="false" />
+          <Property Name="Id_Promo_Servicio" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_DetalleFacturaPromServ_Facturas" FromRole="DetalleFacturaPromServ" ToRole="Facturas" />
+          <NavigationProperty Name="PromocionesServicios" Relationship="Self.FK_DetalleFacturaPromServ_PromocionesServicios" FromRole="DetalleFacturaPromServ" ToRole="PromocionesServicios" />
         </EntityType>
         <EntityType Name="DetalleFacturaServicios">
           <Key>
@@ -756,6 +960,8 @@
           <NavigationProperty Name="Citas" Relationship="Self.FK_Facturas_Citas" FromRole="Facturas" ToRole="Citas" />
           <NavigationProperty Name="Detalle_Ganancias_Facturas" Relationship="Self.FK_Detalle_Ganancias_Facturas_Facturas" FromRole="Facturas" ToRole="Detalle_Ganancias_Facturas" />
           <NavigationProperty Name="DetalleFacturaProducto" Relationship="Self.FK_DetalleFacturaProducto_Facturas" FromRole="Facturas" ToRole="DetalleFacturaProducto" />
+          <NavigationProperty Name="DetalleFacturaPromProdu" Relationship="Self.FK_DetalleFacturaPromProdu_Facturas" FromRole="Facturas" ToRole="DetalleFacturaPromProdu" />
+          <NavigationProperty Name="DetalleFacturaPromServ" Relationship="Self.FK_DetalleFacturaPromServ_Facturas" FromRole="Facturas" ToRole="DetalleFacturaPromServ" />
           <NavigationProperty Name="DetalleFacturaServicios" Relationship="Self.FK_DetalleFacturaServicios_Facturas" FromRole="Facturas" ToRole="DetalleFacturaServicios" />
         </EntityType>
         <EntityType Name="GananciaDiaria">
@@ -787,6 +993,26 @@
           <Property Name="Foto_Producto" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="Nombre_Foto_Producto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Productos" Relationship="Self.FK_ImagenesProductos_Productos" FromRole="ImagenesProductos" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="ImagenesPromosProd">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Promo_Producto" Type="Int32" Nullable="false" />
+          <Property Name="FileName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="PromocionesProductos" Relationship="Self.FK_ImagenesPromosProd_PromocionesProductos_Id_Promo_Producto" FromRole="ImagenesPromosProd" ToRole="PromocionesProductos" />
+        </EntityType>
+        <EntityType Name="ImagenesPromosServ">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Promo_Servicio" Type="Int32" Nullable="false" />
+          <Property Name="FileName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="PromocionesServicios" Relationship="Self.FK_ImagenesPromosServ_PromocionesServicios_Id_Promo_Servicio" FromRole="ImagenesPromosServ" ToRole="PromocionesServicios" />
         </EntityType>
         <EntityType Name="ImagenesServicios">
           <Key>
@@ -833,6 +1059,8 @@
           <Property Name="Fecha_Inicio_Promo" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Fecha_Final_Promo" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Id_Producto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DetalleFacturaPromProdu" Relationship="Self.FK_DetalleFacturaPromProdu_PromocionesProductos" FromRole="PromocionesProductos" ToRole="DetalleFacturaPromProdu" />
+          <NavigationProperty Name="ImagenesPromosProd" Relationship="Self.FK_ImagenesPromosProd_PromocionesProductos_Id_Promo_Producto" FromRole="PromocionesProductos" ToRole="ImagenesPromosProd" />
           <NavigationProperty Name="Productos" Relationship="Self.FK_PromocionesProductos_Productos" FromRole="PromocionesProductos" ToRole="Productos" />
         </EntityType>
         <EntityType Name="PromocionesServicios">
@@ -846,6 +1074,8 @@
           <Property Name="Fecha_Inicio" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Fecha_Final" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Id_Servicio" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DetalleFacturaPromServ" Relationship="Self.FK_DetalleFacturaPromServ_PromocionesServicios" FromRole="PromocionesServicios" ToRole="DetalleFacturaPromServ" />
+          <NavigationProperty Name="ImagenesPromosServ" Relationship="Self.FK_ImagenesPromosServ_PromocionesServicios_Id_Promo_Servicio" FromRole="PromocionesServicios" ToRole="ImagenesPromosServ" />
           <NavigationProperty Name="Servicios" Relationship="Self.FK_PromocionesServicios_Servicios" FromRole="PromocionesServicios" ToRole="Servicios" />
         </EntityType>
         <EntityType Name="Reseñas">
@@ -855,8 +1085,8 @@
           <Property Name="Id_Resena" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Comentario" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Calificacion" Type="Byte" />
-          <Property Name="Id_Usuario" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Reseñas_Usuarios" FromRole="Reseñas" ToRole="Usuarios" />
+          <Property Name="Id_Usuario" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Reseñas_AspNetUsers" FromRole="Reseñas" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -864,7 +1094,7 @@
           </Key>
           <Property Name="Id_Rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre_Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Roles" FromRole="Roles" ToRole="Usuarios" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_AspNetUsers_Roles" FromRole="Roles" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="Servicios">
           <Key>
@@ -889,23 +1119,70 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="Usuarios">
-          <Key>
-            <PropertyRef Name="Id_Usuario" />
-          </Key>
-          <Property Name="Id_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre_Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Contrasena" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Apellido" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Puntos" Type="Int32" />
-          <Property Name="Id_Rol" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Citas" Relationship="Self.FK_Citas_Usuarios" FromRole="Usuarios" ToRole="Citas" />
-          <NavigationProperty Name="Reseñas" Relationship="Self.FK_Reseñas_Usuarios" FromRole="Usuarios" ToRole="Reseñas" />
-          <NavigationProperty Name="Roles" Relationship="Self.FK_Usuarios_Roles" FromRole="Usuarios" ToRole="Roles" />
-        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsers_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id_Rol" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="Rol_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Citas_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Citas" Type="Self.Citas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Citas">
+              <PropertyRef Name="Id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reseñas_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Reseñas" Type="Self.Reseñas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reseñas">
+              <PropertyRef Name="Id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Citas_Empleados">
           <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
           <End Role="Citas" Type="Self.Citas" Multiplicity="*" />
@@ -927,18 +1204,6 @@
             </Principal>
             <Dependent Role="Citas">
               <PropertyRef Name="Id_Servicio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Citas_Usuarios">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
-          <End Role="Citas" Type="Self.Citas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuarios">
-              <PropertyRef Name="Id_Usuario" />
-            </Principal>
-            <Dependent Role="Citas">
-              <PropertyRef Name="Id_Usuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1002,6 +1267,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DetalleFacturaPromProdu_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
+          <End Role="DetalleFacturaPromProdu" Type="Self.DetalleFacturaPromProdu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="Id_Factura" />
+            </Principal>
+            <Dependent Role="DetalleFacturaPromProdu">
+              <PropertyRef Name="Id_Factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleFacturaPromProdu_PromocionesProductos">
+          <End Role="PromocionesProductos" Type="Self.PromocionesProductos" Multiplicity="1" />
+          <End Role="DetalleFacturaPromProdu" Type="Self.DetalleFacturaPromProdu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PromocionesProductos">
+              <PropertyRef Name="Id_Promo_Producto" />
+            </Principal>
+            <Dependent Role="DetalleFacturaPromProdu">
+              <PropertyRef Name="Id_Promo_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleFacturaPromServ_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
+          <End Role="DetalleFacturaPromServ" Type="Self.DetalleFacturaPromServ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="Id_Factura" />
+            </Principal>
+            <Dependent Role="DetalleFacturaPromServ">
+              <PropertyRef Name="Id_Factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleFacturaPromServ_PromocionesServicios">
+          <End Role="PromocionesServicios" Type="Self.PromocionesServicios" Multiplicity="1" />
+          <End Role="DetalleFacturaPromServ" Type="Self.DetalleFacturaPromServ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PromocionesServicios">
+              <PropertyRef Name="Id_Promo_Servicio" />
+            </Principal>
+            <Dependent Role="DetalleFacturaPromServ">
+              <PropertyRef Name="Id_Promo_Servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DetalleFacturaServicios_Facturas">
           <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
           <End Role="DetalleFacturaServicios" Type="Self.DetalleFacturaServicios" Multiplicity="*" />
@@ -1064,6 +1377,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ImagenesPromosProd_PromocionesProductos_Id_Promo_Producto">
+          <End Role="PromocionesProductos" Type="Self.PromocionesProductos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ImagenesPromosProd" Type="Self.ImagenesPromosProd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PromocionesProductos">
+              <PropertyRef Name="Id_Promo_Producto" />
+            </Principal>
+            <Dependent Role="ImagenesPromosProd">
+              <PropertyRef Name="Id_Promo_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ImagenesPromosServ_PromocionesServicios_Id_Promo_Servicio">
+          <End Role="PromocionesServicios" Type="Self.PromocionesServicios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ImagenesPromosServ" Type="Self.ImagenesPromosServ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PromocionesServicios">
+              <PropertyRef Name="Id_Promo_Servicio" />
+            </Principal>
+            <Dependent Role="ImagenesPromosServ">
+              <PropertyRef Name="Id_Promo_Servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ImagenesServicios_Servicios">
           <End Role="Servicios" Type="Self.Servicios" Multiplicity="1" />
           <End Role="ImagenesServicios" Type="Self.ImagenesServicios" Multiplicity="*" />
@@ -1100,40 +1441,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Reseñas_Usuarios">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
-          <End Role="Reseñas" Type="Self.Reseñas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuarios">
-              <PropertyRef Name="Id_Usuario" />
-            </Principal>
-            <Dependent Role="Reseñas">
-              <PropertyRef Name="Id_Usuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Usuarios_Roles">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Roles">
-              <PropertyRef Name="Id_Rol" />
-            </Principal>
-            <Dependent Role="Usuarios">
-              <PropertyRef Name="Id_Rol" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
         </Association>
         <EntityContainer Name="BD_MARYSTYLISEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
           <EntitySet Name="Citas" EntityType="Self.Citas" />
           <EntitySet Name="Detalle_Ganancias_Facturas" EntityType="Self.Detalle_Ganancias_Facturas" />
           <EntitySet Name="DetalleFacturaProducto" EntityType="Self.DetalleFacturaProducto" />
+          <EntitySet Name="DetalleFacturaPromProdu" EntityType="Self.DetalleFacturaPromProdu" />
+          <EntitySet Name="DetalleFacturaPromServ" EntityType="Self.DetalleFacturaPromServ" />
           <EntitySet Name="DetalleFacturaServicios" EntityType="Self.DetalleFacturaServicios" />
           <EntitySet Name="Empleados" EntityType="Self.Empleados" />
           <EntitySet Name="Facturas" EntityType="Self.Facturas" />
           <EntitySet Name="GananciaDiaria" EntityType="Self.GananciaDiaria" />
           <EntitySet Name="ImagenesEmpleados" EntityType="Self.ImagenesEmpleados" />
           <EntitySet Name="ImagenesProductos" EntityType="Self.ImagenesProductos" />
+          <EntitySet Name="ImagenesPromosProd" EntityType="Self.ImagenesPromosProd" />
+          <EntitySet Name="ImagenesPromosServ" EntityType="Self.ImagenesPromosServ" />
           <EntitySet Name="ImagenesServicios" EntityType="Self.ImagenesServicios" />
           <EntitySet Name="Planilla" EntityType="Self.Planilla" />
           <EntitySet Name="Productos" EntityType="Self.Productos" />
@@ -1143,17 +1473,32 @@
           <EntitySet Name="Roles" EntityType="Self.Roles" />
           <EntitySet Name="Servicios" EntityType="Self.Servicios" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_Roles" Association="Self.FK_AspNetUsers_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Citas_AspNetUsers" Association="Self.FK_Citas_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Citas" EntitySet="Citas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reseñas_AspNetUsers" Association="Self.FK_Reseñas_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Reseñas" EntitySet="Reseñas" />
+          </AssociationSet>
           <AssociationSet Name="FK_Citas_Empleados" Association="Self.FK_Citas_Empleados">
             <End Role="Empleados" EntitySet="Empleados" />
             <End Role="Citas" EntitySet="Citas" />
           </AssociationSet>
           <AssociationSet Name="FK_Citas_Servicios" Association="Self.FK_Citas_Servicios">
             <End Role="Servicios" EntitySet="Servicios" />
-            <End Role="Citas" EntitySet="Citas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Citas_Usuarios" Association="Self.FK_Citas_Usuarios">
-            <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Citas" EntitySet="Citas" />
           </AssociationSet>
           <AssociationSet Name="FK_Facturas_Citas" Association="Self.FK_Facturas_Citas">
@@ -1176,6 +1521,22 @@
             <End Role="Productos" EntitySet="Productos" />
             <End Role="DetalleFacturaProducto" EntitySet="DetalleFacturaProducto" />
           </AssociationSet>
+          <AssociationSet Name="FK_DetalleFacturaPromProdu_Facturas" Association="Self.FK_DetalleFacturaPromProdu_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="DetalleFacturaPromProdu" EntitySet="DetalleFacturaPromProdu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleFacturaPromProdu_PromocionesProductos" Association="Self.FK_DetalleFacturaPromProdu_PromocionesProductos">
+            <End Role="PromocionesProductos" EntitySet="PromocionesProductos" />
+            <End Role="DetalleFacturaPromProdu" EntitySet="DetalleFacturaPromProdu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleFacturaPromServ_Facturas" Association="Self.FK_DetalleFacturaPromServ_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="DetalleFacturaPromServ" EntitySet="DetalleFacturaPromServ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleFacturaPromServ_PromocionesServicios" Association="Self.FK_DetalleFacturaPromServ_PromocionesServicios">
+            <End Role="PromocionesServicios" EntitySet="PromocionesServicios" />
+            <End Role="DetalleFacturaPromServ" EntitySet="DetalleFacturaPromServ" />
+          </AssociationSet>
           <AssociationSet Name="FK_DetalleFacturaServicios_Facturas" Association="Self.FK_DetalleFacturaServicios_Facturas">
             <End Role="Facturas" EntitySet="Facturas" />
             <End Role="DetalleFacturaServicios" EntitySet="DetalleFacturaServicios" />
@@ -1196,6 +1557,14 @@
             <End Role="Productos" EntitySet="Productos" />
             <End Role="ImagenesProductos" EntitySet="ImagenesProductos" />
           </AssociationSet>
+          <AssociationSet Name="FK_ImagenesPromosProd_PromocionesProductos_Id_Promo_Producto" Association="Self.FK_ImagenesPromosProd_PromocionesProductos_Id_Promo_Producto">
+            <End Role="PromocionesProductos" EntitySet="PromocionesProductos" />
+            <End Role="ImagenesPromosProd" EntitySet="ImagenesPromosProd" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ImagenesPromosServ_PromocionesServicios_Id_Promo_Servicio" Association="Self.FK_ImagenesPromosServ_PromocionesServicios_Id_Promo_Servicio">
+            <End Role="PromocionesServicios" EntitySet="PromocionesServicios" />
+            <End Role="ImagenesPromosServ" EntitySet="ImagenesPromosServ" />
+          </AssociationSet>
           <AssociationSet Name="FK_ImagenesServicios_Servicios" Association="Self.FK_ImagenesServicios_Servicios">
             <End Role="Servicios" EntitySet="Servicios" />
             <End Role="ImagenesServicios" EntitySet="ImagenesServicios" />
@@ -1208,24 +1577,10 @@
             <End Role="Servicios" EntitySet="Servicios" />
             <End Role="PromocionesServicios" EntitySet="PromocionesServicios" />
           </AssociationSet>
-          <AssociationSet Name="FK_Reseñas_Usuarios" Association="Self.FK_Reseñas_Usuarios">
-            <End Role="Usuarios" EntitySet="Usuarios" />
-            <End Role="Reseñas" EntitySet="Reseñas" />
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Usuarios_Roles" Association="Self.FK_Usuarios_Roles">
-            <End Role="Roles" EntitySet="Roles" />
-            <End Role="Usuarios" EntitySet="Usuarios" />
-          </AssociationSet>
-          <FunctionImport Name="RegistroUsuario">
-            <Parameter Name="nombre_Usuario" Mode="In" Type="String" />
-            <Parameter Name="contrasena" Mode="In" Type="String" />
-            <Parameter Name="Nombre" Mode="In" Type="String" />
-            <Parameter Name="Apellido" Mode="In" Type="String" />
-            <Parameter Name="Correo" Mode="In" Type="String" />
-            <Parameter Name="Telefono" Mode="In" Type="String" />
-            <Parameter Name="Puntos" Mode="In" Type="Int32" />
-            <Parameter Name="Id_Rol" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -1256,23 +1611,6 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <EntitySet Name="C__MigrationHistory" EntityType="BD_MARYSTYLISModel.C__MigrationHistory" />
-          <EntitySet Name="AspNetRoles" EntityType="BD_MARYSTYLISModel.AspNetRoles" />
-          <EntitySet Name="AspNetUserClaims" EntityType="BD_MARYSTYLISModel.AspNetUserClaims" />
-          <EntitySet Name="AspNetUserLogins" EntityType="BD_MARYSTYLISModel.AspNetUserLogins" />
-          <EntitySet Name="AspNetUsers" EntityType="BD_MARYSTYLISModel.AspNetUsers" />
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="BD_MARYSTYLISModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="BD_MARYSTYLISModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="BD_MARYSTYLISModel.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1285,103 +1623,71 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-        <EntityType Name="C__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="AspNetRoles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="BD_MARYSTYLISModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUserClaims">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="BD_MARYSTYLISModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUserLogins">
-          <Key>
-            <PropertyRef Name="LoginProvider" />
-            <PropertyRef Name="ProviderKey" />
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="BD_MARYSTYLISModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
-        </EntityType>
-        <EntityType Name="AspNetUsers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
-          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="BD_MARYSTYLISModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="BD_MARYSTYLISModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="AspNetRoles" Relationship="BD_MARYSTYLISModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-        </EntityType>
-        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Type="BD_MARYSTYLISModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="BD_MARYSTYLISModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserClaims">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Type="BD_MARYSTYLISModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="BD_MARYSTYLISModel.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserLogins">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="AspNetUserRoles">
-          <End Type="BD_MARYSTYLISModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
-          <End Type="BD_MARYSTYLISModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="BD_MARYSTYLISModelStoreContainer" CdmEntityContainer="BD_MARYSTYLISEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Nombre_Usuario" ColumnName="Nombre_Usuario" />
+                <ScalarProperty Name="Apellido_Usuario" ColumnName="Apellido_Usuario" />
+                <ScalarProperty Name="Puntos_Usuario" ColumnName="Puntos_Usuario" />
+                <ScalarProperty Name="Rol_Id" ColumnName="Rol_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Citas">
             <EntityTypeMapping TypeName="BD_MARYSTYLISModel.Citas">
               <MappingFragment StoreEntitySet="Citas">
@@ -1410,6 +1716,24 @@
                 <ScalarProperty Name="Id_Producto" ColumnName="Id_Producto" />
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="Id_Factura" ColumnName="Id_Factura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleFacturaPromProdu">
+            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.DetalleFacturaPromProdu">
+              <MappingFragment StoreEntitySet="DetalleFacturaPromProdu">
+                <ScalarProperty Name="Id_Detalle_PromProdu" ColumnName="Id_Detalle_PromProdu" />
+                <ScalarProperty Name="Id_Factura" ColumnName="Id_Factura" />
+                <ScalarProperty Name="Id_Promo_Producto" ColumnName="Id_Promo_Producto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleFacturaPromServ">
+            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.DetalleFacturaPromServ">
+              <MappingFragment StoreEntitySet="DetalleFacturaPromServ">
+                <ScalarProperty Name="Id_Detalle_PromServ" ColumnName="Id_Detalle_PromServ" />
+                <ScalarProperty Name="Id_Factura" ColumnName="Id_Factura" />
+                <ScalarProperty Name="Id_Promo_Servicio" ColumnName="Id_Promo_Servicio" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1471,6 +1795,26 @@
                 <ScalarProperty Name="Id_Producto" ColumnName="Id_Producto" />
                 <ScalarProperty Name="Foto_Producto" ColumnName="Foto_Producto" />
                 <ScalarProperty Name="Nombre_Foto_Producto" ColumnName="Nombre_Foto_Producto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImagenesPromosProd">
+            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.ImagenesPromosProd">
+              <MappingFragment StoreEntitySet="ImagenesPromosProd">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Promo_Producto" ColumnName="Id_Promo_Producto" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImagenesPromosServ">
+            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.ImagenesPromosServ">
+              <MappingFragment StoreEntitySet="ImagenesPromosServ">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Promo_Servicio" ColumnName="Id_Promo_Servicio" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1571,22 +1915,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Usuarios">
-            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.Usuarios">
-              <MappingFragment StoreEntitySet="Usuarios">
-                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
-                <ScalarProperty Name="Nombre_Usuario" ColumnName="Nombre_Usuario" />
-                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-                <ScalarProperty Name="Correo" ColumnName="Correo" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Puntos" ColumnName="Puntos" />
-                <ScalarProperty Name="Id_Rol" ColumnName="Id_Rol" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="RegistroUsuario" FunctionName="BD_MARYSTYLISModel.Store.RegistroUsuario" />
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="BD_MARYSTYLISModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="BD_MARYSTYLISModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="BD_MARYSTYLISModel.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="BD_MARYSTYLISModel.Store.sp_dropdiagram" />
@@ -1611,69 +1947,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="BD_MARYSTYLISModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="BD_MARYSTYLISModel.Store.sp_upgraddiagrams" />
-          <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.C__MigrationHistory">
-              <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.AspNetRoles">
-              <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.AspNetUserClaims">
-              <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.AspNetUserLogins">
-              <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.AspNetUsers">
-              <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="BD_MARYSTYLISModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetUsers">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-            <EndProperty Name="AspNetRoles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

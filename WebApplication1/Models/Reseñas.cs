@@ -17,8 +17,8 @@ namespace WebApplication1.Models
         public int Id_Resena { get; set; }
         public string Comentario { get; set; }
         public Nullable<byte> Calificacion { get; set; }
-        public int Id_Usuario { get; set; }
+        public string Id_Usuario { get; set; }
     
-        public virtual Usuarios Usuarios { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

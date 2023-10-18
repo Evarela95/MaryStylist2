@@ -14,6 +14,13 @@ namespace WebApplication1.Models
     
     public partial class PromocionesProductos
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PromocionesProductos()
+        {
+            this.DetalleFacturaPromProdu = new HashSet<DetalleFacturaPromProdu>();
+            this.ImagenesPromosProd = new HashSet<ImagenesPromosProd>();
+        }
+    
         public int Id_Promo_Producto { get; set; }
         public string Nombre_Promo_Producto { get; set; }
         public string Descripcion_Promo_Producto { get; set; }
@@ -22,6 +29,10 @@ namespace WebApplication1.Models
         public System.DateTime Fecha_Final_Promo { get; set; }
         public int Id_Producto { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetalleFacturaPromProdu> DetalleFacturaPromProdu { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ImagenesPromosProd> ImagenesPromosProd { get; set; }
         public virtual Productos Productos { get; set; }
     }
 }

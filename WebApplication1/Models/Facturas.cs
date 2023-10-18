@@ -19,6 +19,8 @@ namespace WebApplication1.Models
         {
             this.Detalle_Ganancias_Facturas = new HashSet<Detalle_Ganancias_Facturas>();
             this.DetalleFacturaProducto = new HashSet<DetalleFacturaProducto>();
+            this.DetalleFacturaPromProdu = new HashSet<DetalleFacturaPromProdu>();
+            this.DetalleFacturaPromServ = new HashSet<DetalleFacturaPromServ>();
             this.DetalleFacturaServicios = new HashSet<DetalleFacturaServicios>();
         }
     
@@ -33,6 +35,10 @@ namespace WebApplication1.Models
         public virtual ICollection<Detalle_Ganancias_Facturas> Detalle_Ganancias_Facturas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetalleFacturaProducto> DetalleFacturaProducto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetalleFacturaPromProdu> DetalleFacturaPromProdu { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetalleFacturaPromServ> DetalleFacturaPromServ { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetalleFacturaServicios> DetalleFacturaServicios { get; set; }
     }
