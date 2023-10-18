@@ -10,10 +10,15 @@
 namespace WebApplication1.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagramdefinition_Result
+    public partial class DetalleFacturaPromProdu
     {
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int Id_Detalle_PromProdu { get; set; }
+        public int Id_Factura { get; set; }
+        public int Id_Promo_Producto { get; set; }
+    
+        public virtual Facturas Facturas { get; set; }
+        public virtual PromocionesProductos PromocionesProductos { get; set; }
     }
 }

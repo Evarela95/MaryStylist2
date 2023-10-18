@@ -12,12 +12,13 @@ namespace WebApplication1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagrams
+    public partial class ImagenesPromosProd
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int Id { get; set; }
+        public int Id_Promo_Producto { get; set; }
+        public string FileName { get; set; }
+        public byte[] ImageData { get; set; }
+    
+        public virtual PromocionesProductos PromocionesProductos { get; set; }
     }
 }

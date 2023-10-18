@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="80a0bc78174348778e63d85c3c985e58" Name="Diagram1">
+      <Diagram DiagramId="572daf5feae34b9bb084ef5a79c4ffe8" Name="Diagram1">
         <EntityTypeShape EntityType="BD_MARYSTYLISModel.C__MigrationHistory" Width="1.5" PointX="3.75" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="BD_MARYSTYLISModel.AspNetRoles" Width="1.5" PointX="1.5" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="BD_MARYSTYLISModel.AspNetUserClaims" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
@@ -31,7 +31,6 @@
         <EntityTypeShape EntityType="BD_MARYSTYLISModel.Reseñas" Width="1.5" PointX="3" PointY="24" IsExpanded="true" />
         <EntityTypeShape EntityType="BD_MARYSTYLISModel.Roles" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BD_MARYSTYLISModel.Servicios" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BD_MARYSTYLISModel.sysdiagrams" Width="1.5" PointX="9.75" PointY="2.25" IsExpanded="true" />
         <AssociationConnector Association="BD_MARYSTYLISModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="BD_MARYSTYLISModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="BD_MARYSTYLISModel.FK_AspNetUsers_Roles" ManuallyRouted="false" />
