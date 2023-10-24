@@ -1,10 +1,11 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <title>Salón de Belleza - Inicio</title>
+    <link href="~/Content/HeaderFooter.css" rel="stylesheet" />
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -18,13 +19,35 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Nombre de la aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Mary Stylist", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Galería", "Galeria", "Home")</li>
+                    <li>@Html.ActionLink("Nosotros", "Nosotros", "Home")</li>
+                    <li>@Html.ActionLink("Reseñas", "Reseñas", "Home")</li>
+                    <li>@Html.ActionLink("Contacto", "Contacto", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Servicios <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Promociones", "PromocionesServicios", "Home")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Productos <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Promociones", "PromocionesProductos", "Home")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administración <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Galería", "AdminGaleria", "Admin")</li>
+                            <li>@Html.ActionLink("Nosotros", "AdminNosotros", "Admin")</li>
+                            <li>@Html.ActionLink("Reseñas", "AdminReseñas", "Admin")</li>
+                        </ul>
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -34,7 +57,32 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 footer-info">
+                        <p>Salón de Belleza Mary Stylist
+                        <p>Dirección: Barva, Heredia, Costa Rica </p>
+                        <p>Teléfono: (123) 456-7890</p>
+                        <div class="social-icons">
+                            <a href="#" class="fa fa-facebook"></a>
+                            <a href="#" class="fa fa-twitter"></a>
+                            <a href="#" class="fa fa-instagram"></a>
+                        </div>
+                        <a class="navbar-brand">
+                            <img src="~/images/FAUGET1.png" width="150" height="150" class="d-inline-block align-top" alt="Logo">
+                        </a>
+                    </div>
+                    <div class="col-md-6 contact-form">
+                        <h4>Contacta con nosotros</h4>
+                        <form action="https://formsubmit.co/mepamezacor23@gmail.com" method="POST">
+                            <input type="text" name="Nombre" placeholder="Nombre">
+                            <input type="email" name="Correo" placeholder="Correo electrónico">
+                            <textarea rows="4" name="Mensaje" placeholder="Mensaje"></textarea>
+                            <button type="submit">Enviar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </footer>
     </div>
 
@@ -43,3 +91,4 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
