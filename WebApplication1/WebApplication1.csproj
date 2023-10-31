@@ -173,8 +173,14 @@
     <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductosAdminController.cs" />
+    <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\PromocionesProductosController.cs" />
     <Compile Include="Controllers\PromocionesServiciosController.cs" />
+    <Compile Include="Controllers\ReseñasAdminController.cs" />
+    <Compile Include="Controllers\ReseñasController.cs" />
+    <Compile Include="Controllers\ServiciosAdminController.cs" />
+    <Compile Include="Controllers\ServiciosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -378,6 +384,39 @@
     <Content Include="Views\PromocionesServicios\PromoServImagen.cshtml" />
     <Content Include="Views\PromocionesServicios\AddImage.cshtml" />
     <Content Include="Views\PromocionesServicios\DeleteImage.cshtml" />
+    <Content Include="Views\Reseñas\Create.cshtml" />
+    <Content Include="Views\Reseñas\Delete.cshtml" />
+    <Content Include="Views\Reseñas\Details.cshtml" />
+    <Content Include="Views\Reseñas\Edit.cshtml" />
+    <Content Include="Views\Reseñas\Index.cshtml" />
+    <Content Include="Views\Productos\Create.cshtml" />
+    <Content Include="Views\Productos\Delete.cshtml" />
+    <Content Include="Views\Productos\Details.cshtml" />
+    <Content Include="Views\Productos\Edit.cshtml" />
+    <Content Include="Views\Productos\Index.cshtml" />
+    <Content Include="Views\ProductosAdmin\Create.cshtml" />
+    <Content Include="Views\ProductosAdmin\Delete.cshtml" />
+    <Content Include="Views\ProductosAdmin\Details.cshtml" />
+    <Content Include="Views\ProductosAdmin\Edit.cshtml" />
+    <Content Include="Views\ProductosAdmin\Index.cshtml" />
+    <Content Include="Views\ProductosAdmin\ProductoImagen.cshtml" />
+    <Content Include="Views\ProductosAdmin\DeleteImage.cshtml" />
+    <Content Include="Views\ProductosAdmin\AddImage.cshtml" />
+    <Content Include="Views\ReseñasAdmin\Create.cshtml" />
+    <Content Include="Views\ReseñasAdmin\Delete.cshtml" />
+    <Content Include="Views\ReseñasAdmin\Details.cshtml" />
+    <Content Include="Views\ReseñasAdmin\Edit.cshtml" />
+    <Content Include="Views\ReseñasAdmin\Index.cshtml" />
+    <Content Include="Views\Servicios\Create.cshtml" />
+    <Content Include="Views\Servicios\Delete.cshtml" />
+    <Content Include="Views\Servicios\Details.cshtml" />
+    <Content Include="Views\Servicios\Edit.cshtml" />
+    <Content Include="Views\Servicios\Index.cshtml" />
+    <Content Include="Views\ServiciosAdmin\Create.cshtml" />
+    <Content Include="Views\ServiciosAdmin\Delete.cshtml" />
+    <Content Include="Views\ServiciosAdmin\Details.cshtml" />
+    <Content Include="Views\ServiciosAdmin\Edit.cshtml" />
+    <Content Include="Views\ServiciosAdmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

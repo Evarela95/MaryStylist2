@@ -1,0 +1,45 @@
+﻿@using WebApplication1.Models;
+
+@{
+    ViewBag.Title = "ImagenesProd";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Productos
+
+<head>
+    <link href="~/Content/Nosotros.css" rel="stylesheet" />
+</head>
+
+<section class="titEmp">
+    <h1>Imágenes del Producto</h1>
+    <p>Nombre del Empleado: @Model.Nombre_Producto</p>
+</section>
+
+<body>
+    <p class="crearBTN">
+        @Html.ActionLink("Añadir Imagen", "AddImage", new { id = Model.Id_Producto }) |
+        @Html.ActionLink("Atrás", "Index")
+    </p>
+    <table class="formEmp">
+        <tr>
+            <th class="atributosEmp">Descripción</th>
+            <th class="atributosEmp">Imagen</th>
+            <th class="atributosEmp">Acción</th>
+        </tr>
+        @foreach (var imagen in Model.ImagenesProductos)
+        {
+            <tr>
+                <td>@imagen.Nombre_Foto_Producto</td>
+                <td>
+                    <img src="data:image/png;base64,@Convert.ToBase64String(imagen.Foto_Producto)" />
+                </td>
+                <td class="linkEmpleados">
+                    @Html.ActionLink("Eliminar", "DeleteImage", new { id = imagen.Id_Foto_Producto })
+                </td>
+            </tr>
+        }
+    </table>
+
+
+</body>
