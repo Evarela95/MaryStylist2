@@ -1,0 +1,24 @@
+﻿@model WebApplication1.Models.ImagenesEmpleados
+
+@{
+    ViewBag.Title = "AddImage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Añadir Imagen</h2>
+
+@using (Html.BeginForm("AddImage", "Empleados", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(model => model.Id_Empleado)
+
+    <div>
+        @Html.LabelFor(model => model.FileName)
+        @Html.TextBoxFor(model => model.FileName)
+    </div>
+    <div>
+        <input type="file" name="file" />
+    </div>
+    <input type="submit" value="Add Image" />
+}
+
+
