@@ -1,0 +1,67 @@
+﻿@model WebApplication1.Models.PromocionesServicios
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PromocionesServicios</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre_Promo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre_Promo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion_Promo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion_Promo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Precio_Promo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Precio_Promo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_Inicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_Inicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_Final)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_Final)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Servicios.Nombre_Servicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Servicios.Nombre_Servicio)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Promo_Servicio }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

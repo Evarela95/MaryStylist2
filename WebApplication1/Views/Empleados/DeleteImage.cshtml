@@ -1,0 +1,54 @@
+﻿@model WebApplication1.Models.ImagenesEmpleados
+
+@{
+    ViewBag.Title = "DeleteImage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/Content/Nosotros.css" rel="stylesheet" />
+</head>
+
+<section class="titEmp">
+    <h1>Eliminar Imagen</h1>
+</section>
+
+<h3 class="titConfirmacionEmp">¿Estás seguro de querer eliminar esta imagen?</h3>
+<div>
+    <dl class="formEmp">
+        <dt class="atributosDetallesEmp">
+            @Html.DisplayNameFor(model => model.FileName)
+        </dt>
+
+        <dd class="atributosEmp">
+            @Html.DisplayFor(model => model.FileName)
+        </dd>
+
+        <dt class="atributosDetallesEmp">
+            @Html.DisplayNameFor(model => model.ImageData)
+        </dt>
+
+        <dd class="atributosEmp">
+            @Html.DisplayFor(model => model.ImageData)
+        </dd>
+
+        <dt class="atributosDetallesEmp">
+            @Html.DisplayNameFor(model => model.Empleados.Nombre_Empleado)
+        </dt>
+
+        <dd class="atributosEmp">
+            @Html.DisplayFor(model => model.Empleados.Nombre_Empleado)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="botones">
+            <input type="submit" value="Eliminar" class="btnCrear" /> |
+            @Html.ActionLink("Atrás", "Index")
+        </div>
+    }
+</div>

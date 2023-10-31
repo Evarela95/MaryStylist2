@@ -1,0 +1,58 @@
+﻿@model IEnumerable<WebApplication1.Models.Empleados>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="titEmp">
+    <h1>Lista de Empleados</h1>
+</section>
+
+<body>
+    <p class="crearBTN">
+        @Html.ActionLink("Crear Nuevo Empleado", "Create")
+    </p>
+    <table class="formEmp">
+        <tr>
+            <th class="atributosEmp">
+                @Html.DisplayNameFor(model => model.Nombre_Empleado)
+            </th>
+            <th class="atributosEmp">
+                @Html.DisplayNameFor(model => model.Apellido_Empleado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion_Empleado)
+            </th>
+            <th class="atributosEmp">
+                @Html.DisplayNameFor(model => model.Correo_Empleado)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="atributosEmp">
+                    @Html.DisplayFor(modelItem => item.Nombre_Empleado)
+                </td>
+                <td class="atributosEmp">
+                    @Html.DisplayFor(modelItem => item.Apellido_Empleado)
+                </td>
+                <td class="atributosEmp">
+                    @Html.DisplayFor(modelItem => item.Descripcion_Empleado)
+                </td>
+                <td class="atributosEmp">
+                    @Html.DisplayFor(modelItem => item.Correo_Empleado)
+                </td>
+                <td class="linkEmpleados">
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id_Empleado }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.Id_Empleado }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id_Empleado }) |
+                    @Html.ActionLink("Imagen", "EmpleadoImagen", new { id = item.Id_Empleado })
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>

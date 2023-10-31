@@ -1,0 +1,195 @@
+﻿/* CSS de Index */
+.titEmp {
+    text-align: center;
+    padding: 25px 0;
+    background-color: #f8f8f8;
+}
+
+.crearBTN {
+    padding: 25px 0;
+    text-align: center;
+}
+
+.formEmp {
+    margin-top: 20px;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+.atributosEmp {
+    padding: 10px;
+    text-align: center;
+    font-size: 20px;
+}
+
+img {
+    border-radius: 50%; /* Para hacer la imagen redonda */
+    margin-right: 20px;
+    border: 5px solid #B8860b;
+}
+
+.linkEmpleados {
+    text-decoration: none;
+}
+
+/*CSS de Create(Crear)*/
+
+/* Estilo para el formulario */
+
+/* Estilo para texto*/
+.texto {
+    font-weight: bold;
+}
+
+/* Estilo para los campos de entrada y mensajes de validación */
+.formCampo {
+    width: 100%;
+    height: 40px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 17px;
+}
+
+.botones {
+    padding: 15px 0;
+    margin-left: 30%;
+    margin-right: 30%;
+    text-align: center;
+}
+
+.btnCrear {
+    background-color: #B8860b;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    line-height: 25px;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.linkEmpleados {
+    text-decoration: none;
+}
+
+/* Estilo para el enlace "Atrás" 
+a {
+    text-decoration: none;
+    font-size: 20px;
+    color: #337ab7;
+}
+
+    Estilo para el enlace "Atrás" al pasar el cursor sobre él 
+    a:hover {
+        text-decoration: underline;
+    }*/
+
+/* CSS de Editar */
+
+.btnEditar {
+    background-color: #B8860b;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    line-height: 25px;
+    font-size: 20px;
+}
+
+.formEditar {
+    margin-top: 20px;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+/* CSS de Detalles*/
+
+.formEmp {
+    margin-top: 20px;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+.atributosDetallesEmp {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* CSS de Eliminar */
+
+.titConfirmacionEmp {
+    font-size: 25px;
+    text-align: center;
+}
+
+
+/* Estilos a vista Nosotros */
+.hero {
+    text-align: center;
+    background-color: #f2f2f2;
+    padding: 50px 0;
+}
+
+    .hero h1 {
+        font-size: 36px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .hero p {
+        font-size: 18px;
+        color: #666;
+    }
+
+.estilistas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 30px auto;
+    max-width: 1200px;
+}
+
+.estilista {
+    width: calc(33.33% - 20px);
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}
+
+.card__image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.estilista h3 {
+    font-size: 24px;
+    color: #333;
+    margin: 10px 0;
+}
+
+.estilista p {
+    font-size: 16px;
+    color: #777;
+}
+
+/
+
+.estilistas {
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 30px auto;
+    max-width: 1200px;
+}
