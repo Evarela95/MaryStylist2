@@ -58,6 +58,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -170,8 +171,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+
+    <Compile Include="Controllers\AspNetUsersController.cs" />
+    <Compile Include="Controllers\CitasController.cs" />
+
     <Compile Include="Controllers\EmpleadosController.cs" />
+
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductosAdminController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
@@ -325,6 +332,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\JSCarrusel.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -360,6 +368,20 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+
+    <Content Include="Views\Image\Index.cshtml" />
+    <Content Include="Views\Image\Galeria.cshtml" />
+    <Content Include="Views\Citas\Delete.cshtml" />
+    <Content Include="Views\Citas\Details.cshtml" />
+    <Content Include="Views\Citas\Edit.cshtml" />
+    <Content Include="Views\Citas\Index.cshtml" />
+    <Content Include="Views\Citas\Create.cshtml" />
+    <Content Include="Views\AspNetUsers\Create.cshtml" />
+    <Content Include="Views\AspNetUsers\Delete.cshtml" />
+    <Content Include="Views\AspNetUsers\Details.cshtml" />
+    <Content Include="Views\AspNetUsers\Edit.cshtml" />
+    <Content Include="Views\AspNetUsers\Index.cshtml" />
+
     <Content Include="Views\Empleados\Create.cshtml" />
     <Content Include="Views\Empleados\Delete.cshtml" />
     <Content Include="Views\Empleados\Details.cshtml" />
@@ -417,6 +439,7 @@
     <Content Include="Views\ServiciosAdmin\Details.cshtml" />
     <Content Include="Views\ServiciosAdmin\Edit.cshtml" />
     <Content Include="Views\ServiciosAdmin\Index.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

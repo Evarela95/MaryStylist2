@@ -1,0 +1,35 @@
+﻿@model List<string>
+
+@{
+    ViewBag.Title = "Image Carousel";
+}
+
+
+<div id="carousel-container">
+    <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                <div class="item @(i == 0 ? "active" : "")">
+                    <img src="~/images/@Model[i]" alt="Image @(i + 1)">
+                </div>
+            }
+        </div>
+        <a class="left carousel-control" href="#imageCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#imageCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+</div>
+
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#imageCarousel').carousel();
+        });
+    </script>
+}

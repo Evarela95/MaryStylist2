@@ -1,0 +1,26 @@
+﻿
+@model List<string>
+
+@{
+    ViewBag.Title = "Gestión de Imágenes";
+}
+
+<h2>Imágenes en el proyecto</h2>
+
+@foreach (var imageName in Model)
+{
+    <div class="image-container">
+        <img src="~/images/@imageName" alt="@imageName" width="400" height="400" />
+        @using (Html.BeginForm("Delete", "Image", new { imageName = imageName }, FormMethod.Post))
+        {
+            <input type="submit" value="Eliminar" onclick="return confirm('¿Estás seguro de que deseas eliminar esta imagen?');" />
+        }
+    </div>
+}
+
+<h3>Subir una nueva imagen</h3>
+@using (Html.BeginForm("Upload", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="file" />
+    <input type="submit" value="Subir" />
+}

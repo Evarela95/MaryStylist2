@@ -29,8 +29,13 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+
+                  
+                    <li>@Html.ActionLink("Galería", "Galeria", "Image")</li>
+
                     <li>@Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Galería", "Galeria", "Home")</li>
+                   
+
                     <li>@Html.ActionLink("Nosotros", "Nosotros", "Home")</li>
                     <li>@Html.ActionLink("Reseñas", "Index", "Reseñas")</li>
                     <li>@Html.ActionLink("Contacto", "Contacto", "Home")</li>
@@ -50,10 +55,20 @@
 
                         </ul>
                     </li>
+                     @*@if (User.Identity.IsAuthenticated)
+                     {
+                         if (User.IsInRole("Administrador"))
+                         {*@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administración <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Galería", "AdminGaleria", "Admin")</li>
+
+                            <li>@Html.ActionLink("Adm. Galería", "Index", "Image")</li>
+                            <li>@Html.ActionLink("Nosotros", "AdminNosotros", "Admin")</li>
+                        
+                            <li>@Html.ActionLink("Usuarios", "Index", "AspNetUsers")</li>
+
+                        
                             <li>@Html.ActionLink("Nosotros", "Index", "Empleados")</li>
                             <li>@Html.ActionLink("ReseñasAdmin", "Index", "ReseñasAdmin")</li>
                             <li>@Html.ActionLink("ProductosAdmin", "Index", "ProductosAdmin")</li>
@@ -62,6 +77,8 @@
 
                         </ul>
                     </li>
+                         @*}
+                     }*@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
