@@ -6,12 +6,18 @@
     <title>Salón de Belleza - Inicio</title>
     <link href="~/Content/HeaderFooter.css" rel="stylesheet" />
 
+    <link href="~/Content/Nosotros.css" rel="stylesheet" />
+    <link href="~/Content/Promociones.css" rel="stylesheet" />
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top navbar-dark bg-dark">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -23,37 +29,62 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Galería", "Galeria", "Home")</li>
+
+                  
+                    <li>@Html.ActionLink("Galería", "Galeria", "Image")</li>
+
+                    <li>@Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" })</li>
+                   
+
                     <li>@Html.ActionLink("Nosotros", "Nosotros", "Home")</li>
-                    <li>@Html.ActionLink("Reseñas", "Reseñas", "Home")</li>
+                    <li>@Html.ActionLink("Reseñas", "Index", "Reseñas")</li>
                     <li>@Html.ActionLink("Contacto", "Contacto", "Home")</li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Servicios <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Promociones", "PromocionesServicios", "Home")</li>
+                            <li>@Html.ActionLink("Servicios", "Index", "Servicios")</li>
+                            <li>@Html.ActionLink("Promociones", "Index", "PromocionesServicios")</li>
+
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Productos <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Promociones", "PromocionesProductos", "Home")</li>
+                            <li>@Html.ActionLink("Productos", "Index", "Productos")</li>
+                            <li>@Html.ActionLink("Promociones", "Index", "PromocionesProductos")</li>
+
                         </ul>
                     </li>
+                     @*@if (User.Identity.IsAuthenticated)
+                     {
+                         if (User.IsInRole("Administrador"))
+                         {*@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administración <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Galería", "AdminGaleria", "Admin")</li>
+
+                            <li>@Html.ActionLink("Adm. Galería", "Index", "Image")</li>
                             <li>@Html.ActionLink("Nosotros", "AdminNosotros", "Admin")</li>
-                            <li>@Html.ActionLink("Reseñas", "AdminReseñas", "Admin")</li>
+                        
+                            <li>@Html.ActionLink("Usuarios", "Index", "AspNetUsers")</li>
+
+                        
+                            <li>@Html.ActionLink("Nosotros", "Index", "Empleados")</li>
+                            <li>@Html.ActionLink("ReseñasAdmin", "Index", "ReseñasAdmin")</li>
+                            <li>@Html.ActionLink("ProductosAdmin", "Index", "ProductosAdmin")</li>
+                            <li>@Html.ActionLink("ServiciosAdmin", "Index", "ServiciosAdmin")</li>
+
+
                         </ul>
                     </li>
+                         @*}
+                     }*@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div>
         @RenderBody()
         <hr />
         <footer>
@@ -62,13 +93,13 @@
                     <div class="col-md-6 footer-info">
                         <p>Salón de Belleza Mary Stylist
                         <p>Dirección: Barva, Heredia, Costa Rica </p>
-                        <p>Teléfono: (123) 456-7890</p>
+                        <p>Teléfono: (506) 6060 2509</p>
                         <div class="social-icons">
                             <a href="#" class="fa fa-facebook"></a>
                             <a href="#" class="fa fa-twitter"></a>
                             <a href="#" class="fa fa-instagram"></a>
                         </div>
-                        <a class="navbar-brand">
+                        <a class="imgLogo">
                             <img src="~/images/FAUGET1.png" width="150" height="150" class="d-inline-block align-top" alt="Logo">
                         </a>
                     </div>

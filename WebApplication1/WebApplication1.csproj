@@ -45,6 +45,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -52,6 +58,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -117,12 +124,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -170,8 +171,23 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+
+    <Compile Include="Controllers\AspNetUsersController.cs" />
+    <Compile Include="Controllers\CitasController.cs" />
+
+    <Compile Include="Controllers\EmpleadosController.cs" />
+
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductosAdminController.cs" />
+    <Compile Include="Controllers\ProductosController.cs" />
+    <Compile Include="Controllers\PromocionesProductosController.cs" />
+    <Compile Include="Controllers\PromocionesServiciosController.cs" />
+    <Compile Include="Controllers\ReseñasAdminController.cs" />
+    <Compile Include="Controllers\ReseñasController.cs" />
+    <Compile Include="Controllers\ServiciosAdminController.cs" />
+    <Compile Include="Controllers\ServiciosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -280,6 +296,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\HeaderFooter.css" />
+    <Content Include="Content\Nosotros.css" />
+    <Content Include="Content\Promociones.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -314,6 +332,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\JSCarrusel.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -349,6 +368,78 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+
+    <Content Include="Views\Image\Index.cshtml" />
+    <Content Include="Views\Image\Galeria.cshtml" />
+    <Content Include="Views\Citas\Delete.cshtml" />
+    <Content Include="Views\Citas\Details.cshtml" />
+    <Content Include="Views\Citas\Edit.cshtml" />
+    <Content Include="Views\Citas\Index.cshtml" />
+    <Content Include="Views\Citas\Create.cshtml" />
+    <Content Include="Views\AspNetUsers\Create.cshtml" />
+    <Content Include="Views\AspNetUsers\Delete.cshtml" />
+    <Content Include="Views\AspNetUsers\Details.cshtml" />
+    <Content Include="Views\AspNetUsers\Edit.cshtml" />
+    <Content Include="Views\AspNetUsers\Index.cshtml" />
+
+    <Content Include="Views\Empleados\Create.cshtml" />
+    <Content Include="Views\Empleados\Delete.cshtml" />
+    <Content Include="Views\Empleados\Details.cshtml" />
+    <Content Include="Views\Empleados\Edit.cshtml" />
+    <Content Include="Views\Empleados\Index.cshtml" />
+    <Content Include="Views\PromocionesProductos\Create.cshtml" />
+    <Content Include="Views\PromocionesProductos\Delete.cshtml" />
+    <Content Include="Views\PromocionesProductos\Details.cshtml" />
+    <Content Include="Views\PromocionesProductos\Edit.cshtml" />
+    <Content Include="Views\PromocionesProductos\Index.cshtml" />
+    <Content Include="Views\PromocionesServicios\Create.cshtml" />
+    <Content Include="Views\PromocionesServicios\Delete.cshtml" />
+    <Content Include="Views\PromocionesServicios\Details.cshtml" />
+    <Content Include="Views\PromocionesServicios\Edit.cshtml" />
+    <Content Include="Views\PromocionesServicios\Index.cshtml" />
+    <Content Include="Views\Empleados\AddImage.cshtml" />
+    <Content Include="Views\Empleados\EmpleadoImagen.cshtml" />
+    <Content Include="Views\Empleados\DeleteImage.cshtml" />
+    <Content Include="Views\PromocionesProductos\PromoProdImagen.cshtml" />
+    <Content Include="Views\PromocionesProductos\AddImage.cshtml" />
+    <Content Include="Views\PromocionesProductos\DeleteImage.cshtml" />
+    <Content Include="Views\PromocionesServicios\PromoServImagen.cshtml" />
+    <Content Include="Views\PromocionesServicios\AddImage.cshtml" />
+    <Content Include="Views\PromocionesServicios\DeleteImage.cshtml" />
+    <Content Include="Views\Reseñas\Create.cshtml" />
+    <Content Include="Views\Reseñas\Delete.cshtml" />
+    <Content Include="Views\Reseñas\Details.cshtml" />
+    <Content Include="Views\Reseñas\Edit.cshtml" />
+    <Content Include="Views\Reseñas\Index.cshtml" />
+    <Content Include="Views\Productos\Create.cshtml" />
+    <Content Include="Views\Productos\Delete.cshtml" />
+    <Content Include="Views\Productos\Details.cshtml" />
+    <Content Include="Views\Productos\Edit.cshtml" />
+    <Content Include="Views\Productos\Index.cshtml" />
+    <Content Include="Views\ProductosAdmin\Create.cshtml" />
+    <Content Include="Views\ProductosAdmin\Delete.cshtml" />
+    <Content Include="Views\ProductosAdmin\Details.cshtml" />
+    <Content Include="Views\ProductosAdmin\Edit.cshtml" />
+    <Content Include="Views\ProductosAdmin\Index.cshtml" />
+    <Content Include="Views\ProductosAdmin\ProductoImagen.cshtml" />
+    <Content Include="Views\ProductosAdmin\DeleteImage.cshtml" />
+    <Content Include="Views\ProductosAdmin\AddImage.cshtml" />
+    <Content Include="Views\ReseñasAdmin\Create.cshtml" />
+    <Content Include="Views\ReseñasAdmin\Delete.cshtml" />
+    <Content Include="Views\ReseñasAdmin\Details.cshtml" />
+    <Content Include="Views\ReseñasAdmin\Edit.cshtml" />
+    <Content Include="Views\ReseñasAdmin\Index.cshtml" />
+    <Content Include="Views\Servicios\Create.cshtml" />
+    <Content Include="Views\Servicios\Delete.cshtml" />
+    <Content Include="Views\Servicios\Details.cshtml" />
+    <Content Include="Views\Servicios\Edit.cshtml" />
+    <Content Include="Views\Servicios\Index.cshtml" />
+    <Content Include="Views\ServiciosAdmin\Create.cshtml" />
+    <Content Include="Views\ServiciosAdmin\Delete.cshtml" />
+    <Content Include="Views\ServiciosAdmin\Details.cshtml" />
+    <Content Include="Views\ServiciosAdmin\Edit.cshtml" />
+    <Content Include="Views\ServiciosAdmin\Index.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

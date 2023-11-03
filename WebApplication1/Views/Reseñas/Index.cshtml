@@ -1,0 +1,36 @@
+﻿@model IEnumerable<WebApplication1.Models.Reseñas>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .review-card {
+        background-color: #F2F2F2;
+        padding: 15px;
+        margin: 10px auto;
+        max-width: 500px;
+        text-align: center;
+    }
+
+    .create-button {
+        margin-top: 20px;
+    }
+</style>
+
+<div class="container">
+    <div class="text-center create-button">
+        <a href="@Url.Action("Create")" class="btn btn-primary btn-lg">Crear Nueva Reseña</a>
+    </div>
+
+    <h2 class="text-center">Reseñas</h2>
+
+    @foreach (var item in Model)
+    {
+        <div class="review-card">
+            <h5 style="color: gold;">@item.AspNetUsers.Email</h5>
+            <p style="color: black;">@item.Comentario</p>
+            <p style="color: gray;">Calificación: @item.Calificacion</p>
+        </div>
+    }
+</div>
