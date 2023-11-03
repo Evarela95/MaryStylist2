@@ -26,7 +26,12 @@
                     <div class="col-md-10">
                         @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        <br />
+                        <p>
+                            @Html.ActionLink("¿Ha olvidado su contraseña?", "ForgotPassword")
+                        </p>
                     </div>
+                    
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
@@ -39,15 +44,14 @@
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Iniciar sesión" class="btn btn-default" />
+                        <br />
+                        <br />
+                        <p>
+                            @Html.ActionLink("Registrarse", "Register")
+                        </p>
                     </div>
+                    
                 </div>
-                <p>
-                    @Html.ActionLink("Registrarse como usuario nuevo", "Register")
-                </p>
-                @* Habilite esta opción una vez tenga la confirmación de la cuenta habilitada para la funcionalidad de restablecimiento de contraseña
-                    <p>
-                        @Html.ActionLink("¿Ha olvidado su contraseña?", "ForgotPassword")
-                    </p>*@
             }
         </section>
     </div>
