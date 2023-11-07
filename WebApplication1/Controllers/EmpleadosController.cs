@@ -221,5 +221,22 @@ namespace WebApplication1.Controllers
             db.SaveChanges();
             return RedirectToAction("EmpleadoImagen", new { id = image.Id_Empleado });
         }
+
+
+
+        public ActionResult Planilla(int id, string nombre, string apellido)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Empleados empleados = db.Empleados.Find(id);
+            PlanillaEmpleados.GeneratePlanillaPDF(id, nombre, apellido);
+            if (empleados == null)
+            {
+                return HttpNotFound();
+            }
+            return View(empleados);
+        }
     }
 }
