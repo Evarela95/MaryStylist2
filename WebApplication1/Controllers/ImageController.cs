@@ -11,6 +11,7 @@ namespace WebApplication1.Controllers
     {
         private string imagePath = "~/images/";
 
+        [Authorize(Roles = "Administrador")]
         public ActionResult Index()
         {
             var imageDirectory = Server.MapPath(imagePath);
@@ -32,6 +33,7 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Administrador")]
         public ActionResult Delete(string imageName)
         {
             var path = Path.Combine(Server.MapPath(imagePath), imageName);
