@@ -1,0 +1,63 @@
+﻿@model IEnumerable<WebApplication1.Models.GananciaDiaria>
+
+@{
+    ViewBag.Title = "Ganancias";
+}
+
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div class="container">
+        <h2>Index</h2>
+
+        <p>
+            @Html.ActionLink("Agregar Ganancias", "Create", null, new { @class = "btn btn-primary" })
+        </p>
+
+        <div class="form-group">
+            <label for="search">Search:</label>
+            <input type="text" id="search" class="form-control" oninput="filterTable()" />
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Ingresos)</th>
+                    <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+                    <th>@Html.DisplayNameFor(model => model.Egresos)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Ingresos)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Egresos)</td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id_Ganancias }, new { @class = "btn btn-primary btn-sm" }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id_Ganancias }, new { @class = "btn btn-info btn-sm" }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id_Ganancias }, new { @class = "btn btn-danger btn-sm" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        function filterTable() {
+            var searchText = $('#search').val().toLowerCase();
+
+            $('table tbody tr').each(function () {
+                var rowText = $(this).text().toLowerCase();
+                $(this).toggle(rowText.indexOf(searchText) > -1);
+            });
+        }
+    </script>
+</body>
+</html>
