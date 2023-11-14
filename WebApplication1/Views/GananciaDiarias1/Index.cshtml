@@ -1,0 +1,128 @@
+﻿@model IEnumerable<WebApplication1.Models.GananciaDiaria>
+
+@{
+    ViewBag.Title = "Ganancias Diarias";
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>@ViewBag.Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Ganancias Diarias</h2>
+
+        <p>
+            @Html.ActionLink("Agregar Ganancias", "Create", null, new { @class = "btn btn-primary" })
+        </p>
+
+        <div class="row">
+            <div class="col-md-6">
+                <canvas id="ingresosChart" width="400" height="200"></canvas>
+            </div>
+            <div class="col-md-6">
+                <canvas id="egresosChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+
+        <div class="form-group mt-4">
+            <label for="search">Search:</label>
+            <input type="text" id="search" class="form-control" oninput="filterTable()" />
+        </div>
+
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Ingresos)</th>
+                    <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+                    <th>@Html.DisplayNameFor(model => model.Egresos)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Ingresos)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Egresos)</td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id_Ganancias }, new { @class = "btn btn-primary btn-sm" }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id_Ganancias }, new { @class = "btn btn-info btn-sm" }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id_Ganancias }, new { @class = "btn btn-danger btn-sm" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var ingresosData = @Html.Raw(Json.Encode(Model.Select(x => x.Ingresos).ToList()));
+            var egresosData = @Html.Raw(Json.Encode(Model.Select(x => x.Egresos).ToList()));
+
+            var ingresosChartCtx = document.getElementById('ingresosChart').getContext('2d');
+            var ingresosChart = new Chart(ingresosChartCtx, {
+                type: 'bar',
+                data: {
+                    labels: ingresosData.map((_, index) => `Day ${index + 1}`),
+                    datasets: [{
+                        label: 'Ingresos',
+                        data: ingresosData,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            var egresosChartCtx = document.getElementById('egresosChart').getContext('2d');
+            var egresosChart = new Chart(egresosChartCtx, {
+                type: 'bar',
+                data: {
+                    labels: egresosData.map((_, index) => `Day ${index + 1}`),
+                    datasets: [{
+                        label: 'Egresos',
+                        data: egresosData,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+
+        function filterTable() {
+            var searchText = $('#search').val().toLowerCase();
+
+            $('table tbody tr').each(function () {
+                var rowText = $(this).text().toLowerCase();
+                $(this).toggle(rowText.indexOf(searchText) > -1);
+            });
+        }
+    </script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>

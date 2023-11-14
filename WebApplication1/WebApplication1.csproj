@@ -180,6 +180,10 @@
     <Compile Include="Controllers\AspNetUsersController.cs" />
     <Compile Include="Controllers\CitasController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
+
+    <Compile Include="Controllers\GananciaDiarias1Controller.cs" />
+
+
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -385,6 +389,14 @@
     <Content Include="Views\Citas\Edit.cshtml" />
     <Content Include="Views\Citas\Index.cshtml" />
     <Content Include="Views\Citas\Create.cshtml" />
+
+    <Content Include="Views\AspNetUsers\Create.cshtml" />
+    <Content Include="Views\AspNetUsers\Delete.cshtml" />
+    <Content Include="Views\AspNetUsers\Details.cshtml" />
+    <Content Include="Views\AspNetUsers\Edit.cshtml" />
+    <Content Include="Views\AspNetUsers\Index.cshtml" />
+
+
     <Content Include="Views\Empleados\Create.cshtml" />
     <Content Include="Views\Empleados\Delete.cshtml" />
     <Content Include="Views\Empleados\Details.cshtml" />
@@ -442,6 +454,13 @@
     <Content Include="Views\ServiciosAdmin\Details.cshtml" />
     <Content Include="Views\ServiciosAdmin\Edit.cshtml" />
     <Content Include="Views\ServiciosAdmin\Index.cshtml" />
+
+    <Content Include="Views\GananciaDiarias1\Create.cshtml" />
+    <Content Include="Views\GananciaDiarias1\Delete.cshtml" />
+    <Content Include="Views\GananciaDiarias1\Details.cshtml" />
+    <Content Include="Views\GananciaDiarias1\Edit.cshtml" />
+    <Content Include="Views\GananciaDiarias1\Index.cshtml" />
+
     <Content Include="Views\Empleados\Planilla.cshtml" />
 
     <Content Include="Views\Home\Contacto.cshtml" />
@@ -451,6 +470,7 @@
     <Content Include="Views\AspNetUsers\Details.cshtml" />
     <Content Include="Views\AspNetUsers\Edit.cshtml" />
     <Content Include="Views\AspNetUsers\Index.cshtml" />
+
 
   </ItemGroup>
   <ItemGroup>
