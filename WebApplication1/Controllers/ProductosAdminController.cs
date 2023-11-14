@@ -11,6 +11,7 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class ProductosAdminController : Controller
     {
         private BD_MARYSTYLISEntities db = new BD_MARYSTYLISEntities();

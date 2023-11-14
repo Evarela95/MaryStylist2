@@ -11,12 +11,13 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+    
     public class CitasController : Controller
     {
         private BD_MARYSTYLISEntities db = new BD_MARYSTYLISEntities();
 
 
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         // GET: Citas
         public ActionResult Index()
         {
@@ -25,7 +26,7 @@ namespace WebApplication1.Controllers
         }
 
 
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         // GET: Citas/Details/5
         public ActionResult Details(int? id)
         {
@@ -57,7 +58,7 @@ namespace WebApplication1.Controllers
 
 
         // POST: Citas/Create
-        
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id_Cita,Fecha_Cita,Hora_Cita,Id_Usuario,Id_Servicio,Id_Empleado")] Citas citas)
@@ -81,7 +82,7 @@ namespace WebApplication1.Controllers
         }
 
 
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         // GET: Citas/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -105,6 +106,7 @@ namespace WebApplication1.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Edit([Bind(Include = "Id_Cita,Fecha_Cita,Hora_Cita,Id_Usuario,Id_Servicio,Id_Empleado")] Citas citas)
         {
             if (ModelState.IsValid)
@@ -120,7 +122,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Citas/Delete/5
-        [Authorize]
+        [Authorize(Roles = "Administrador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -138,6 +140,7 @@ namespace WebApplication1.Controllers
         // POST: Citas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrador")]
         public ActionResult DeleteConfirmed(int id)
         {
             Citas citas = db.Citas.Find(id);

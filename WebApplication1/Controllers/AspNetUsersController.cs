@@ -17,8 +17,7 @@ namespace WebApplication1.Controllers
         // GET: AspNetUsers
         public ActionResult Index()
         {
-            var aspNetUsers = db.AspNetUsers.Include(a => a.Roles);
-            return View(aspNetUsers.ToList());
+            return View(db.AspNetUsers.ToList());
         }
 
         // GET: AspNetUsers/Details/5
@@ -39,7 +38,6 @@ namespace WebApplication1.Controllers
         // GET: AspNetUsers/Create
         public ActionResult Create()
         {
-            ViewBag.Rol_Id = new SelectList(db.Roles, "Id_Rol", "Nombre_Rol");
             return View();
         }
 
@@ -48,7 +46,7 @@ namespace WebApplication1.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Nombre_Usuario,Apellido_Usuario,Puntos_Usuario,Rol_Id")] AspNetUsers aspNetUsers)
+        public ActionResult Create([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Nombre_Usuario,Apellido_Usuario,Puntos_Usuario")] AspNetUsers aspNetUsers)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +55,6 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Rol_Id = new SelectList(db.Roles, "Id_Rol", "Nombre_Rol", aspNetUsers.Rol_Id);
             return View(aspNetUsers);
         }
 
@@ -73,7 +70,6 @@ namespace WebApplication1.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Rol_Id = new SelectList(db.Roles, "Id_Rol", "Nombre_Rol", aspNetUsers.Rol_Id);
             return View(aspNetUsers);
         }
 
@@ -82,7 +78,7 @@ namespace WebApplication1.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Nombre_Usuario,Apellido_Usuario,Puntos_Usuario,Rol_Id")] AspNetUsers aspNetUsers)
+        public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Nombre_Usuario,Apellido_Usuario,Puntos_Usuario")] AspNetUsers aspNetUsers)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +86,6 @@ namespace WebApplication1.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Rol_Id = new SelectList(db.Roles, "Id_Rol", "Nombre_Rol", aspNetUsers.Rol_Id);
             return View(aspNetUsers);
         }
 

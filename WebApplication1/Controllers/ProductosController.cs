@@ -10,6 +10,7 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+   
     public class ProductosController : Controller
     {
         private BD_MARYSTYLISEntities db = new BD_MARYSTYLISEntities();

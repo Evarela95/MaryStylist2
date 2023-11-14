@@ -49,7 +49,7 @@ namespace WebApplication1.Models
         public virtual DbSet<PromocionesProductos> PromocionesProductos { get; set; }
         public virtual DbSet<PromocionesServicios> PromocionesServicios { get; set; }
         public virtual DbSet<Reseñas> Reseñas { get; set; }
-        public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Servicios> Servicios { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

@@ -50,6 +50,8 @@
                     @Html.ActionLink("Detalles", "Details", new { id = item.Id_Empleado }) |
                     @Html.ActionLink("Eliminar", "Delete", new { id = item.Id_Empleado }) |
                     @Html.ActionLink("Imagen", "EmpleadoImagen", new { id = item.Id_Empleado })
+                    @Html.ActionLink("Planilla", "Planilla", new { id = item.Id_Empleado, nombre = item.Nombre_Empleado, apellido = item.Apellido_Empleado })
+
                 </td>
             </tr>
         }
