@@ -4,14 +4,27 @@
     ViewBag.Title = "Iniciar sesión";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
+<style>
+    #loginForm {
+        margin-top: 50px; /* Ajusta el margen superior según sea necesario */
+        margin-left: 50px;
+        margin-right: 100px;
+    }
+
+    .row {
+        margin: 0;
+    }
+</style>
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<div class="row justify-content-center">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <section id="loginForm" class="text-center">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h4>Utilice una cuenta local para iniciar sesión.</h4>
+                <h4 class="text-center">Utilice una cuenta local para iniciar sesión</h4>
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
@@ -31,7 +44,7 @@
                             @Html.ActionLink("¿Ha olvidado su contraseña?", "ForgotPassword")
                         </p>
                     </div>
-                    
+
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
@@ -50,16 +63,17 @@
                             @Html.ActionLink("Registrarse", "Register")
                         </p>
                     </div>
-                    
+
                 </div>
             }
         </section>
     </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
+    <div class="col-md-3"></div>
+    @*<div class="col-md-4">
+            <section id="socialLoginForm">
+                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            </section>
+        </div>*@
 </div>
 
 @section Scripts {
