@@ -80,6 +80,14 @@ namespace WebApplication1.Models
                                 table.AddCell("Nombre");
                                 table.AddCell(row["Nombre_Empleado"].ToString() + " " + row["Apellido_Empleado"].ToString());
 
+                                table.AddCell("Puesto ");
+                                table.AddCell(row["Descripcion_Empleado"].ToString());
+
+                                table.AddCell("Correo ");
+                                table.AddCell(row["Correo_Empleado"].ToString());
+
+
+
                                 table.AddCell("Salario Bruto");
                                 table.AddCell(row["Salario"].ToString());
 
@@ -88,6 +96,10 @@ namespace WebApplication1.Models
 
                                 table.AddCell("Banco Popular");
                                 table.AddCell(row["BP"].ToString());
+
+
+                                table.AddCell("Salario neto");
+                                table.AddCell(row["SalarioNeto"].ToString());
 
                                 // Añadir la tabla al documento PDF
                                 doc.Add(table);
