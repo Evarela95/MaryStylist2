@@ -19,6 +19,7 @@ namespace WebApplication1.Controllers
             return View(imageNames);
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase file)
         {
