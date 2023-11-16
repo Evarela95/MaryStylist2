@@ -69,6 +69,13 @@
           <Property Name="Apellido_Usuario" Type="nvarchar" MaxLength="25" />
           <Property Name="Puntos_Usuario" Type="int" />
         </EntityType>
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="Id_Categoria" />
+          </Key>
+          <Property Name="Id_Categoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Categoria" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Citas">
           <Key>
             <PropertyRef Name="Id_Cita" />
@@ -77,8 +84,18 @@
           <Property Name="Fecha_Cita" Type="date" Nullable="false" />
           <Property Name="Hora_Cita" Type="time" Precision="7" Nullable="false" />
           <Property Name="Id_Usuario" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Id_Servicio" Type="int" Nullable="false" />
           <Property Name="Id_Empleado" Type="int" Nullable="false" />
+          <Property Name="Id_Serv_Prod" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Detalle_Factura_Productos">
+          <Key>
+            <PropertyRef Name="Id_Detalle" />
+          </Key>
+          <Property Name="Id_Detalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Factura" Type="int" Nullable="false" />
+          <Property Name="Id_Producto" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Detalle_Ganancias_Facturas">
           <Key>
@@ -87,39 +104,6 @@
           <Property Name="Id_Factura_Ganancias" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id_Factura" Type="int" Nullable="false" />
           <Property Name="Id_Ganancia" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="DetalleFacturaProducto">
-          <Key>
-            <PropertyRef Name="Id_Detalle_Producto" />
-          </Key>
-          <Property Name="Id_Detalle_Producto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Id_Producto" Type="int" Nullable="false" />
-          <Property Name="Cantidad" Type="tinyint" Nullable="false" />
-          <Property Name="Id_Factura" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="DetalleFacturaPromProdu">
-          <Key>
-            <PropertyRef Name="Id_Detalle_PromProdu" />
-          </Key>
-          <Property Name="Id_Detalle_PromProdu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Id_Factura" Type="int" Nullable="false" />
-          <Property Name="Id_Promo_Producto" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="DetalleFacturaPromServ">
-          <Key>
-            <PropertyRef Name="Id_Detalle_PromServ" />
-          </Key>
-          <Property Name="Id_Detalle_PromServ" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Id_Factura" Type="int" Nullable="false" />
-          <Property Name="Id_Promo_Servicio" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="DetalleFacturaServicios">
-          <Key>
-            <PropertyRef Name="Id_Detalle" />
-          </Key>
-          <Property Name="Id_Detalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Id_Factura" Type="int" Nullable="false" />
-          <Property Name="Id_Servicio" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Empleados">
           <Key>
@@ -136,10 +120,10 @@
             <PropertyRef Name="Id_Factura" />
           </Key>
           <Property Name="Id_Factura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Id_Cita" Type="int" Nullable="false" />
+          <Property Name="Id_Cita" Type="int" />
           <Property Name="Fecha" Type="date" Nullable="false" />
           <Property Name="Total" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Vuelto" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="User_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="GananciaDiaria">
           <Key>
@@ -159,42 +143,6 @@
           <Property Name="FileName" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="ImageData" Type="varbinary(max)" Nullable="false" />
         </EntityType>
-        <EntityType Name="ImagenesProductos">
-          <Key>
-            <PropertyRef Name="Id_Foto_Producto" />
-          </Key>
-          <Property Name="Id_Foto_Producto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Id_Producto" Type="int" Nullable="false" />
-          <Property Name="Foto_Producto" Type="image" Nullable="false" />
-          <Property Name="Nombre_Foto_Producto" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ImagenesPromosProd">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Id_Promo_Producto" Type="int" Nullable="false" />
-          <Property Name="FileName" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="ImageData" Type="varbinary(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ImagenesPromosServ">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Id_Promo_Servicio" Type="int" Nullable="false" />
-          <Property Name="FileName" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="ImageData" Type="varbinary(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ImagenesServicios">
-          <Key>
-            <PropertyRef Name="Id_Foto_Servicio" />
-          </Key>
-          <Property Name="Id_Foto_Servicio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Id_Servicio" Type="int" Nullable="false" />
-          <Property Name="Foto_Servicio" Type="varbinary(max)" Nullable="false" />
-          <Property Name="Nombre_Foto" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
         <EntityType Name="Planilla">
           <Key>
             <PropertyRef Name="Id_Planilla" />
@@ -205,40 +153,6 @@
           <Property Name="Especializacion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Id_Empleado" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Productos">
-          <Key>
-            <PropertyRef Name="Id_Producto" />
-          </Key>
-          <Property Name="Id_Producto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre_Producto" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Descripcion_Producto" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Precio_Producto" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Stock" Type="tinyint" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PromocionesProductos">
-          <Key>
-            <PropertyRef Name="Id_Promo_Producto" />
-          </Key>
-          <Property Name="Id_Promo_Producto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre_Promo_Producto" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Descripcion_Promo_Producto" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Precio_Nuevo_Producto" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Fecha_Inicio_Promo" Type="date" Nullable="false" />
-          <Property Name="Fecha_Final_Promo" Type="date" Nullable="false" />
-          <Property Name="Id_Producto" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PromocionesServicios">
-          <Key>
-            <PropertyRef Name="Id_Promo_Servicio" />
-          </Key>
-          <Property Name="Id_Promo_Servicio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre_Promo" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Descripcion_Promo" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Precio_Promo" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Fecha_Inicio" Type="date" Nullable="false" />
-          <Property Name="Fecha_Final" Type="date" Nullable="false" />
-          <Property Name="Id_Servicio" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Reseñas">
           <Key>
             <PropertyRef Name="Id_Resena" />
@@ -248,14 +162,19 @@
           <Property Name="Calificacion" Type="tinyint" />
           <Property Name="Id_Usuario" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
-        <EntityType Name="Servicios">
+        <EntityType Name="Servicios_Productos">
           <Key>
-            <PropertyRef Name="Id_Servicio" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id_Servicio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre_Servicio" Type="nchar" MaxLength="15" Nullable="false" />
-          <Property Name="Descripcion_Servicio" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Precio_Servicio" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Precio" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Promo" Type="bit" Nullable="false" />
+          <Property Name="Precio_Promo" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Id_Categoria" Type="int" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="200" />
+          <Property Name="ImageData" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -291,15 +210,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Citas_Servicios">
-          <End Role="Servicios" Type="Self.Servicios" Multiplicity="1" />
+        <Association Name="FK_Citas_Servicios_Productos">
+          <End Role="Servicios_Productos" Type="Self.Servicios_Productos" Multiplicity="1" />
           <End Role="Citas" Type="Self.Citas" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Servicios">
-              <PropertyRef Name="Id_Servicio" />
+            <Principal Role="Servicios_Productos">
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Citas">
-              <PropertyRef Name="Id_Servicio" />
+              <PropertyRef Name="Id_Serv_Prod" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -359,6 +278,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Detalle_Factura_Productos_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
+          <End Role="Detalle_Factura_Productos" Type="Self.Detalle_Factura_Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="Id_Factura" />
+            </Principal>
+            <Dependent Role="Detalle_Factura_Productos">
+              <PropertyRef Name="Id_Factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detalle_Factura_Productos_Servicios_Productos">
+          <End Role="Servicios_Productos" Type="Self.Servicios_Productos" Multiplicity="1" />
+          <End Role="Detalle_Factura_Productos" Type="Self.Detalle_Factura_Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicios_Productos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Detalle_Factura_Productos">
+              <PropertyRef Name="Id_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Detalle_Ganancias_Facturas_Facturas">
           <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
           <End Role="Detalle_Ganancias_Facturas" Type="Self.Detalle_Ganancias_Facturas" Multiplicity="*" />
@@ -383,104 +326,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DetalleFacturaProducto_Facturas">
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
-          <End Role="DetalleFacturaProducto" Type="Self.DetalleFacturaProducto" Multiplicity="*" />
+        <Association Name="FK_Facturas_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Facturas">
-              <PropertyRef Name="Id_Factura" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="DetalleFacturaProducto">
-              <PropertyRef Name="Id_Factura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetalleFacturaProducto_Productos">
-          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
-          <End Role="DetalleFacturaProducto" Type="Self.DetalleFacturaProducto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Productos">
-              <PropertyRef Name="Id_Producto" />
-            </Principal>
-            <Dependent Role="DetalleFacturaProducto">
-              <PropertyRef Name="Id_Producto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetalleFacturaPromProdu_Facturas">
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
-          <End Role="DetalleFacturaPromProdu" Type="Self.DetalleFacturaPromProdu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Facturas">
-              <PropertyRef Name="Id_Factura" />
-            </Principal>
-            <Dependent Role="DetalleFacturaPromProdu">
-              <PropertyRef Name="Id_Factura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetalleFacturaPromProdu_PromocionesProductos">
-          <End Role="PromocionesProductos" Type="Self.PromocionesProductos" Multiplicity="1" />
-          <End Role="DetalleFacturaPromProdu" Type="Self.DetalleFacturaPromProdu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PromocionesProductos">
-              <PropertyRef Name="Id_Promo_Producto" />
-            </Principal>
-            <Dependent Role="DetalleFacturaPromProdu">
-              <PropertyRef Name="Id_Promo_Producto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetalleFacturaPromServ_Facturas">
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
-          <End Role="DetalleFacturaPromServ" Type="Self.DetalleFacturaPromServ" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Facturas">
-              <PropertyRef Name="Id_Factura" />
-            </Principal>
-            <Dependent Role="DetalleFacturaPromServ">
-              <PropertyRef Name="Id_Factura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetalleFacturaPromServ_PromocionesServicios">
-          <End Role="PromocionesServicios" Type="Self.PromocionesServicios" Multiplicity="1" />
-          <End Role="DetalleFacturaPromServ" Type="Self.DetalleFacturaPromServ" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PromocionesServicios">
-              <PropertyRef Name="Id_Promo_Servicio" />
-            </Principal>
-            <Dependent Role="DetalleFacturaPromServ">
-              <PropertyRef Name="Id_Promo_Servicio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetalleFacturaServicios_Facturas">
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
-          <End Role="DetalleFacturaServicios" Type="Self.DetalleFacturaServicios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Facturas">
-              <PropertyRef Name="Id_Factura" />
-            </Principal>
-            <Dependent Role="DetalleFacturaServicios">
-              <PropertyRef Name="Id_Factura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetalleFacturaServicios_Servicios">
-          <End Role="Servicios" Type="Self.Servicios" Multiplicity="1" />
-          <End Role="DetalleFacturaServicios" Type="Self.DetalleFacturaServicios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Servicios">
-              <PropertyRef Name="Id_Servicio" />
-            </Principal>
-            <Dependent Role="DetalleFacturaServicios">
-              <PropertyRef Name="Id_Servicio" />
+            <Dependent Role="Facturas">
+              <PropertyRef Name="User_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Facturas_Citas">
-          <End Role="Citas" Type="Self.Citas" Multiplicity="1" />
+          <End Role="Citas" Type="Self.Citas" Multiplicity="0..1" />
           <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Citas">
@@ -505,58 +364,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ImagenesProductos_Productos">
-          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
-          <End Role="ImagenesProductos" Type="Self.ImagenesProductos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Productos">
-              <PropertyRef Name="Id_Producto" />
-            </Principal>
-            <Dependent Role="ImagenesProductos">
-              <PropertyRef Name="Id_Producto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ImagenesPromosProd_PromocionesProductos_Id_Promo_Producto">
-          <End Role="PromocionesProductos" Type="Self.PromocionesProductos" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ImagenesPromosProd" Type="Self.ImagenesPromosProd" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PromocionesProductos">
-              <PropertyRef Name="Id_Promo_Producto" />
-            </Principal>
-            <Dependent Role="ImagenesPromosProd">
-              <PropertyRef Name="Id_Promo_Producto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ImagenesPromosServ_PromocionesServicios_Id_Promo_Servicio">
-          <End Role="PromocionesServicios" Type="Self.PromocionesServicios" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ImagenesPromosServ" Type="Self.ImagenesPromosServ" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PromocionesServicios">
-              <PropertyRef Name="Id_Promo_Servicio" />
-            </Principal>
-            <Dependent Role="ImagenesPromosServ">
-              <PropertyRef Name="Id_Promo_Servicio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ImagenesServicios_Servicios">
-          <End Role="Servicios" Type="Self.Servicios" Multiplicity="1" />
-          <End Role="ImagenesServicios" Type="Self.ImagenesServicios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Servicios">
-              <PropertyRef Name="Id_Servicio" />
-            </Principal>
-            <Dependent Role="ImagenesServicios">
-              <PropertyRef Name="Id_Servicio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Planilla_Empleados">
           <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
           <End Role="Planilla" Type="Self.Planilla" Multiplicity="*" />
@@ -566,30 +373,6 @@
             </Principal>
             <Dependent Role="Planilla">
               <PropertyRef Name="Id_Empleado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PromocionesProductos_Productos">
-          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
-          <End Role="PromocionesProductos" Type="Self.PromocionesProductos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Productos">
-              <PropertyRef Name="Id_Producto" />
-            </Principal>
-            <Dependent Role="PromocionesProductos">
-              <PropertyRef Name="Id_Producto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PromocionesServicios_Servicios">
-          <End Role="Servicios" Type="Self.Servicios" Multiplicity="1" />
-          <End Role="PromocionesServicios" Type="Self.PromocionesServicios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Servicios">
-              <PropertyRef Name="Id_Servicio" />
-            </Principal>
-            <Dependent Role="PromocionesServicios">
-              <PropertyRef Name="Id_Servicio" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -605,6 +388,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Servicios_Productos_Categorias">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="1" />
+          <End Role="Servicios_Productos" Type="Self.Servicios_Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="Id_Categoria" />
+            </Principal>
+            <Dependent Role="Servicios_Productos">
+              <PropertyRef Name="Id_Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BD_MARYSTYLISModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -612,26 +407,17 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Citas" EntityType="Self.Citas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Detalle_Factura_Productos" EntityType="Self.Detalle_Factura_Productos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Detalle_Ganancias_Facturas" EntityType="Self.Detalle_Ganancias_Facturas" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DetalleFacturaProducto" EntityType="Self.DetalleFacturaProducto" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DetalleFacturaPromProdu" EntityType="Self.DetalleFacturaPromProdu" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DetalleFacturaPromServ" EntityType="Self.DetalleFacturaPromServ" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DetalleFacturaServicios" EntityType="Self.DetalleFacturaServicios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GananciaDiaria" EntityType="Self.GananciaDiaria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImagenesEmpleados" EntityType="Self.ImagenesEmpleados" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ImagenesProductos" EntityType="Self.ImagenesProductos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ImagenesPromosProd" EntityType="Self.ImagenesPromosProd" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ImagenesPromosServ" EntityType="Self.ImagenesPromosServ" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ImagenesServicios" EntityType="Self.ImagenesServicios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Planilla" EntityType="Self.Planilla" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PromocionesProductos" EntityType="Self.PromocionesProductos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PromocionesServicios" EntityType="Self.PromocionesServicios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reseñas" EntityType="Self.Reseñas" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Servicios" EntityType="Self.Servicios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Servicios_Productos" EntityType="Self.Servicios_Productos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Citas_AspNetUsers" Association="Self.FK_Citas_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -641,8 +427,8 @@
             <End Role="Empleados" EntitySet="Empleados" />
             <End Role="Citas" EntitySet="Citas" />
           </AssociationSet>
-          <AssociationSet Name="FK_Citas_Servicios" Association="Self.FK_Citas_Servicios">
-            <End Role="Servicios" EntitySet="Servicios" />
+          <AssociationSet Name="FK_Citas_Servicios_Productos" Association="Self.FK_Citas_Servicios_Productos">
+            <End Role="Servicios_Productos" EntitySet="Servicios_Productos" />
             <End Role="Citas" EntitySet="Citas" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -661,6 +447,14 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Detalle_Factura_Productos_Facturas" Association="Self.FK_Detalle_Factura_Productos_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="Detalle_Factura_Productos" EntitySet="Detalle_Factura_Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detalle_Factura_Productos_Servicios_Productos" Association="Self.FK_Detalle_Factura_Productos_Servicios_Productos">
+            <End Role="Servicios_Productos" EntitySet="Servicios_Productos" />
+            <End Role="Detalle_Factura_Productos" EntitySet="Detalle_Factura_Productos" />
+          </AssociationSet>
           <AssociationSet Name="FK_Detalle_Ganancias_Facturas_Facturas" Association="Self.FK_Detalle_Ganancias_Facturas_Facturas">
             <End Role="Facturas" EntitySet="Facturas" />
             <End Role="Detalle_Ganancias_Facturas" EntitySet="Detalle_Ganancias_Facturas" />
@@ -669,37 +463,9 @@
             <End Role="GananciaDiaria" EntitySet="GananciaDiaria" />
             <End Role="Detalle_Ganancias_Facturas" EntitySet="Detalle_Ganancias_Facturas" />
           </AssociationSet>
-          <AssociationSet Name="FK_DetalleFacturaProducto_Facturas" Association="Self.FK_DetalleFacturaProducto_Facturas">
+          <AssociationSet Name="FK_Facturas_AspNetUsers" Association="Self.FK_Facturas_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Facturas" EntitySet="Facturas" />
-            <End Role="DetalleFacturaProducto" EntitySet="DetalleFacturaProducto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleFacturaProducto_Productos" Association="Self.FK_DetalleFacturaProducto_Productos">
-            <End Role="Productos" EntitySet="Productos" />
-            <End Role="DetalleFacturaProducto" EntitySet="DetalleFacturaProducto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleFacturaPromProdu_Facturas" Association="Self.FK_DetalleFacturaPromProdu_Facturas">
-            <End Role="Facturas" EntitySet="Facturas" />
-            <End Role="DetalleFacturaPromProdu" EntitySet="DetalleFacturaPromProdu" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleFacturaPromProdu_PromocionesProductos" Association="Self.FK_DetalleFacturaPromProdu_PromocionesProductos">
-            <End Role="PromocionesProductos" EntitySet="PromocionesProductos" />
-            <End Role="DetalleFacturaPromProdu" EntitySet="DetalleFacturaPromProdu" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleFacturaPromServ_Facturas" Association="Self.FK_DetalleFacturaPromServ_Facturas">
-            <End Role="Facturas" EntitySet="Facturas" />
-            <End Role="DetalleFacturaPromServ" EntitySet="DetalleFacturaPromServ" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleFacturaPromServ_PromocionesServicios" Association="Self.FK_DetalleFacturaPromServ_PromocionesServicios">
-            <End Role="PromocionesServicios" EntitySet="PromocionesServicios" />
-            <End Role="DetalleFacturaPromServ" EntitySet="DetalleFacturaPromServ" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleFacturaServicios_Facturas" Association="Self.FK_DetalleFacturaServicios_Facturas">
-            <End Role="Facturas" EntitySet="Facturas" />
-            <End Role="DetalleFacturaServicios" EntitySet="DetalleFacturaServicios" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleFacturaServicios_Servicios" Association="Self.FK_DetalleFacturaServicios_Servicios">
-            <End Role="Servicios" EntitySet="Servicios" />
-            <End Role="DetalleFacturaServicios" EntitySet="DetalleFacturaServicios" />
           </AssociationSet>
           <AssociationSet Name="FK_Facturas_Citas" Association="Self.FK_Facturas_Citas">
             <End Role="Citas" EntitySet="Citas" />
@@ -709,37 +475,17 @@
             <End Role="Empleados" EntitySet="Empleados" />
             <End Role="ImagenesEmpleados" EntitySet="ImagenesEmpleados" />
           </AssociationSet>
-          <AssociationSet Name="FK_ImagenesProductos_Productos" Association="Self.FK_ImagenesProductos_Productos">
-            <End Role="Productos" EntitySet="Productos" />
-            <End Role="ImagenesProductos" EntitySet="ImagenesProductos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ImagenesPromosProd_PromocionesProductos_Id_Promo_Producto" Association="Self.FK_ImagenesPromosProd_PromocionesProductos_Id_Promo_Producto">
-            <End Role="PromocionesProductos" EntitySet="PromocionesProductos" />
-            <End Role="ImagenesPromosProd" EntitySet="ImagenesPromosProd" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ImagenesPromosServ_PromocionesServicios_Id_Promo_Servicio" Association="Self.FK_ImagenesPromosServ_PromocionesServicios_Id_Promo_Servicio">
-            <End Role="PromocionesServicios" EntitySet="PromocionesServicios" />
-            <End Role="ImagenesPromosServ" EntitySet="ImagenesPromosServ" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ImagenesServicios_Servicios" Association="Self.FK_ImagenesServicios_Servicios">
-            <End Role="Servicios" EntitySet="Servicios" />
-            <End Role="ImagenesServicios" EntitySet="ImagenesServicios" />
-          </AssociationSet>
           <AssociationSet Name="FK_Planilla_Empleados" Association="Self.FK_Planilla_Empleados">
             <End Role="Empleados" EntitySet="Empleados" />
             <End Role="Planilla" EntitySet="Planilla" />
           </AssociationSet>
-          <AssociationSet Name="FK_PromocionesProductos_Productos" Association="Self.FK_PromocionesProductos_Productos">
-            <End Role="Productos" EntitySet="Productos" />
-            <End Role="PromocionesProductos" EntitySet="PromocionesProductos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PromocionesServicios_Servicios" Association="Self.FK_PromocionesServicios_Servicios">
-            <End Role="Servicios" EntitySet="Servicios" />
-            <End Role="PromocionesServicios" EntitySet="PromocionesServicios" />
-          </AssociationSet>
           <AssociationSet Name="FK_Reseñas_AspNetUsers" Association="Self.FK_Reseñas_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Reseñas" EntitySet="Reseñas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Servicios_Productos_Categorias" Association="Self.FK_Servicios_Productos_Categorias">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Servicios_Productos" EntitySet="Servicios_Productos" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -807,8 +553,17 @@
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="Citas" Relationship="Self.FK_Citas_AspNetUsers" FromRole="AspNetUsers" ToRole="Citas" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_Facturas_AspNetUsers" FromRole="AspNetUsers" ToRole="Facturas" />
           <NavigationProperty Name="Reseñas" Relationship="Self.FK_Reseñas_AspNetUsers" FromRole="AspNetUsers" ToRole="Reseñas" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="Id_Categoria" />
+          </Key>
+          <Property Name="Id_Categoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Categoria" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Servicios_Productos" Relationship="Self.FK_Servicios_Productos_Categorias" FromRole="Categorias" ToRole="Servicios_Productos" />
         </EntityType>
         <EntityType Name="Citas">
           <Key>
@@ -818,12 +573,24 @@
           <Property Name="Fecha_Cita" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Hora_Cita" Type="Time" Nullable="false" Precision="7" />
           <Property Name="Id_Usuario" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Id_Servicio" Type="Int32" Nullable="false" />
           <Property Name="Id_Empleado" Type="Int32" Nullable="false" />
+          <Property Name="Id_Serv_Prod" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Citas_AspNetUsers" FromRole="Citas" ToRole="AspNetUsers" />
           <NavigationProperty Name="Empleados" Relationship="Self.FK_Citas_Empleados" FromRole="Citas" ToRole="Empleados" />
-          <NavigationProperty Name="Servicios" Relationship="Self.FK_Citas_Servicios" FromRole="Citas" ToRole="Servicios" />
+          <NavigationProperty Name="Servicios_Productos" Relationship="Self.FK_Citas_Servicios_Productos" FromRole="Citas" ToRole="Servicios_Productos" />
           <NavigationProperty Name="Facturas" Relationship="Self.FK_Facturas_Citas" FromRole="Citas" ToRole="Facturas" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Detalle_Factura_Productos">
+          <Key>
+            <PropertyRef Name="Id_Detalle" />
+          </Key>
+          <Property Name="Id_Detalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Factura" Type="Int32" Nullable="false" />
+          <Property Name="Id_Producto" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_Detalle_Factura_Productos_Facturas" FromRole="Detalle_Factura_Productos" ToRole="Facturas" />
+          <NavigationProperty Name="Servicios_Productos" Relationship="Self.FK_Detalle_Factura_Productos_Servicios_Productos" FromRole="Detalle_Factura_Productos" ToRole="Servicios_Productos" />
         </EntityType>
         <EntityType Name="Detalle_Ganancias_Facturas">
           <Key>
@@ -834,47 +601,6 @@
           <Property Name="Id_Ganancia" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Facturas" Relationship="Self.FK_Detalle_Ganancias_Facturas_Facturas" FromRole="Detalle_Ganancias_Facturas" ToRole="Facturas" />
           <NavigationProperty Name="GananciaDiaria" Relationship="Self.FK_Detalle_Ganancias_Facturas_GananciaDiaria" FromRole="Detalle_Ganancias_Facturas" ToRole="GananciaDiaria" />
-        </EntityType>
-        <EntityType Name="DetalleFacturaProducto">
-          <Key>
-            <PropertyRef Name="Id_Detalle_Producto" />
-          </Key>
-          <Property Name="Id_Detalle_Producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id_Producto" Type="Int32" Nullable="false" />
-          <Property Name="Cantidad" Type="Byte" Nullable="false" />
-          <Property Name="Id_Factura" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Facturas" Relationship="Self.FK_DetalleFacturaProducto_Facturas" FromRole="DetalleFacturaProducto" ToRole="Facturas" />
-          <NavigationProperty Name="Productos" Relationship="Self.FK_DetalleFacturaProducto_Productos" FromRole="DetalleFacturaProducto" ToRole="Productos" />
-        </EntityType>
-        <EntityType Name="DetalleFacturaPromProdu">
-          <Key>
-            <PropertyRef Name="Id_Detalle_PromProdu" />
-          </Key>
-          <Property Name="Id_Detalle_PromProdu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id_Factura" Type="Int32" Nullable="false" />
-          <Property Name="Id_Promo_Producto" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Facturas" Relationship="Self.FK_DetalleFacturaPromProdu_Facturas" FromRole="DetalleFacturaPromProdu" ToRole="Facturas" />
-          <NavigationProperty Name="PromocionesProductos" Relationship="Self.FK_DetalleFacturaPromProdu_PromocionesProductos" FromRole="DetalleFacturaPromProdu" ToRole="PromocionesProductos" />
-        </EntityType>
-        <EntityType Name="DetalleFacturaPromServ">
-          <Key>
-            <PropertyRef Name="Id_Detalle_PromServ" />
-          </Key>
-          <Property Name="Id_Detalle_PromServ" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id_Factura" Type="Int32" Nullable="false" />
-          <Property Name="Id_Promo_Servicio" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Facturas" Relationship="Self.FK_DetalleFacturaPromServ_Facturas" FromRole="DetalleFacturaPromServ" ToRole="Facturas" />
-          <NavigationProperty Name="PromocionesServicios" Relationship="Self.FK_DetalleFacturaPromServ_PromocionesServicios" FromRole="DetalleFacturaPromServ" ToRole="PromocionesServicios" />
-        </EntityType>
-        <EntityType Name="DetalleFacturaServicios">
-          <Key>
-            <PropertyRef Name="Id_Detalle" />
-          </Key>
-          <Property Name="Id_Detalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id_Factura" Type="Int32" Nullable="false" />
-          <Property Name="Id_Servicio" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Facturas" Relationship="Self.FK_DetalleFacturaServicios_Facturas" FromRole="DetalleFacturaServicios" ToRole="Facturas" />
-          <NavigationProperty Name="Servicios" Relationship="Self.FK_DetalleFacturaServicios_Servicios" FromRole="DetalleFacturaServicios" ToRole="Servicios" />
         </EntityType>
         <EntityType Name="Empleados">
           <Key>
@@ -894,16 +620,14 @@
             <PropertyRef Name="Id_Factura" />
           </Key>
           <Property Name="Id_Factura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id_Cita" Type="Int32" Nullable="false" />
+          <Property Name="Id_Cita" Type="Int32" />
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Total" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Vuelto" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Facturas_AspNetUsers" FromRole="Facturas" ToRole="AspNetUsers" />
           <NavigationProperty Name="Citas" Relationship="Self.FK_Facturas_Citas" FromRole="Facturas" ToRole="Citas" />
+          <NavigationProperty Name="Detalle_Factura_Productos" Relationship="Self.FK_Detalle_Factura_Productos_Facturas" FromRole="Facturas" ToRole="Detalle_Factura_Productos" />
           <NavigationProperty Name="Detalle_Ganancias_Facturas" Relationship="Self.FK_Detalle_Ganancias_Facturas_Facturas" FromRole="Facturas" ToRole="Detalle_Ganancias_Facturas" />
-          <NavigationProperty Name="DetalleFacturaProducto" Relationship="Self.FK_DetalleFacturaProducto_Facturas" FromRole="Facturas" ToRole="DetalleFacturaProducto" />
-          <NavigationProperty Name="DetalleFacturaPromProdu" Relationship="Self.FK_DetalleFacturaPromProdu_Facturas" FromRole="Facturas" ToRole="DetalleFacturaPromProdu" />
-          <NavigationProperty Name="DetalleFacturaPromServ" Relationship="Self.FK_DetalleFacturaPromServ_Facturas" FromRole="Facturas" ToRole="DetalleFacturaPromServ" />
-          <NavigationProperty Name="DetalleFacturaServicios" Relationship="Self.FK_DetalleFacturaServicios_Facturas" FromRole="Facturas" ToRole="DetalleFacturaServicios" />
         </EntityType>
         <EntityType Name="GananciaDiaria">
           <Key>
@@ -925,46 +649,6 @@
           <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <NavigationProperty Name="Empleados" Relationship="Self.FK_ImagenesEmpleados_Empleados_Id_Empleado" FromRole="ImagenesEmpleados" ToRole="Empleados" />
         </EntityType>
-        <EntityType Name="ImagenesProductos">
-          <Key>
-            <PropertyRef Name="Id_Foto_Producto" />
-          </Key>
-          <Property Name="Id_Foto_Producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id_Producto" Type="Int32" Nullable="false" />
-          <Property Name="Foto_Producto" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="Nombre_Foto_Producto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Productos" Relationship="Self.FK_ImagenesProductos_Productos" FromRole="ImagenesProductos" ToRole="Productos" />
-        </EntityType>
-        <EntityType Name="ImagenesPromosProd">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id_Promo_Producto" Type="Int32" Nullable="false" />
-          <Property Name="FileName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <NavigationProperty Name="PromocionesProductos" Relationship="Self.FK_ImagenesPromosProd_PromocionesProductos_Id_Promo_Producto" FromRole="ImagenesPromosProd" ToRole="PromocionesProductos" />
-        </EntityType>
-        <EntityType Name="ImagenesPromosServ">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id_Promo_Servicio" Type="Int32" Nullable="false" />
-          <Property Name="FileName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <NavigationProperty Name="PromocionesServicios" Relationship="Self.FK_ImagenesPromosServ_PromocionesServicios_Id_Promo_Servicio" FromRole="ImagenesPromosServ" ToRole="PromocionesServicios" />
-        </EntityType>
-        <EntityType Name="ImagenesServicios">
-          <Key>
-            <PropertyRef Name="Id_Foto_Servicio" />
-          </Key>
-          <Property Name="Id_Foto_Servicio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id_Servicio" Type="Int32" Nullable="false" />
-          <Property Name="Foto_Servicio" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="Nombre_Foto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Servicios" Relationship="Self.FK_ImagenesServicios_Servicios" FromRole="ImagenesServicios" ToRole="Servicios" />
-        </EntityType>
         <EntityType Name="Planilla">
           <Key>
             <PropertyRef Name="Id_Planilla" />
@@ -976,49 +660,6 @@
           <Property Name="Id_Empleado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Empleados" Relationship="Self.FK_Planilla_Empleados" FromRole="Planilla" ToRole="Empleados" />
         </EntityType>
-        <EntityType Name="Productos">
-          <Key>
-            <PropertyRef Name="Id_Producto" />
-          </Key>
-          <Property Name="Id_Producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre_Producto" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Descripcion_Producto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Precio_Producto" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Stock" Type="Byte" Nullable="false" />
-          <NavigationProperty Name="DetalleFacturaProducto" Relationship="Self.FK_DetalleFacturaProducto_Productos" FromRole="Productos" ToRole="DetalleFacturaProducto" />
-          <NavigationProperty Name="ImagenesProductos" Relationship="Self.FK_ImagenesProductos_Productos" FromRole="Productos" ToRole="ImagenesProductos" />
-          <NavigationProperty Name="PromocionesProductos" Relationship="Self.FK_PromocionesProductos_Productos" FromRole="Productos" ToRole="PromocionesProductos" />
-        </EntityType>
-        <EntityType Name="PromocionesProductos">
-          <Key>
-            <PropertyRef Name="Id_Promo_Producto" />
-          </Key>
-          <Property Name="Id_Promo_Producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre_Promo_Producto" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Descripcion_Promo_Producto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Precio_Nuevo_Producto" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Fecha_Inicio_Promo" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Fecha_Final_Promo" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Id_Producto" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="DetalleFacturaPromProdu" Relationship="Self.FK_DetalleFacturaPromProdu_PromocionesProductos" FromRole="PromocionesProductos" ToRole="DetalleFacturaPromProdu" />
-          <NavigationProperty Name="ImagenesPromosProd" Relationship="Self.FK_ImagenesPromosProd_PromocionesProductos_Id_Promo_Producto" FromRole="PromocionesProductos" ToRole="ImagenesPromosProd" />
-          <NavigationProperty Name="Productos" Relationship="Self.FK_PromocionesProductos_Productos" FromRole="PromocionesProductos" ToRole="Productos" />
-        </EntityType>
-        <EntityType Name="PromocionesServicios">
-          <Key>
-            <PropertyRef Name="Id_Promo_Servicio" />
-          </Key>
-          <Property Name="Id_Promo_Servicio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre_Promo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Descripcion_Promo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Precio_Promo" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Fecha_Inicio" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Fecha_Final" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Id_Servicio" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="DetalleFacturaPromServ" Relationship="Self.FK_DetalleFacturaPromServ_PromocionesServicios" FromRole="PromocionesServicios" ToRole="DetalleFacturaPromServ" />
-          <NavigationProperty Name="ImagenesPromosServ" Relationship="Self.FK_ImagenesPromosServ_PromocionesServicios_Id_Promo_Servicio" FromRole="PromocionesServicios" ToRole="ImagenesPromosServ" />
-          <NavigationProperty Name="Servicios" Relationship="Self.FK_PromocionesServicios_Servicios" FromRole="PromocionesServicios" ToRole="Servicios" />
-        </EntityType>
         <EntityType Name="Reseñas">
           <Key>
             <PropertyRef Name="Id_Resena" />
@@ -1029,18 +670,22 @@
           <Property Name="Id_Usuario" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Reseñas_AspNetUsers" FromRole="Reseñas" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="Servicios">
+        <EntityType Name="Servicios_Productos">
           <Key>
-            <PropertyRef Name="Id_Servicio" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id_Servicio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre_Servicio" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Descripcion_Servicio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Precio_Servicio" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <NavigationProperty Name="Citas" Relationship="Self.FK_Citas_Servicios" FromRole="Servicios" ToRole="Citas" />
-          <NavigationProperty Name="DetalleFacturaServicios" Relationship="Self.FK_DetalleFacturaServicios_Servicios" FromRole="Servicios" ToRole="DetalleFacturaServicios" />
-          <NavigationProperty Name="ImagenesServicios" Relationship="Self.FK_ImagenesServicios_Servicios" FromRole="Servicios" ToRole="ImagenesServicios" />
-          <NavigationProperty Name="PromocionesServicios" Relationship="Self.FK_PromocionesServicios_Servicios" FromRole="Servicios" ToRole="PromocionesServicios" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Promo" Type="Boolean" Nullable="false" />
+          <Property Name="Precio_Promo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id_Categoria" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Categorias" Relationship="Self.FK_Servicios_Productos_Categorias" FromRole="Servicios_Productos" ToRole="Categorias" />
+          <NavigationProperty Name="Citas" Relationship="Self.FK_Citas_Servicios_Productos" FromRole="Servicios_Productos" ToRole="Citas" />
+          <NavigationProperty Name="Detalle_Factura_Productos" Relationship="Self.FK_Detalle_Factura_Productos_Servicios_Productos" FromRole="Servicios_Productos" ToRole="Detalle_Factura_Productos" />
+          <Property Name="FileName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1092,6 +737,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Facturas_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Reseñas_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Reseñas" Type="Self.Reseñas" Multiplicity="*" />
@@ -1101,6 +758,18 @@
             </Principal>
             <Dependent Role="Reseñas">
               <PropertyRef Name="Id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Servicios_Productos_Categorias">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="1" />
+          <End Role="Servicios_Productos" Type="Self.Servicios_Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="Id_Categoria" />
+            </Principal>
+            <Dependent Role="Servicios_Productos">
+              <PropertyRef Name="Id_Categoria" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1116,20 +785,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Citas_Servicios">
-          <End Role="Servicios" Type="Self.Servicios" Multiplicity="1" />
+        <Association Name="FK_Citas_Servicios_Productos">
+          <End Role="Servicios_Productos" Type="Self.Servicios_Productos" Multiplicity="1" />
           <End Role="Citas" Type="Self.Citas" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Servicios">
-              <PropertyRef Name="Id_Servicio" />
+            <Principal Role="Servicios_Productos">
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Citas">
-              <PropertyRef Name="Id_Servicio" />
+              <PropertyRef Name="Id_Serv_Prod" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Facturas_Citas">
-          <End Role="Citas" Type="Self.Citas" Multiplicity="1" />
+          <End Role="Citas" Type="Self.Citas" Multiplicity="0..1" />
           <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Citas">
@@ -1137,6 +806,30 @@
             </Principal>
             <Dependent Role="Facturas">
               <PropertyRef Name="Id_Cita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detalle_Factura_Productos_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
+          <End Role="Detalle_Factura_Productos" Type="Self.Detalle_Factura_Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="Id_Factura" />
+            </Principal>
+            <Dependent Role="Detalle_Factura_Productos">
+              <PropertyRef Name="Id_Factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detalle_Factura_Productos_Servicios_Productos">
+          <End Role="Servicios_Productos" Type="Self.Servicios_Productos" Multiplicity="1" />
+          <End Role="Detalle_Factura_Productos" Type="Self.Detalle_Factura_Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicios_Productos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Detalle_Factura_Productos">
+              <PropertyRef Name="Id_Producto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1161,102 +854,6 @@
             </Principal>
             <Dependent Role="Detalle_Ganancias_Facturas">
               <PropertyRef Name="Id_Ganancia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetalleFacturaProducto_Facturas">
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
-          <End Role="DetalleFacturaProducto" Type="Self.DetalleFacturaProducto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Facturas">
-              <PropertyRef Name="Id_Factura" />
-            </Principal>
-            <Dependent Role="DetalleFacturaProducto">
-              <PropertyRef Name="Id_Factura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetalleFacturaProducto_Productos">
-          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
-          <End Role="DetalleFacturaProducto" Type="Self.DetalleFacturaProducto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Productos">
-              <PropertyRef Name="Id_Producto" />
-            </Principal>
-            <Dependent Role="DetalleFacturaProducto">
-              <PropertyRef Name="Id_Producto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetalleFacturaPromProdu_Facturas">
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
-          <End Role="DetalleFacturaPromProdu" Type="Self.DetalleFacturaPromProdu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Facturas">
-              <PropertyRef Name="Id_Factura" />
-            </Principal>
-            <Dependent Role="DetalleFacturaPromProdu">
-              <PropertyRef Name="Id_Factura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetalleFacturaPromProdu_PromocionesProductos">
-          <End Role="PromocionesProductos" Type="Self.PromocionesProductos" Multiplicity="1" />
-          <End Role="DetalleFacturaPromProdu" Type="Self.DetalleFacturaPromProdu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PromocionesProductos">
-              <PropertyRef Name="Id_Promo_Producto" />
-            </Principal>
-            <Dependent Role="DetalleFacturaPromProdu">
-              <PropertyRef Name="Id_Promo_Producto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetalleFacturaPromServ_Facturas">
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
-          <End Role="DetalleFacturaPromServ" Type="Self.DetalleFacturaPromServ" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Facturas">
-              <PropertyRef Name="Id_Factura" />
-            </Principal>
-            <Dependent Role="DetalleFacturaPromServ">
-              <PropertyRef Name="Id_Factura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetalleFacturaPromServ_PromocionesServicios">
-          <End Role="PromocionesServicios" Type="Self.PromocionesServicios" Multiplicity="1" />
-          <End Role="DetalleFacturaPromServ" Type="Self.DetalleFacturaPromServ" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PromocionesServicios">
-              <PropertyRef Name="Id_Promo_Servicio" />
-            </Principal>
-            <Dependent Role="DetalleFacturaPromServ">
-              <PropertyRef Name="Id_Promo_Servicio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetalleFacturaServicios_Facturas">
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
-          <End Role="DetalleFacturaServicios" Type="Self.DetalleFacturaServicios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Facturas">
-              <PropertyRef Name="Id_Factura" />
-            </Principal>
-            <Dependent Role="DetalleFacturaServicios">
-              <PropertyRef Name="Id_Factura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetalleFacturaServicios_Servicios">
-          <End Role="Servicios" Type="Self.Servicios" Multiplicity="1" />
-          <End Role="DetalleFacturaServicios" Type="Self.DetalleFacturaServicios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Servicios">
-              <PropertyRef Name="Id_Servicio" />
-            </Principal>
-            <Dependent Role="DetalleFacturaServicios">
-              <PropertyRef Name="Id_Servicio" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1286,82 +883,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ImagenesProductos_Productos">
-          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
-          <End Role="ImagenesProductos" Type="Self.ImagenesProductos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Productos">
-              <PropertyRef Name="Id_Producto" />
-            </Principal>
-            <Dependent Role="ImagenesProductos">
-              <PropertyRef Name="Id_Producto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ImagenesPromosProd_PromocionesProductos_Id_Promo_Producto">
-          <End Role="PromocionesProductos" Type="Self.PromocionesProductos" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ImagenesPromosProd" Type="Self.ImagenesPromosProd" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PromocionesProductos">
-              <PropertyRef Name="Id_Promo_Producto" />
-            </Principal>
-            <Dependent Role="ImagenesPromosProd">
-              <PropertyRef Name="Id_Promo_Producto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ImagenesPromosServ_PromocionesServicios_Id_Promo_Servicio">
-          <End Role="PromocionesServicios" Type="Self.PromocionesServicios" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ImagenesPromosServ" Type="Self.ImagenesPromosServ" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PromocionesServicios">
-              <PropertyRef Name="Id_Promo_Servicio" />
-            </Principal>
-            <Dependent Role="ImagenesPromosServ">
-              <PropertyRef Name="Id_Promo_Servicio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ImagenesServicios_Servicios">
-          <End Role="Servicios" Type="Self.Servicios" Multiplicity="1" />
-          <End Role="ImagenesServicios" Type="Self.ImagenesServicios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Servicios">
-              <PropertyRef Name="Id_Servicio" />
-            </Principal>
-            <Dependent Role="ImagenesServicios">
-              <PropertyRef Name="Id_Servicio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PromocionesProductos_Productos">
-          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
-          <End Role="PromocionesProductos" Type="Self.PromocionesProductos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Productos">
-              <PropertyRef Name="Id_Producto" />
-            </Principal>
-            <Dependent Role="PromocionesProductos">
-              <PropertyRef Name="Id_Producto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PromocionesServicios_Servicios">
-          <End Role="Servicios" Type="Self.Servicios" Multiplicity="1" />
-          <End Role="PromocionesServicios" Type="Self.PromocionesServicios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Servicios">
-              <PropertyRef Name="Id_Servicio" />
-            </Principal>
-            <Dependent Role="PromocionesServicios">
-              <PropertyRef Name="Id_Servicio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
@@ -1372,26 +893,17 @@
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" />
           <EntitySet Name="Citas" EntityType="Self.Citas" />
+          <EntitySet Name="Detalle_Factura_Productos" EntityType="Self.Detalle_Factura_Productos" />
           <EntitySet Name="Detalle_Ganancias_Facturas" EntityType="Self.Detalle_Ganancias_Facturas" />
-          <EntitySet Name="DetalleFacturaProducto" EntityType="Self.DetalleFacturaProducto" />
-          <EntitySet Name="DetalleFacturaPromProdu" EntityType="Self.DetalleFacturaPromProdu" />
-          <EntitySet Name="DetalleFacturaPromServ" EntityType="Self.DetalleFacturaPromServ" />
-          <EntitySet Name="DetalleFacturaServicios" EntityType="Self.DetalleFacturaServicios" />
           <EntitySet Name="Empleados" EntityType="Self.Empleados" />
           <EntitySet Name="Facturas" EntityType="Self.Facturas" />
           <EntitySet Name="GananciaDiaria" EntityType="Self.GananciaDiaria" />
           <EntitySet Name="ImagenesEmpleados" EntityType="Self.ImagenesEmpleados" />
-          <EntitySet Name="ImagenesProductos" EntityType="Self.ImagenesProductos" />
-          <EntitySet Name="ImagenesPromosProd" EntityType="Self.ImagenesPromosProd" />
-          <EntitySet Name="ImagenesPromosServ" EntityType="Self.ImagenesPromosServ" />
-          <EntitySet Name="ImagenesServicios" EntityType="Self.ImagenesServicios" />
           <EntitySet Name="Planilla" EntityType="Self.Planilla" />
-          <EntitySet Name="Productos" EntityType="Self.Productos" />
-          <EntitySet Name="PromocionesProductos" EntityType="Self.PromocionesProductos" />
-          <EntitySet Name="PromocionesServicios" EntityType="Self.PromocionesServicios" />
           <EntitySet Name="Reseñas" EntityType="Self.Reseñas" />
-          <EntitySet Name="Servicios" EntityType="Self.Servicios" />
+          <EntitySet Name="Servicios_Productos" EntityType="Self.Servicios_Productos" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -1405,21 +917,37 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Citas" EntitySet="Citas" />
           </AssociationSet>
+          <AssociationSet Name="FK_Facturas_AspNetUsers" Association="Self.FK_Facturas_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
           <AssociationSet Name="FK_Reseñas_AspNetUsers" Association="Self.FK_Reseñas_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Reseñas" EntitySet="Reseñas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Servicios_Productos_Categorias" Association="Self.FK_Servicios_Productos_Categorias">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Servicios_Productos" EntitySet="Servicios_Productos" />
           </AssociationSet>
           <AssociationSet Name="FK_Citas_Empleados" Association="Self.FK_Citas_Empleados">
             <End Role="Empleados" EntitySet="Empleados" />
             <End Role="Citas" EntitySet="Citas" />
           </AssociationSet>
-          <AssociationSet Name="FK_Citas_Servicios" Association="Self.FK_Citas_Servicios">
-            <End Role="Servicios" EntitySet="Servicios" />
+          <AssociationSet Name="FK_Citas_Servicios_Productos" Association="Self.FK_Citas_Servicios_Productos">
+            <End Role="Servicios_Productos" EntitySet="Servicios_Productos" />
             <End Role="Citas" EntitySet="Citas" />
           </AssociationSet>
           <AssociationSet Name="FK_Facturas_Citas" Association="Self.FK_Facturas_Citas">
             <End Role="Citas" EntitySet="Citas" />
             <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detalle_Factura_Productos_Facturas" Association="Self.FK_Detalle_Factura_Productos_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="Detalle_Factura_Productos" EntitySet="Detalle_Factura_Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detalle_Factura_Productos_Servicios_Productos" Association="Self.FK_Detalle_Factura_Productos_Servicios_Productos">
+            <End Role="Servicios_Productos" EntitySet="Servicios_Productos" />
+            <End Role="Detalle_Factura_Productos" EntitySet="Detalle_Factura_Productos" />
           </AssociationSet>
           <AssociationSet Name="FK_Detalle_Ganancias_Facturas_Facturas" Association="Self.FK_Detalle_Ganancias_Facturas_Facturas">
             <End Role="Facturas" EntitySet="Facturas" />
@@ -1429,38 +957,6 @@
             <End Role="GananciaDiaria" EntitySet="GananciaDiaria" />
             <End Role="Detalle_Ganancias_Facturas" EntitySet="Detalle_Ganancias_Facturas" />
           </AssociationSet>
-          <AssociationSet Name="FK_DetalleFacturaProducto_Facturas" Association="Self.FK_DetalleFacturaProducto_Facturas">
-            <End Role="Facturas" EntitySet="Facturas" />
-            <End Role="DetalleFacturaProducto" EntitySet="DetalleFacturaProducto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleFacturaProducto_Productos" Association="Self.FK_DetalleFacturaProducto_Productos">
-            <End Role="Productos" EntitySet="Productos" />
-            <End Role="DetalleFacturaProducto" EntitySet="DetalleFacturaProducto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleFacturaPromProdu_Facturas" Association="Self.FK_DetalleFacturaPromProdu_Facturas">
-            <End Role="Facturas" EntitySet="Facturas" />
-            <End Role="DetalleFacturaPromProdu" EntitySet="DetalleFacturaPromProdu" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleFacturaPromProdu_PromocionesProductos" Association="Self.FK_DetalleFacturaPromProdu_PromocionesProductos">
-            <End Role="PromocionesProductos" EntitySet="PromocionesProductos" />
-            <End Role="DetalleFacturaPromProdu" EntitySet="DetalleFacturaPromProdu" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleFacturaPromServ_Facturas" Association="Self.FK_DetalleFacturaPromServ_Facturas">
-            <End Role="Facturas" EntitySet="Facturas" />
-            <End Role="DetalleFacturaPromServ" EntitySet="DetalleFacturaPromServ" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleFacturaPromServ_PromocionesServicios" Association="Self.FK_DetalleFacturaPromServ_PromocionesServicios">
-            <End Role="PromocionesServicios" EntitySet="PromocionesServicios" />
-            <End Role="DetalleFacturaPromServ" EntitySet="DetalleFacturaPromServ" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleFacturaServicios_Facturas" Association="Self.FK_DetalleFacturaServicios_Facturas">
-            <End Role="Facturas" EntitySet="Facturas" />
-            <End Role="DetalleFacturaServicios" EntitySet="DetalleFacturaServicios" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleFacturaServicios_Servicios" Association="Self.FK_DetalleFacturaServicios_Servicios">
-            <End Role="Servicios" EntitySet="Servicios" />
-            <End Role="DetalleFacturaServicios" EntitySet="DetalleFacturaServicios" />
-          </AssociationSet>
           <AssociationSet Name="FK_ImagenesEmpleados_Empleados_Id_Empleado" Association="Self.FK_ImagenesEmpleados_Empleados_Id_Empleado">
             <End Role="Empleados" EntitySet="Empleados" />
             <End Role="ImagenesEmpleados" EntitySet="ImagenesEmpleados" />
@@ -1468,30 +964,6 @@
           <AssociationSet Name="FK_Planilla_Empleados" Association="Self.FK_Planilla_Empleados">
             <End Role="Empleados" EntitySet="Empleados" />
             <End Role="Planilla" EntitySet="Planilla" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ImagenesProductos_Productos" Association="Self.FK_ImagenesProductos_Productos">
-            <End Role="Productos" EntitySet="Productos" />
-            <End Role="ImagenesProductos" EntitySet="ImagenesProductos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ImagenesPromosProd_PromocionesProductos_Id_Promo_Producto" Association="Self.FK_ImagenesPromosProd_PromocionesProductos_Id_Promo_Producto">
-            <End Role="PromocionesProductos" EntitySet="PromocionesProductos" />
-            <End Role="ImagenesPromosProd" EntitySet="ImagenesPromosProd" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ImagenesPromosServ_PromocionesServicios_Id_Promo_Servicio" Association="Self.FK_ImagenesPromosServ_PromocionesServicios_Id_Promo_Servicio">
-            <End Role="PromocionesServicios" EntitySet="PromocionesServicios" />
-            <End Role="ImagenesPromosServ" EntitySet="ImagenesPromosServ" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ImagenesServicios_Servicios" Association="Self.FK_ImagenesServicios_Servicios">
-            <End Role="Servicios" EntitySet="Servicios" />
-            <End Role="ImagenesServicios" EntitySet="ImagenesServicios" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PromocionesProductos_Productos" Association="Self.FK_PromocionesProductos_Productos">
-            <End Role="Productos" EntitySet="Productos" />
-            <End Role="PromocionesProductos" EntitySet="PromocionesProductos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PromocionesServicios_Servicios" Association="Self.FK_PromocionesServicios_Servicios">
-            <End Role="Servicios" EntitySet="Servicios" />
-            <End Role="PromocionesServicios" EntitySet="PromocionesServicios" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -1562,15 +1034,34 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.Categorias">
+              <MappingFragment StoreEntitySet="Categorias">
+                <ScalarProperty Name="Id_Categoria" ColumnName="Id_Categoria" />
+                <ScalarProperty Name="Nombre_Categoria" ColumnName="Nombre_Categoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Citas">
             <EntityTypeMapping TypeName="BD_MARYSTYLISModel.Citas">
               <MappingFragment StoreEntitySet="Citas">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Id_Cita" ColumnName="Id_Cita" />
                 <ScalarProperty Name="Fecha_Cita" ColumnName="Fecha_Cita" />
                 <ScalarProperty Name="Hora_Cita" ColumnName="Hora_Cita" />
                 <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
-                <ScalarProperty Name="Id_Servicio" ColumnName="Id_Servicio" />
                 <ScalarProperty Name="Id_Empleado" ColumnName="Id_Empleado" />
+                <ScalarProperty Name="Id_Serv_Prod" ColumnName="Id_Serv_Prod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Detalle_Factura_Productos">
+            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.Detalle_Factura_Productos">
+              <MappingFragment StoreEntitySet="Detalle_Factura_Productos">
+                <ScalarProperty Name="Id_Detalle" ColumnName="Id_Detalle" />
+                <ScalarProperty Name="Id_Factura" ColumnName="Id_Factura" />
+                <ScalarProperty Name="Id_Producto" ColumnName="Id_Producto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1580,43 +1071,6 @@
                 <ScalarProperty Name="Id_Factura_Ganancias" ColumnName="Id_Factura_Ganancias" />
                 <ScalarProperty Name="Id_Factura" ColumnName="Id_Factura" />
                 <ScalarProperty Name="Id_Ganancia" ColumnName="Id_Ganancia" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DetalleFacturaProducto">
-            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.DetalleFacturaProducto">
-              <MappingFragment StoreEntitySet="DetalleFacturaProducto">
-                <ScalarProperty Name="Id_Detalle_Producto" ColumnName="Id_Detalle_Producto" />
-                <ScalarProperty Name="Id_Producto" ColumnName="Id_Producto" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="Id_Factura" ColumnName="Id_Factura" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DetalleFacturaPromProdu">
-            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.DetalleFacturaPromProdu">
-              <MappingFragment StoreEntitySet="DetalleFacturaPromProdu">
-                <ScalarProperty Name="Id_Detalle_PromProdu" ColumnName="Id_Detalle_PromProdu" />
-                <ScalarProperty Name="Id_Factura" ColumnName="Id_Factura" />
-                <ScalarProperty Name="Id_Promo_Producto" ColumnName="Id_Promo_Producto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DetalleFacturaPromServ">
-            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.DetalleFacturaPromServ">
-              <MappingFragment StoreEntitySet="DetalleFacturaPromServ">
-                <ScalarProperty Name="Id_Detalle_PromServ" ColumnName="Id_Detalle_PromServ" />
-                <ScalarProperty Name="Id_Factura" ColumnName="Id_Factura" />
-                <ScalarProperty Name="Id_Promo_Servicio" ColumnName="Id_Promo_Servicio" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DetalleFacturaServicios">
-            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.DetalleFacturaServicios">
-              <MappingFragment StoreEntitySet="DetalleFacturaServicios">
-                <ScalarProperty Name="Id_Detalle" ColumnName="Id_Detalle" />
-                <ScalarProperty Name="Id_Factura" ColumnName="Id_Factura" />
-                <ScalarProperty Name="Id_Servicio" ColumnName="Id_Servicio" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1638,7 +1092,7 @@
                 <ScalarProperty Name="Id_Cita" ColumnName="Id_Cita" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Vuelto" ColumnName="Vuelto" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1662,46 +1116,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ImagenesProductos">
-            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.ImagenesProductos">
-              <MappingFragment StoreEntitySet="ImagenesProductos">
-                <ScalarProperty Name="Id_Foto_Producto" ColumnName="Id_Foto_Producto" />
-                <ScalarProperty Name="Id_Producto" ColumnName="Id_Producto" />
-                <ScalarProperty Name="Foto_Producto" ColumnName="Foto_Producto" />
-                <ScalarProperty Name="Nombre_Foto_Producto" ColumnName="Nombre_Foto_Producto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ImagenesPromosProd">
-            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.ImagenesPromosProd">
-              <MappingFragment StoreEntitySet="ImagenesPromosProd">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Id_Promo_Producto" ColumnName="Id_Promo_Producto" />
-                <ScalarProperty Name="FileName" ColumnName="FileName" />
-                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ImagenesPromosServ">
-            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.ImagenesPromosServ">
-              <MappingFragment StoreEntitySet="ImagenesPromosServ">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Id_Promo_Servicio" ColumnName="Id_Promo_Servicio" />
-                <ScalarProperty Name="FileName" ColumnName="FileName" />
-                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ImagenesServicios">
-            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.ImagenesServicios">
-              <MappingFragment StoreEntitySet="ImagenesServicios">
-                <ScalarProperty Name="Id_Foto_Servicio" ColumnName="Id_Foto_Servicio" />
-                <ScalarProperty Name="Id_Servicio" ColumnName="Id_Servicio" />
-                <ScalarProperty Name="Foto_Servicio" ColumnName="Foto_Servicio" />
-                <ScalarProperty Name="Nombre_Foto" ColumnName="Nombre_Foto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Planilla">
             <EntityTypeMapping TypeName="BD_MARYSTYLISModel.Planilla">
               <MappingFragment StoreEntitySet="Planilla">
@@ -1710,43 +1124,6 @@
                 <ScalarProperty Name="Salario" ColumnName="Salario" />
                 <ScalarProperty Name="Especializacion" ColumnName="Especializacion" />
                 <ScalarProperty Name="Id_Empleado" ColumnName="Id_Empleado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Productos">
-            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.Productos">
-              <MappingFragment StoreEntitySet="Productos">
-                <ScalarProperty Name="Id_Producto" ColumnName="Id_Producto" />
-                <ScalarProperty Name="Nombre_Producto" ColumnName="Nombre_Producto" />
-                <ScalarProperty Name="Descripcion_Producto" ColumnName="Descripcion_Producto" />
-                <ScalarProperty Name="Precio_Producto" ColumnName="Precio_Producto" />
-                <ScalarProperty Name="Stock" ColumnName="Stock" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PromocionesProductos">
-            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.PromocionesProductos">
-              <MappingFragment StoreEntitySet="PromocionesProductos">
-                <ScalarProperty Name="Id_Promo_Producto" ColumnName="Id_Promo_Producto" />
-                <ScalarProperty Name="Nombre_Promo_Producto" ColumnName="Nombre_Promo_Producto" />
-                <ScalarProperty Name="Descripcion_Promo_Producto" ColumnName="Descripcion_Promo_Producto" />
-                <ScalarProperty Name="Precio_Nuevo_Producto" ColumnName="Precio_Nuevo_Producto" />
-                <ScalarProperty Name="Fecha_Inicio_Promo" ColumnName="Fecha_Inicio_Promo" />
-                <ScalarProperty Name="Fecha_Final_Promo" ColumnName="Fecha_Final_Promo" />
-                <ScalarProperty Name="Id_Producto" ColumnName="Id_Producto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PromocionesServicios">
-            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.PromocionesServicios">
-              <MappingFragment StoreEntitySet="PromocionesServicios">
-                <ScalarProperty Name="Id_Promo_Servicio" ColumnName="Id_Promo_Servicio" />
-                <ScalarProperty Name="Nombre_Promo" ColumnName="Nombre_Promo" />
-                <ScalarProperty Name="Descripcion_Promo" ColumnName="Descripcion_Promo" />
-                <ScalarProperty Name="Precio_Promo" ColumnName="Precio_Promo" />
-                <ScalarProperty Name="Fecha_Inicio" ColumnName="Fecha_Inicio" />
-                <ScalarProperty Name="Fecha_Final" ColumnName="Fecha_Final" />
-                <ScalarProperty Name="Id_Servicio" ColumnName="Id_Servicio" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1760,13 +1137,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Servicios">
-            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.Servicios">
-              <MappingFragment StoreEntitySet="Servicios">
-                <ScalarProperty Name="Id_Servicio" ColumnName="Id_Servicio" />
-                <ScalarProperty Name="Nombre_Servicio" ColumnName="Nombre_Servicio" />
-                <ScalarProperty Name="Descripcion_Servicio" ColumnName="Descripcion_Servicio" />
-                <ScalarProperty Name="Precio_Servicio" ColumnName="Precio_Servicio" />
+          <EntitySetMapping Name="Servicios_Productos">
+            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.Servicios_Productos">
+              <MappingFragment StoreEntitySet="Servicios_Productos">
+                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Promo" ColumnName="Promo" />
+                <ScalarProperty Name="Precio_Promo" ColumnName="Precio_Promo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id_Categoria" ColumnName="Id_Categoria" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -55,10 +55,10 @@
 
                         </ul>
                     </li>
-                     @if (User.Identity.IsAuthenticated)
+                     @*@if (User.Identity.IsAuthenticated)
                      {
                          if (User.IsInRole("Administrador"))
-                         {
+                         {*@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administración <b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -71,8 +71,8 @@
 
                             <li>@Html.ActionLink("Nosotros", "Index", "Empleados")</li>
                             <li>@Html.ActionLink("ReseñasAdmin", "Index", "ReseñasAdmin")</li>
-                            <li>@Html.ActionLink("ProductosAdmin", "Index", "ProductosAdmin")</li>
-                            <li>@Html.ActionLink("ServiciosAdmin", "Index", "ServiciosAdmin")</li>
+                            <li>@Html.ActionLink("Servicios y Productos", "Index", "Servicios_Productos")</li>
+                           
 
                             <li>@Html.ActionLink("GananciaDiarias1", "Index", "GananciaDiarias1")</li>
 
@@ -83,8 +83,8 @@
 
                         </ul>
                     </li>
-                        }
-                     }
+                        @*}
+                     }*@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

@@ -12,27 +12,29 @@ namespace WebApplication1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PromocionesServicios
+    public partial class Servicios_Productos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PromocionesServicios()
+        public Servicios_Productos()
         {
-            this.DetalleFacturaPromServ = new HashSet<DetalleFacturaPromServ>();
-            this.ImagenesPromosServ = new HashSet<ImagenesPromosServ>();
+            this.Citas = new HashSet<Citas>();
+            this.Detalle_Factura_Productos = new HashSet<Detalle_Factura_Productos>();
         }
     
-        public int Id_Promo_Servicio { get; set; }
-        public string Nombre_Promo { get; set; }
-        public string Descripcion_Promo { get; set; }
-        public decimal Precio_Promo { get; set; }
-        public System.DateTime Fecha_Inicio { get; set; }
-        public System.DateTime Fecha_Final { get; set; }
-        public int Id_Servicio { get; set; }
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public decimal Precio { get; set; }
+        public bool Promo { get; set; }
+        public Nullable<decimal> Precio_Promo { get; set; }
+        public string Descripcion { get; set; }
+        public int Id_Categoria { get; set; }
+        public string FileName { get; set; }
+        public byte[] ImageData { get; set; }
     
+        public virtual Categorias Categorias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetalleFacturaPromServ> DetalleFacturaPromServ { get; set; }
+        public virtual ICollection<Citas> Citas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ImagenesPromosServ> ImagenesPromosServ { get; set; }
-        public virtual Servicios Servicios { get; set; }
+        public virtual ICollection<Detalle_Factura_Productos> Detalle_Factura_Productos { get; set; }
     }
 }

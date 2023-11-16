@@ -17,29 +17,21 @@ namespace WebApplication1.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Facturas()
         {
+            this.Detalle_Factura_Productos = new HashSet<Detalle_Factura_Productos>();
             this.Detalle_Ganancias_Facturas = new HashSet<Detalle_Ganancias_Facturas>();
-            this.DetalleFacturaProducto = new HashSet<DetalleFacturaProducto>();
-            this.DetalleFacturaPromProdu = new HashSet<DetalleFacturaPromProdu>();
-            this.DetalleFacturaPromServ = new HashSet<DetalleFacturaPromServ>();
-            this.DetalleFacturaServicios = new HashSet<DetalleFacturaServicios>();
         }
     
         public int Id_Factura { get; set; }
-        public int Id_Cita { get; set; }
+        public Nullable<int> Id_Cita { get; set; }
         public System.DateTime Fecha { get; set; }
         public decimal Total { get; set; }
-        public decimal Vuelto { get; set; }
+        public string User_Id { get; set; }
     
+        public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Citas Citas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Detalle_Factura_Productos> Detalle_Factura_Productos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Detalle_Ganancias_Facturas> Detalle_Ganancias_Facturas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetalleFacturaProducto> DetalleFacturaProducto { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetalleFacturaPromProdu> DetalleFacturaPromProdu { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetalleFacturaPromServ> DetalleFacturaPromServ { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetalleFacturaServicios> DetalleFacturaServicios { get; set; }
     }
 }

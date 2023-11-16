@@ -30,26 +30,17 @@ namespace WebApplication1.Models
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<Categorias> Categorias { get; set; }
         public virtual DbSet<Citas> Citas { get; set; }
+        public virtual DbSet<Detalle_Factura_Productos> Detalle_Factura_Productos { get; set; }
         public virtual DbSet<Detalle_Ganancias_Facturas> Detalle_Ganancias_Facturas { get; set; }
-        public virtual DbSet<DetalleFacturaProducto> DetalleFacturaProducto { get; set; }
-        public virtual DbSet<DetalleFacturaPromProdu> DetalleFacturaPromProdu { get; set; }
-        public virtual DbSet<DetalleFacturaPromServ> DetalleFacturaPromServ { get; set; }
-        public virtual DbSet<DetalleFacturaServicios> DetalleFacturaServicios { get; set; }
         public virtual DbSet<Empleados> Empleados { get; set; }
         public virtual DbSet<Facturas> Facturas { get; set; }
         public virtual DbSet<GananciaDiaria> GananciaDiaria { get; set; }
         public virtual DbSet<ImagenesEmpleados> ImagenesEmpleados { get; set; }
-        public virtual DbSet<ImagenesProductos> ImagenesProductos { get; set; }
-        public virtual DbSet<ImagenesPromosProd> ImagenesPromosProd { get; set; }
-        public virtual DbSet<ImagenesPromosServ> ImagenesPromosServ { get; set; }
-        public virtual DbSet<ImagenesServicios> ImagenesServicios { get; set; }
         public virtual DbSet<Planilla> Planilla { get; set; }
-        public virtual DbSet<Productos> Productos { get; set; }
-        public virtual DbSet<PromocionesProductos> PromocionesProductos { get; set; }
-        public virtual DbSet<PromocionesServicios> PromocionesServicios { get; set; }
         public virtual DbSet<Reseñas> Reseñas { get; set; }
-        public virtual DbSet<Servicios> Servicios { get; set; }
+        public virtual DbSet<Servicios_Productos> Servicios_Productos { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

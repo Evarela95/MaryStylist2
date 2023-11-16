@@ -12,13 +12,14 @@ namespace WebApplication1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ImagenesServicios
+    public partial class Detalle_Factura_Productos
     {
-        public int Id_Foto_Servicio { get; set; }
-        public int Id_Servicio { get; set; }
-        public byte[] Foto_Servicio { get; set; }
-        public string Nombre_Foto { get; set; }
+        public int Id_Detalle { get; set; }
+        public int Id_Factura { get; set; }
+        public int Id_Producto { get; set; }
+        public int Cantidad { get; set; }
     
-        public virtual Servicios Servicios { get; set; }
+        public virtual Facturas Facturas { get; set; }
+        public virtual Servicios_Productos Servicios_Productos { get; set; }
     }
 }

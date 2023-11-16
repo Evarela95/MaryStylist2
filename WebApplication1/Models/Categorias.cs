@@ -12,26 +12,18 @@ namespace WebApplication1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Citas
+    public partial class Categorias
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Citas()
+        public Categorias()
         {
-            this.Facturas = new HashSet<Facturas>();
+            this.Servicios_Productos = new HashSet<Servicios_Productos>();
         }
     
-        public int Id_Cita { get; set; }
-        public System.DateTime Fecha_Cita { get; set; }
-        public System.TimeSpan Hora_Cita { get; set; }
-        public string Id_Usuario { get; set; }
-        public int Id_Empleado { get; set; }
-        public int Id_Serv_Prod { get; set; }
-        public bool Estado { get; set; }
+        public int Id_Categoria { get; set; }
+        public string Nombre_Categoria { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual Empleados Empleados { get; set; }
-        public virtual Servicios_Productos Servicios_Productos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Facturas> Facturas { get; set; }
+        public virtual ICollection<Servicios_Productos> Servicios_Productos { get; set; }
     }
 }
