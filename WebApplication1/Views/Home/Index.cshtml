@@ -12,7 +12,8 @@
         <div class="texto">
             <p>Tu destino para la belleza y el bienestar</p>
         </div>
-        <a href="#reserva" class="cta-button">Reserva ahora</a>
+        @Html.ActionLink("Reserva ahora", "Create", "Citas", null, new { @class = "cta-button", id = "reserva" })
+
     </header>
 
     <section class="servicios-info">

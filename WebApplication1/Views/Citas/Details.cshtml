@@ -1,0 +1,67 @@
+﻿@model WebApplication1.Models.Citas
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Citas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_Cita)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_Cita)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hora_Cita)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hora_Cita)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUsers.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Empleados.Nombre_Empleado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empleados.Nombre_Empleado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Servicios_Productos.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Servicios_Productos.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Cita }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

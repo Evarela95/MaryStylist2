@@ -1,0 +1,49 @@
+﻿@model System.Data.DataTable
+
+@{
+    ViewBag.Title = "Citas por Usuario";
+}
+
+<h2>Citas por Usuario</h2>
+
+@if (Model != null && Model.Rows.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>Fecha Cita</th>
+
+                <th>Hora Cita</th>
+                <th>Servicio</th>
+                <th>Precio</th>
+                <th>Promoción</th>
+                <th>Descrición</th>
+                <th>Atiende</th>
+                <!-- Agregar las columnas restantes según tu tabla de citas -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (System.Data.DataRow row in Model.Rows)
+            {
+            <tr>
+
+                <td>@row["Fecha_Cita"]</td>
+
+                <td>@row["Hora_Cita"]</td>
+                <td>@row["Nombre"]</td>
+
+                <td>@row["Precio"]</td>
+                <td>@(string.IsNullOrEmpty(row["Precio_Promo"].ToString()) ? "N/A" : row["Precio_Promo"])</td>
+                <td>@row["Descripcion"]</td>
+                <td>@row["Nombre_Empleado"] @row["Apellido_Empleado"] </td>
+                <!-- Agregar el resto de las columnas -->
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No se encontraron citas para este usuario.</p>
+}

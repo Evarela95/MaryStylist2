@@ -178,6 +178,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AspNetUsersController.cs" />
+    <Compile Include="Controllers\CitasController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
     <Compile Include="Controllers\GananciaDiarias1Controller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -392,6 +393,14 @@
     <Content Include="Views\Servicios_Productos\Productos.cshtml" />
     <Content Include="Views\Servicios_Productos\ServiciosPromo.cshtml" />
     <Content Include="Views\Servicios_Productos\ProductosPromo.cshtml" />
+    <Content Include="Views\Citas\Delete.cshtml" />
+    <Content Include="Views\Citas\Details.cshtml" />
+    <Content Include="Views\Citas\Edit.cshtml" />
+    <Content Include="Views\Citas\Index.cshtml" />
+    <Content Include="Views\Citas\Create.cshtml" />
+    <Content Include="Views\Citas\CitasCanceladas.cshtml" />
+    <Content Include="Views\Citas\CitaExitosa.cshtml" />
+    <Content Include="Views\Citas\MisCitas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
