@@ -397,10 +397,12 @@
     <Content Include="Views\Citas\Details.cshtml" />
     <Content Include="Views\Citas\Edit.cshtml" />
     <Content Include="Views\Citas\Index.cshtml" />
-    <Content Include="Views\Citas\Create.cshtml" />
-    <Content Include="Views\Citas\CitasCanceladas.cshtml" />
+    <Content Include="Views\Citas\CitasFinalizadas.cshtml" />
     <Content Include="Views\Citas\CitaExitosa.cshtml" />
     <Content Include="Views\Citas\MisCitas.cshtml" />
+    <Content Include="Views\Citas\TodasLasCitas.cshtml" />
+    <Content Include="Views\Citas\CitasNoPromo.cshtml" />
+    <Content Include="Views\Citas\CitasPromo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

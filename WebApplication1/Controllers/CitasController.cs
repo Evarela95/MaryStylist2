@@ -20,10 +20,27 @@ namespace WebApplication1.Controllers
         public ActionResult Index()
         {
             var citas = db.Citas
+                               .Where(c => c.Estado && c.Fecha_Cita == DateTime.Today)
+                               .Include(c => c.AspNetUsers)
+                               .Include(c => c.Empleados)
+                               .Include(c => c.Servicios_Productos)
+                               
+                               .ToList();
+
+
+            return View(citas.ToList());
+        }
+
+        
+
+             public ActionResult TodasLasCitas()
+        {
+            var citas = db.Citas
                                .Where(c => c.Estado)
                                .Include(c => c.AspNetUsers)
                                .Include(c => c.Empleados)
                                .Include(c => c.Servicios_Productos)
+
                                .ToList();
 
 
@@ -31,7 +48,8 @@ namespace WebApplication1.Controllers
         }
 
 
-        public ActionResult CitasCanceladas()
+
+        public ActionResult CitasFinalizadas()
         {
             var citas = db.Citas
                                .Where(c => !c.Estado)
@@ -59,15 +77,25 @@ namespace WebApplication1.Controllers
             return View(citas);
         }
 
-        // GET: Citas/Create
+
+
+
+        public ActionResult CitaExitosa()
+        {
+
+            return View();
+        }
+
+
+        // -------------------------------------CITAS QUE NO TIENEN PROMOCION -----------------------------
         [Authorize]
-        public ActionResult Create()
+        public ActionResult CitasNoPromo()
         {
 
             ViewBag.Id_Empleado = new SelectList(db.Empleados, "Id_Empleado", "Nombre_Empleado");
 
 
-            var serviciosDeCategoria1 = db.Servicios_Productos.Where(sp => sp.Id_Categoria == 1).ToList();
+            var serviciosDeCategoria1 = db.Servicios_Productos.Where(sp => sp.Id_Categoria == 1 && !sp.Promo).ToList();
 
             // SelectList solo con los servicios
             ViewBag.Id_Serv_Prod = new SelectList(serviciosDeCategoria1, "Id", "Nombre");
@@ -78,12 +106,6 @@ namespace WebApplication1.Controllers
         }
 
 
-        public ActionResult CitaExitosa()
-        {
-            
-            return View();
-        }
-
 
 
 
@@ -92,7 +114,7 @@ namespace WebApplication1.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_Cita,Fecha_Cita,Hora_Cita,Id_Usuario,Id_Empleado,Id_Serv_Prod,Estado")] Citas citas)
+        public ActionResult CitasNoPromo([Bind(Include = "Id_Cita,Fecha_Cita,Hora_Cita,Id_Usuario,Id_Empleado,Id_Serv_Prod,Estado")] Citas citas)
         {
             if (ModelState.IsValid)
             {
@@ -112,6 +134,63 @@ namespace WebApplication1.Controllers
             ViewBag.Id_Serv_Prod = new SelectList(db.Servicios_Productos, "Id", "Nombre", citas.Id_Serv_Prod);
             return View(citas);
         }
+
+        //------------------------------------------------------------------------------------------------
+
+
+        //CITAS CON PROMO----------------------------------------------------------
+
+        // GET: Citas/Create
+        [Authorize]
+        public ActionResult CitasPromo()
+        {
+
+            ViewBag.Id_Empleado = new SelectList(db.Empleados, "Id_Empleado", "Nombre_Empleado");
+
+
+            var serviciosDeCategoria1 = db.Servicios_Productos.Where(sp => sp.Id_Categoria == 1 && sp.Promo).ToList();
+
+            // SelectList solo con los servicios
+            ViewBag.Id_Serv_Prod = new SelectList(serviciosDeCategoria1, "Id", "Nombre");
+
+
+
+            return View();
+        }
+
+
+
+
+
+        // POST: Citas/Create
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
+        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CitasPromo([Bind(Include = "Id_Cita,Fecha_Cita,Hora_Cita,Id_Usuario,Id_Empleado,Id_Serv_Prod,Estado")] Citas citas)
+        {
+            if (ModelState.IsValid)
+            {
+                var estado = true;
+                citas.Estado = estado;
+                string userId = User.Identity.GetUserId();
+
+                citas.Id_Usuario = userId;
+
+                db.Citas.Add(citas);
+                db.SaveChanges();
+                return RedirectToAction("CitaExitosa");
+            }
+
+
+            ViewBag.Id_Empleado = new SelectList(db.Empleados, "Id_Empleado", "Nombre_Empleado", citas.Id_Empleado);
+            ViewBag.Id_Serv_Prod = new SelectList(db.Servicios_Productos, "Id", "Nombre", citas.Id_Serv_Prod);
+            return View(citas);
+        }
+
+//---------------------------------------------------------------------------------------------
+
+
 
 
 
