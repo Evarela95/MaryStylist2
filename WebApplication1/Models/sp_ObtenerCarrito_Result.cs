@@ -10,16 +10,14 @@
 namespace WebApplication1.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Detalle_Factura_Productos
+    public partial class sp_ObtenerCarrito_Result
     {
-        public int Id_Detalle { get; set; }
-        public int Id_Factura { get; set; }
-        public int Id_Producto { get; set; }
-        public int Cantidad { get; set; }
-    
-        public virtual Facturas Facturas { get; set; }
-        public virtual Servicios_Productos Servicios_Productos { get; set; }
+        public int IdCarrito { get; set; }
+        public int IdProducto { get; set; }
+        public string Descripcion { get; set; }
+        public string Nombre { get; set; }
+        public Nullable<decimal> Precio { get; set; }
+        public string RutaImagen { get; set; }
     }
 }

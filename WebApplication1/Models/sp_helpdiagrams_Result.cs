@@ -10,16 +10,13 @@
 namespace WebApplication1.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Detalle_Factura_Productos
+    public partial class sp_helpdiagrams_Result
     {
-        public int Id_Detalle { get; set; }
-        public int Id_Factura { get; set; }
-        public int Id_Producto { get; set; }
-        public int Cantidad { get; set; }
-    
-        public virtual Facturas Facturas { get; set; }
-        public virtual Servicios_Productos Servicios_Productos { get; set; }
+        public string Database { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }

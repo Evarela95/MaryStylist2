@@ -12,18 +12,26 @@ namespace WebApplication1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetRoles
+    public partial class COMPRA
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AspNetRoles()
+        public COMPRA()
         {
-            this.AspNetUsers = new HashSet<AspNetUsers>();
+            this.DETALLE_COMPRA = new HashSet<DETALLE_COMPRA>();
         }
     
+        public int IdCompra { get; set; }
         public string Id { get; set; }
-        public string Name { get; set; }
+        public Nullable<int> TotalProducto { get; set; }
+        public Nullable<decimal> Total { get; set; }
+        public string Contacto { get; set; }
+        public string Telefono { get; set; }
+        public string Direccion { get; set; }
+        public string IdDistrito { get; set; }
+        public Nullable<System.DateTime> FechaCompra { get; set; }
     
+        public virtual AspNetUsers AspNetUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
+        public virtual ICollection<DETALLE_COMPRA> DETALLE_COMPRA { get; set; }
     }
 }

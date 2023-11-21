@@ -10,16 +10,12 @@
 namespace WebApplication1.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Detalle_Factura_Productos
+    public partial class sp_obtenerCategoria_Result
     {
-        public int Id_Detalle { get; set; }
-        public int Id_Factura { get; set; }
-        public int Id_Producto { get; set; }
-        public int Cantidad { get; set; }
-    
-        public virtual Facturas Facturas { get; set; }
-        public virtual Servicios_Productos Servicios_Productos { get; set; }
+        public int IdCategoria { get; set; }
+        public string Descripcion { get; set; }
+        public Nullable<bool> Activo { get; set; }
+        public Nullable<System.DateTime> FechaRegistro { get; set; }
     }
 }

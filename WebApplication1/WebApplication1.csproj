@@ -186,9 +186,15 @@
     <Compile Include="Controllers\ReseñasAdminController.cs" />
     <Compile Include="Controllers\ReseñasController.cs" />
     <Compile Include="Controllers\Servicios_ProductosController.cs" />
+    <Compile Include="Controllers\TiendaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logica\CarritoLogica.cs" />
+    <Compile Include="Logica\CategoriaLogica.cs" />
+    <Compile Include="Logica\CompraLogica.cs" />
+    <Compile Include="Logica\MarcaLogica.cs" />
+    <Compile Include="Logica\ProductoLogica.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRoles.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -202,13 +208,25 @@
     <Compile Include="Models\AspNetUsers.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CARRITO.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CATEGORIA.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Categorias.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Citas.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\COMPRA.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DETALLE_COMPRA.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Detalle_Factura_Productos.cs">
@@ -231,6 +249,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MARCA.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -246,14 +267,41 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ObtenerCitasPorUsuario_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Planilla.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PlanillaEmpleados.cs" />
+    <Compile Include="Models\PRODUCTO.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Reseñas.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Servicios_Productos.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_ConsultaPlanillaConFiltro_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_ObtenerCarrito_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_obtenerCategoria_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_obtenerMarca_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_obtenerProducto_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
@@ -324,7 +372,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -377,7 +424,6 @@
     <Content Include="Views\GananciaDiarias1\Edit.cshtml" />
     <Content Include="Views\GananciaDiarias1\Index.cshtml" />
     <Content Include="Views\Empleados\Planilla.cshtml" />
-    <Content Include="Views\Home\Contacto.cshtml" />
     <Content Include="Views\AspNetUsers\Create.cshtml" />
     <Content Include="Views\AspNetUsers\Delete.cshtml" />
     <Content Include="Views\AspNetUsers\Details.cshtml" />
@@ -392,10 +438,25 @@
     <Content Include="Views\Servicios_Productos\Productos.cshtml" />
     <Content Include="Views\Servicios_Productos\ServiciosPromo.cshtml" />
     <Content Include="Views\Servicios_Productos\ProductosPromo.cshtml" />
+    <Content Include="Views\Puntos\Create.cshtml" />
+    <Content Include="Views\Puntos\Delete.cshtml" />
+    <Content Include="Views\Puntos\Details.cshtml" />
+    <Content Include="Views\Puntos\Edit.cshtml" />
+    <Content Include="Views\Puntos\Index.cshtml" />
+    <Content Include="Views\Home2\Categoria.cshtml" />
+    <Content Include="Views\Home2\Index.cshtml" />
+    <Content Include="Views\Home2\Marca.cshtml" />
+    <Content Include="Views\Home2\Producto.cshtml" />
+    <Content Include="Views\Home2\Tienda.cshtml" />
+    <Content Include="Views\Tienda\Index.cshtml" />
+    <Content Include="Views\Tienda\Compras.cshtml" />
+    <Content Include="Views\Tienda\Carrito.cshtml" />
+    <Content Include="Views\Tienda\Producto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Planilla\" />
+    <Folder Include="Views\Salon\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

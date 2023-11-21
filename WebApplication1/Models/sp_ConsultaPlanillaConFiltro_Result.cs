@@ -10,16 +10,17 @@
 namespace WebApplication1.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Planilla
+    public partial class sp_ConsultaPlanillaConFiltro_Result
     {
-        public int Id_Planilla { get; set; }
-        public System.DateTime Fecha_Ingreso { get; set; }
-        public decimal Salario { get; set; }
-        public string Especializacion { get; set; }
         public int Id_Empleado { get; set; }
-    
-        public virtual Empleados Empleados { get; set; }
+        public string Nombre_Empleado { get; set; }
+        public string Apellido_Empleado { get; set; }
+        public string Descripcion_Empleado { get; set; }
+        public string Correo_Empleado { get; set; }
+        public decimal Salario { get; set; }
+        public Nullable<decimal> CCSS { get; set; }
+        public Nullable<decimal> BP { get; set; }
+        public Nullable<decimal> SalarioNeto { get; set; }
     }
 }

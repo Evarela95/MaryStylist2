@@ -12,18 +12,20 @@ namespace WebApplication1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetRoles
+    public partial class CATEGORIA
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AspNetRoles()
+        public CATEGORIA()
         {
-            this.AspNetUsers = new HashSet<AspNetUsers>();
+            this.PRODUCTO = new HashSet<PRODUCTO>();
         }
     
-        public string Id { get; set; }
-        public string Name { get; set; }
+        public int IdCategoria { get; set; }
+        public string Descripcion { get; set; }
+        public Nullable<bool> Activo { get; set; }
+        public Nullable<System.DateTime> FechaRegistro { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
+        public virtual ICollection<PRODUCTO> PRODUCTO { get; set; }
     }
 }

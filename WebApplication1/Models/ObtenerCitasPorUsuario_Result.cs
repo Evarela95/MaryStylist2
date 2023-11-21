@@ -10,16 +10,9 @@
 namespace WebApplication1.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Citas
+    public partial class ObtenerCitasPorUsuario_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Citas()
-        {
-            this.Facturas = new HashSet<Facturas>();
-        }
-    
         public int Id_Cita { get; set; }
         public System.DateTime Fecha_Cita { get; set; }
         public System.TimeSpan Hora_Cita { get; set; }
@@ -27,11 +20,11 @@ namespace WebApplication1.Models
         public int Id_Empleado { get; set; }
         public int Id_Serv_Prod { get; set; }
         public bool Estado { get; set; }
-    
-        public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual Empleados Empleados { get; set; }
-        public virtual Servicios_Productos Servicios_Productos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Facturas> Facturas { get; set; }
+        public string Nombre { get; set; }
+        public decimal Precio { get; set; }
+        public Nullable<decimal> Precio_Promo { get; set; }
+        public string Descripcion { get; set; }
+        public string Nombre_Empleado { get; set; }
+        public string Apellido_Empleado { get; set; }
     }
 }

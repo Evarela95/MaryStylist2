@@ -12,26 +12,31 @@ namespace WebApplication1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Facturas
+    public partial class PRODUCTO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Facturas()
+        public PRODUCTO()
         {
-            this.Detalle_Factura_Productos = new HashSet<Detalle_Factura_Productos>();
-            this.Detalle_Ganancias_Facturas = new HashSet<Detalle_Ganancias_Facturas>();
+            this.CARRITO = new HashSet<CARRITO>();
+            this.DETALLE_COMPRA = new HashSet<DETALLE_COMPRA>();
         }
     
-        public int Id_Factura { get; set; }
-        public Nullable<int> Id_Cita { get; set; }
-        public System.DateTime Fecha { get; set; }
-        public decimal Total { get; set; }
-        public string User_Id { get; set; }
+        public int IdProducto { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
+        public Nullable<int> IdMarca { get; set; }
+        public Nullable<int> IdCategoria { get; set; }
+        public Nullable<decimal> Precio { get; set; }
+        public Nullable<int> Stock { get; set; }
+        public string RutaImagen { get; set; }
+        public Nullable<bool> Activo { get; set; }
+        public Nullable<System.DateTime> FechaRegistro { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual Citas Citas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Detalle_Factura_Productos> Detalle_Factura_Productos { get; set; }
+        public virtual ICollection<CARRITO> CARRITO { get; set; }
+        public virtual CATEGORIA CATEGORIA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Detalle_Ganancias_Facturas> Detalle_Ganancias_Facturas { get; set; }
+        public virtual ICollection<DETALLE_COMPRA> DETALLE_COMPRA { get; set; }
+        public virtual MARCA MARCA { get; set; }
     }
 }

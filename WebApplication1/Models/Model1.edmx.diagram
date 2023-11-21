@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="69192fc48fb5455c83a4060b7ac3ba99" Name="Diagram1">
+      <Diagram DiagramId="69192fc48fb5455c83a4060b7ac3ba99" Name="Diagram1" ZoomLevel="70">
         <EntityTypeShape EntityType="BD_MARYSTYLISModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BD_MARYSTYLISModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="BD_MARYSTYLISModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
@@ -38,6 +38,19 @@
         <AssociationConnector Association="BD_MARYSTYLISModel.FK_ImagenesEmpleados_Empleados_Id_Empleado" ManuallyRouted="false" />
         <AssociationConnector Association="BD_MARYSTYLISModel.FK_Planilla_Empleados" ManuallyRouted="false" />
         <AssociationConnector Association="BD_MARYSTYLISModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.CARRITO" Width="1.5" PointX="14.875" PointY="10.5" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.CATEGORIA" Width="1.5" PointX="10.375" PointY="15.625" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.COMPRA" Width="1.5" PointX="12.625" PointY="17" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.DETALLE_COMPRA" Width="1.5" PointX="14.875" PointY="13.5" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.MARCA" Width="1.5" PointX="10.375" PointY="12.625" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.PRODUCTO" Width="1.5" PointX="12.625" PointY="11.75" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK__CARRITO__Id__72C60C4A" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK__COMPRA__Id__76969D2E" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK__CARRITO__IdProdu__73BA3083" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK__PRODUCTO__IdCate__6D0D32F4" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK__DETALLE_C__IdCom__7A672E12" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK__DETALLE_C__IdPro__7B5B524B" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK__PRODUCTO__IdMarc__6C190EBB" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
