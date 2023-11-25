@@ -306,8 +306,34 @@ namespace WebApplication1.Controllers
 
             return dataTable;
         }
+
+
+
+
+
+        public ActionResult FinalizarCita(int id)
+        {
+            string connectionString = "Server=localhost\\sqlexpress;Database=BD_MARYSTYLIS;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True;";
+            string storedProcedure = "CitaFinalizada";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(storedProcedure, connection))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@IdCita", id);
+
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            // Redireccionar a la acción Index
+            return RedirectToAction("Index");
+        }
     }
 }
+
 
 
 

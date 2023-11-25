@@ -180,6 +180,7 @@
     <Compile Include="Controllers\AspNetUsersController.cs" />
     <Compile Include="Controllers\CitasController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
+    <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\GananciaDiarias1Controller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
@@ -403,6 +404,7 @@
     <Content Include="Views\Citas\TodasLasCitas.cshtml" />
     <Content Include="Views\Citas\CitasNoPromo.cshtml" />
     <Content Include="Views\Citas\CitasPromo.cshtml" />
+    <Content Include="Views\Facturas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
