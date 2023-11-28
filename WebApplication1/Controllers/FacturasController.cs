@@ -76,14 +76,14 @@ namespace WebApplication1.Controllers
 
         //----------------------------------------------------------------------------------------
 
-        public ActionResult ImprimirFacturaPDF(int id, string Nombre_Usuario, string Apellido_Usuario)
+        public ActionResult ImprimirFacturaPDF(int id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Facturas facturas = db.Facturas.Find(id);
-            GenerarFacturaPDF.GenerateFacturaPDF(id, Nombre_Usuario, Apellido_Usuario);
+            GenerarFacturaPDF.GenerateFacturaPDF(id);
             if (facturas == null)
             {
                 return HttpNotFound();

@@ -17,27 +17,33 @@
     <table class="table">
         <thead>
             <tr>
-
+                <th> ID</th>
                 <th>Fecha</th>
                 <th>Servicio</th>
                 <th>Descrición</th>
                 <th>Total</th>
                 <th>Atendió</th>
+                <th>Acciones</th>
 
             </tr>
         </thead>
         <tbody>
             @foreach (System.Data.DataRow row in Model.Rows)
             {
-                <tr>
-
-                    <td>@row["Fecha"]</td>
-                    <td>@row["Nombre"]</td>
-                    <td>@row["Descripcion"]</td>
-                    <td>@row["Total"]</td>
-                    <td>@row["Nombre_Empleado"] @row["Apellido_Empleado"] </td>
-
-                </tr>
+            <tr>
+                <th>@row["Id_Factura"]</th>
+                <td>@row["Fecha"]</td>
+                <td>@row["Nombre"]</td>
+                <td>@row["Descripcion"]</td>
+                <td>@row["Total"]</td>
+                <td>@row["Nombre_Empleado"] @row["Apellido_Empleado"] </td>
+                <td>
+                    @Html.ActionLink("Imprimir", "ImprimirFacturaPDF", new
+                    {
+                        id = @row["Id_Factura"]
+                    })
+                </td>
+            </tr>
             }
         </tbody>
     </table>

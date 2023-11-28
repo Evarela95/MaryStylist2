@@ -12,7 +12,7 @@ namespace WebApplication1.Models
 {
     public class GenerarFacturaPDF
     {
-        public static void GenerateFacturaPDF(int id, string Nombre_Usuario, string Apellido_Usuario)
+        public static void GenerateFacturaPDF(int id)
         {
 
             //RUTA DE CONEXION
@@ -28,7 +28,7 @@ namespace WebApplication1.Models
             string fechaHoraActual = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
 
             //ASIGNAR NOMBRE AL DOCUMENTO PDF NUEVO
-            string nombrePDF = $"{Nombre_Usuario + " " + Apellido_Usuario}" + fechaHoraActual + ".pdf"; // Nombre del archivo con el nombre del usuario
+            string nombrePDF =  fechaHoraActual + ".pdf"; // Nombre del archivo con el nombre del usuario
 
             // CREA EL DOC
             Document doc = new Document();
@@ -73,8 +73,8 @@ namespace WebApplication1.Models
                                 table.WidthPercentage = 80;
 
                                 // Agregar celdas a la tabla invertida
-                                AddCellWithBorders(table, "ID", row["Id_Factura"].ToString());
-                                AddCellWithBorders(table, "Cliente", row["Nombre_Usuario"].ToString() + " " + row["Apellido_Usuario"].ToString());
+                                AddCellWithBorders(table, "ID de factura", row["Id_Factura"].ToString());
+                                AddCellWithBorders(table, "Cliente", row["UserName"].ToString());
                                 AddCellWithBorders(table, "Fecha", row["Fecha"].ToString());
                                 AddCellWithBorders(table, "Nombre del servicio", row["Nombre"].ToString());
                                 AddCellWithBorders(table, "Descripción", row["Descripcion"].ToString());
