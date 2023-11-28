@@ -48,9 +48,11 @@
                 @Html.DisplayFor(modelItem => item.Citas.Empleados.Nombre_Empleado)
             </td>
             <td>
-                @Html.ActionLink("Imprimir", "", new { id = item.Id_Factura })
+                @Html.ActionLink("Imprimir", "ImprimirFacturaPDF", new { id = item.Id_Factura, 
+               Nombre_Usuario = item.AspNetUsers.Nombre_Usuario, 
+               Apellido_Usuario = item.AspNetUsers.Apellido_Usuario, })
             </td>
         </tr>
     }
-
+  
 </table>

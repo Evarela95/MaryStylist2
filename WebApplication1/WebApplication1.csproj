@@ -228,6 +228,7 @@
     <Compile Include="Models\GananciaDiaria.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GenerarFacturaPDF.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ImagenesEmpleados.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -405,9 +406,12 @@
     <Content Include="Views\Citas\CitasNoPromo.cshtml" />
     <Content Include="Views\Citas\CitasPromo.cshtml" />
     <Content Include="Views\Facturas\Index.cshtml" />
+    <Content Include="Views\Facturas\MisFacturas.cshtml" />
+    <Content Include="Views\Facturas\ImprimirFacturaPDF.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Facturas\" />
     <Folder Include="Planilla\" />
   </ItemGroup>
   <ItemGroup>

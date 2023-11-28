@@ -1,0 +1,60 @@
+﻿@model System.Data.DataTable
+
+@{
+    ViewBag.Title = "Mis Facturas";
+}
+
+<h2>Mis facturas</h2>
+
+@if (Model != null && Model.Rows.Count > 0)
+{
+    <div class="form-group mt-4">
+        <label for="search">Search:</label>
+        <input type="text" id="search" class="form-control" oninput="filterTable()" />
+    </div>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>Fecha</th>
+                <th>Servicio</th>
+                <th>Descrición</th>
+                <th>Total</th>
+                <th>Atendió</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (System.Data.DataRow row in Model.Rows)
+            {
+                <tr>
+
+                    <td>@row["Fecha"]</td>
+                    <td>@row["Nombre"]</td>
+                    <td>@row["Descripcion"]</td>
+                    <td>@row["Total"]</td>
+                    <td>@row["Nombre_Empleado"] @row["Apellido_Empleado"] </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No se encontraron facturas.</p>
+}
+
+
+<script>
+    function filterTable() {
+        var searchText = $('#search').val().toLowerCase();
+
+        $('table tbody tr').each(function () {
+            var rowText = $(this).text().toLowerCase();
+            $(this).toggle(rowText.indexOf(searchText) > -1);
+        });
+    }
+</script>

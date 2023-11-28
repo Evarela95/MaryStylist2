@@ -270,8 +270,9 @@ namespace WebApplication1.Controllers
 
 
 
+        ///----------------------------------------------------------------------------------------------------
 
-
+        [Authorize]
         public ActionResult MisCitas(string idUsuario)
         {
             DataTable citasPorUsuario = ObtenerCitasPorUsuario(idUsuario);
@@ -307,8 +308,13 @@ namespace WebApplication1.Controllers
             return dataTable;
         }
 
+        ///----------------------------------------------------------------------------------------------------
+
+        ///----------------------------------------------------------------------------------------------------
 
 
+
+        ///----------------------------------------------------------------------------------------------------
 
 
         public ActionResult FinalizarCita(int id)

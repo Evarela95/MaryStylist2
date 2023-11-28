@@ -54,7 +54,12 @@
                     </li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                    <li>@Html.ActionLink("Mis citas", "MisCitas", "Citas", null, new { @class = "nav-link" })</li>}
+                        <li>@Html.ActionLink("Mis citas", "MisCitas", "Citas", null, new { @class = "nav-link" })</li>
+}
+
+                    <li>@Html.ActionLink("Mis Facturas", "MisFacturas", "Facturas", null, new { @class = "nav-link" })</li>
+                    
+                    }
                     @* if (User.IsInRole("Administrador"))
         {*@
 

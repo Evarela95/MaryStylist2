@@ -20,7 +20,7 @@
                 <th>Promoción</th>
                 <th>Descrición</th>
                 <th>Atiende</th>
-                <!-- Agregar las columnas restantes según tu tabla de citas -->
+             
             </tr>
         </thead>
         <tbody>
@@ -37,7 +37,7 @@
                 <td>@(string.IsNullOrEmpty(row["Precio_Promo"].ToString()) ? "N/A" : row["Precio_Promo"])</td>
                 <td>@row["Descripcion"]</td>
                 <td>@row["Nombre_Empleado"] @row["Apellido_Empleado"] </td>
-                <!-- Agregar el resto de las columnas -->
+             
             </tr>
             }
         </tbody>
