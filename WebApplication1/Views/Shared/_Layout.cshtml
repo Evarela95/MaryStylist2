@@ -52,13 +52,8 @@
 
                         </ul>
                     </li>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <li>@Html.ActionLink("Mis citas", "MisCitas", "Citas", null, new { @class = "nav-link" })</li>
-}
 
-                    <li>@Html.ActionLink("Mis Facturas", "MisFacturas", "Facturas", null, new { @class = "nav-link" })</li>
-                    
+
                     }
                     @* if (User.IsInRole("Administrador"))
         {*@
@@ -69,8 +64,7 @@
                         <ul class="dropdown-menu">
 
                             <li>@Html.ActionLink("Adm. Galería", "Index", "Image")</li>
-                            <li>@Html.ActionLink("Nosotros", "AdminNosotros", "Admin")</li>
-
+                           
                             <li>@Html.ActionLink("Usuarios", "Index", "AspNetUsers")</li>
 
 
@@ -90,8 +84,13 @@
 
                         </ul>
                     </li>
+
                     @*}
         }*@
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Carrito", "", "", null, new { @class = "nav-link" })</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

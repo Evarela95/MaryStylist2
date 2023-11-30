@@ -91,16 +91,18 @@ namespace WebApplication1.Controllers
         [Authorize]
         public ActionResult CitasNoPromo()
         {
-
             ViewBag.Id_Empleado = new SelectList(db.Empleados, "Id_Empleado", "Nombre_Empleado");
-
 
             var serviciosDeCategoria1 = db.Servicios_Productos.Where(sp => sp.Id_Categoria == 1 && !sp.Promo).ToList();
 
-            // SelectList solo con los servicios
-            ViewBag.Id_Serv_Prod = new SelectList(serviciosDeCategoria1, "Id", "Nombre");
+        
+            var serviciosConPrecio = serviciosDeCategoria1.Select(sp => new SelectListItem
+            {
+                Value = sp.Id.ToString(), 
+                Text = $"{sp.Nombre} - ₡{sp.Precio}" 
+            }).ToList();
 
-
+            ViewBag.Id_Serv_Prod = new SelectList(serviciosConPrecio, "Value", "Text");
 
             return View();
         }
@@ -147,13 +149,16 @@ namespace WebApplication1.Controllers
 
             ViewBag.Id_Empleado = new SelectList(db.Empleados, "Id_Empleado", "Nombre_Empleado");
 
-
             var serviciosDeCategoria1 = db.Servicios_Productos.Where(sp => sp.Id_Categoria == 1 && sp.Promo).ToList();
 
-            // SelectList solo con los servicios
-            ViewBag.Id_Serv_Prod = new SelectList(serviciosDeCategoria1, "Id", "Nombre");
+            var serviciosConPrecio = serviciosDeCategoria1.Select(sp => new SelectListItem
+            {
+                Value = sp.Id.ToString(), 
+                Text = $"{sp.Nombre} - ₡{sp.Precio_Promo}" 
+            }).ToList();
 
-
+           
+            ViewBag.Id_Serv_Prod = new SelectList(serviciosConPrecio, "Value", "Text");
 
             return View();
         }
