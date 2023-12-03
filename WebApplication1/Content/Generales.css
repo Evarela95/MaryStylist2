@@ -1,0 +1,92 @@
+﻿
+body {
+    font-size: 18px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+.form {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+    .form th, .form td {
+        padding: 10px;
+        text-align: center;
+    }
+
+.atributos th {
+    font-weight: bold;
+}
+
+.links a {
+    margin-right: 5px;
+}
+
+.crearBTN {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+
+
+
+.formG {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.tit {
+    text-align: center;
+}
+
+.form-horizontal {
+    text-align: left;
+}
+
+.texto {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.formCampo {
+    width: 100%; 
+    padding: 8px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+}
+
+
+.botones {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.btnCrear {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.btnAtras {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #6c757d;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}

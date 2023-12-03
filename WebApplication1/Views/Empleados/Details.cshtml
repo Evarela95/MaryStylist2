@@ -5,46 +5,44 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Detalles</h2>
+<div class="container mt-5">
+    <h2>Detalles</h2>
 
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nombre_Empleado)
-        </dt>
+    <div>
+        <hr />
+        <dl class="row justify-content-center">
+            <dt class="col-4">
+                @Html.DisplayNameFor(model => model.Nombre_Empleado)
+            </dt>
+            <dd class="col-4">
+                @Html.DisplayFor(model => model.Nombre_Empleado)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nombre_Empleado)
-        </dd>
+            <dt class="col-4">
+                @Html.DisplayNameFor(model => model.Apellido_Empleado)
+            </dt>
+            <dd class="col-4">
+                @Html.DisplayFor(model => model.Apellido_Empleado)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Apellido_Empleado)
-        </dt>
+            <dt class="col-4">
+                @Html.DisplayNameFor(model => model.Descripcion_Empleado)
+            </dt>
+            <dd class="col-4">
+                @Html.DisplayFor(model => model.Descripcion_Empleado)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Apellido_Empleado)
-        </dd>
+            <dt class="col-4">
+                @Html.DisplayNameFor(model => model.Correo_Empleado)
+            </dt>
+            <dd class="col-4">
+                @Html.DisplayFor(model => model.Correo_Empleado)
+            </dd>
+        </dl>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Descripcion_Empleado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Descripcion_Empleado)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Correo_Empleado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Correo_Empleado)
-        </dd>
-
-    </dl>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.Id_Empleado }) |
+        @Html.ActionLink("Atrás", "Index", null, new { @class = "btn btn-secondary" })
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id_Empleado }) |
-    @Html.ActionLink("Atrás", "Index")
-</p>
