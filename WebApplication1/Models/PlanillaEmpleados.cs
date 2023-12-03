@@ -1,5 +1,6 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.draw;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -26,7 +27,7 @@ namespace WebApplication1.Models
            
 
             // ERUTA DONDE SE GUARDA EL PDF
-            string rutaGuardado = "C:\\Users\\esteb\\source\\repos\\MaryStylist2\\WebApplication1\\Planilla\\";
+            string rutaGuardado = "C:\\Users\\melme\\source\\repos\\MaryStylist2\\WebApplication1\\Planilla\\";
 
             //OBTENER FECHA
             string fechaHoraActual = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
@@ -59,47 +60,37 @@ namespace WebApplication1.Models
                             if (dataTable.Rows.Count > 0)
                             {
                                 // Agregamos los datos al documento PDF
-                                // Agregamos los datos al documento PDF
                                 DataRow row = dataTable.Rows[0];
 
                                 // Crear un párrafo para el título
-                                Paragraph title = new Paragraph("Boleta de pago", FontFactory.GetFont(FontFactory.HELVETICA, 18, BaseColor.BLUE));
-                                title.Alignment = Element.ALIGN_CENTER;
-
-                                // Añadir el título al documento PDF
+                                Paragraph title = new Paragraph("Mari Stylist", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 24, BaseColor.BLACK));
+                                title.Alignment = Element.ALIGN_LEFT;
                                 doc.Add(title);
 
-                                // Agregar dos espacios debajo del título
-                                doc.Add(Chunk.NEWLINE);
+                                // Crear un párrafo para el subtítulo
+                                Paragraph subTitle = new Paragraph("Planilla de Empleado", FontFactory.GetFont(FontFactory.HELVETICA, 18, BaseColor.BLACK));
+                                subTitle.Alignment = Element.ALIGN_CENTER;
+                                doc.Add(subTitle);
+
+                                // Añadir una línea divisoria
+                                doc.Add(new Chunk(new LineSeparator(0.5f, 100, BaseColor.BLACK, Element.ALIGN_CENTER, -1)));
+
+                                // Agregar dos espacios debajo del subtítulo
                                 doc.Add(Chunk.NEWLINE);
 
-                                // Crear una tabla con tantas filas como celdas tenga la original y 2 columnas
+                                // Crear una tabla para los datos del empleado
                                 PdfPTable table = new PdfPTable(2);
+                                table.WidthPercentage = 60;
+                                table.HorizontalAlignment = Element.ALIGN_CENTER;
 
-                                // Agregar celdas a la tabla invertida
-                                table.AddCell("Nombre");
-                                table.AddCell(row["Nombre_Empleado"].ToString() + " " + row["Apellido_Empleado"].ToString());
-
-                                table.AddCell("Puesto ");
-                                table.AddCell(row["Descripcion_Empleado"].ToString());
-
-                                table.AddCell("Correo ");
-                                table.AddCell(row["Correo_Empleado"].ToString());
-
-
-
-                                table.AddCell("Salario Bruto");
-                                table.AddCell(row["Salario"].ToString());
-
-                                table.AddCell("CCSS (10.67%)");
-                                table.AddCell(row["CCSS"].ToString());
-
-                                table.AddCell("Banco Popular");
-                                table.AddCell(row["BP"].ToString());
-
-
-                                table.AddCell("Salario neto");
-                                table.AddCell(row["SalarioNeto"].ToString());
+                                // Agregar celdas a la tabla
+                                AddCellWithBorders(table, "Nombre", row["Nombre_Empleado"].ToString() + " " + row["Apellido_Empleado"].ToString());
+                                AddCellWithBorders(table, "Puesto", row["Descripcion_Empleado"].ToString());
+                                AddCellWithBorders(table, "Correo", row["Correo_Empleado"].ToString());
+                                AddCellWithBorders(table, "Salario Bruto", row["Salario"].ToString());
+                                AddCellWithBorders(table, "CCSS (10.67%)", row["CCSS"].ToString());
+                                AddCellWithBorders(table, "Banco Popular", row["BP"].ToString());
+                                AddCellWithBorders(table, "Salario Neto", row["SalarioNeto"].ToString());
 
                                 // Añadir la tabla al documento PDF
                                 doc.Add(table);
@@ -111,5 +102,27 @@ namespace WebApplication1.Models
                 doc.Close();
             }
         }
+
+        private static void AddCellWithBorders(PdfPTable table, string header, string value)
+        {
+            PdfPCell cellHeader = new PdfPCell(new Phrase(header, FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12, BaseColor.BLACK)));
+            PdfPCell cellValue = new PdfPCell(new Phrase(value, FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.BLACK)));
+
+            // Establecer el estilo de las celdas
+            cellHeader.BackgroundColor = BaseColor.LIGHT_GRAY;
+            cellHeader.HorizontalAlignment = Element.ALIGN_CENTER;
+            cellHeader.VerticalAlignment = Element.ALIGN_MIDDLE;
+            cellHeader.Padding = 8;
+
+            cellValue.HorizontalAlignment = Element.ALIGN_LEFT;
+            cellValue.VerticalAlignment = Element.ALIGN_MIDDLE;
+            cellValue.Padding = 8;
+
+            // Agregar celdas a la tabla
+            table.AddCell(cellHeader);
+            table.AddCell(cellValue);
+        }
     }
+
+
 }

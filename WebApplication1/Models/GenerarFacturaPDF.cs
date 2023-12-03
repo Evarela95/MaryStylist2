@@ -15,29 +15,26 @@ namespace WebApplication1.Models
         public static void GenerateFacturaPDF(int id)
         {
 
-            //RUTA DE CONEXION
             string connectionString = "Server=localhost\\sqlexpress;Database=BD_MARYSTYLIS;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True;";
-
-            //PROCEDIMIENTO ALMACENADO QUE RECIBE UN ID
             string query = "EXEC sp_DescargarFactura @Id_Factura";
-
-            // RUTA DONDE SE GUARDA EL PDF
-            string rutaGuardado = "C:\\Users\\esteb\\source\\repos\\MaryStylist2\\WebApplication1\\Facturas\\";
-
-            //OBTENER FECHA
+            string rutaGuardado = "C:\\Users\\melme\\source\\repos\\MaryStylist2\\WebApplication1\\Facturas\\";
             string fechaHoraActual = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+            string nombrePDF =  fechaHoraActual + ".pdf"; 
 
-            //ASIGNAR NOMBRE AL DOCUMENTO PDF NUEVO
-            string nombrePDF =  fechaHoraActual + ".pdf"; // Nombre del archivo con el nombre del usuario
-
-            // CREA EL DOC
             Document doc = new Document();
+            doc.AddAuthor("Mary Stylist");
+            doc.AddTitle("Factura Electrónica");
 
-            // CREA OBJETO FILE STREAM
             using (FileStream fs = new FileStream(Path.Combine(rutaGuardado, nombrePDF), FileMode.Create))
             {
                 PdfWriter writer = PdfWriter.GetInstance(doc, fs);
                 doc.Open();
+
+                // Agregar encabezado
+                AddHeader(doc);
+
+                //Agregar título
+                AddTitle(doc);
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -46,6 +43,7 @@ namespace WebApplication1.Models
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@Id_Factura", id);
+
                         using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
                         {
                             DataTable dataTable = new DataTable();
@@ -53,56 +51,103 @@ namespace WebApplication1.Models
 
                             if (dataTable.Rows.Count > 0)
                             {
-                                // Agregamos los datos al documento PDF
-                                // Agregamos los datos al documento PDF
                                 DataRow row = dataTable.Rows[0];
 
-                                // Crear un párrafo para el título
-                                Paragraph title = new Paragraph("Factura Electrónica", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 24, BaseColor.BLACK));
-                                title.Alignment = Element.ALIGN_CENTER;
+                                // Mostrar ID de factura, Usuario y Fecha sin bordes
+                                AddDataWithoutBorders(doc, "ID de Factura", row["Id_Factura"].ToString());
+                                AddDataWithoutBorders(doc, "Cliente", row["UserName"].ToString());
+                                AddDataWithoutBorders(doc, "Fecha", row["Fecha"].ToString());
 
-                                // Añadir el título al documento PDF
-                                doc.Add(title);
-
-                                // Agregar dos espacios debajo del título
-                                doc.Add(Chunk.NEWLINE);
+                                // Agregar espacio después de la primera tabla
                                 doc.Add(Chunk.NEWLINE);
 
-                                // Crear una tabla con tantas filas como celdas tenga la original y 2 columnas
-                                PdfPTable table = new PdfPTable(2);
-                                table.WidthPercentage = 80;
+                                // Crear una nueva tabla para el resto de los detalles
+                                PdfPTable detailsTable = new PdfPTable(2);
+                                detailsTable.WidthPercentage = 100;
+                                detailsTable.SpacingBefore = 10;
 
-                                // Agregar celdas a la tabla invertida
-                                AddCellWithBorders(table, "ID de factura", row["Id_Factura"].ToString());
-                                AddCellWithBorders(table, "Cliente", row["UserName"].ToString());
-                                AddCellWithBorders(table, "Fecha", row["Fecha"].ToString());
-                                AddCellWithBorders(table, "Nombre del servicio", row["Nombre"].ToString());
-                                AddCellWithBorders(table, "Descripción", row["Descripcion"].ToString());
-                                AddCellWithBorders(table, "Nombre empleado", row["Nombre_Empleado"].ToString());
-                                AddCellWithBorders(table, "Apellido empleado", row["Descripcion"].ToString());
-                                AddCellWithBorders(table, "Total", row["Total"].ToString());
+                                // Establecer el estilo de las celdas para los detalles
+                                PdfPCell detailCellHeader = new PdfPCell();
+                                PdfPCell detailCellValue = new PdfPCell();
 
-                                // Añadir la tabla al documento PDF
-                                doc.Add(table);
+                                detailCellHeader.BackgroundColor = BaseColor.LIGHT_GRAY;
+                                detailCellHeader.HorizontalAlignment = Element.ALIGN_LEFT;
+                                detailCellHeader.VerticalAlignment = Element.ALIGN_MIDDLE;
+                                detailCellHeader.Padding = 5;
+
+                                detailCellValue.HorizontalAlignment = Element.ALIGN_LEFT;
+                                detailCellValue.VerticalAlignment = Element.ALIGN_MIDDLE;
+                                detailCellValue.Padding = 5;
+                                detailCellValue.Colspan = 2;
+
+                                // Agregar celdas para el resto de los detalles
+                                AddCellWithBorders(detailsTable, detailCellHeader, detailCellValue, "Nombre del Servicio", row["Nombre"].ToString());
+                                AddCellWithBorders(detailsTable, detailCellHeader, detailCellValue, "Descripción", row["Descripcion"].ToString());
+                                AddCellWithBorders(detailsTable, detailCellHeader, detailCellValue, "Nombre Empleado", row["Nombre_Empleado"].ToString());
+                                AddCellWithBorders(detailsTable, detailCellHeader, detailCellValue, "Apellido Empleado", row["Apellido_Empleado"].ToString());
+                                AddCellWithBorders(detailsTable, detailCellHeader, detailCellValue, "Total", row["Total"].ToString());
+
+                                doc.Add(detailsTable);
                             }
                         }
                     }
                 }
+                //Agregar footer
+                AddFooter(doc);
 
                 doc.Close();
             }
         }
 
-        // Función para agregar celda a la tabla con bordes
-        private static void AddCellWithBorders(PdfPTable table, string header, string content)
+        private static void AddHeader(Document doc)
         {
-            PdfPCell cell = new PdfPCell(new Phrase(header));
-            cell.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
-            table.AddCell(cell);
 
-            cell = new PdfPCell(new Phrase(content));
-            cell.Border = Rectangle.BOTTOM_BORDER | Rectangle.TOP_BORDER | Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
-            table.AddCell(cell);
+            PdfPTable headerTable = new PdfPTable(1);
+            headerTable.WidthPercentage = 100;
+
+            PdfPCell cell = new PdfPCell(new Phrase("FACTURA ELECTRÓNICA", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16, BaseColor.BLACK)));
+            cell.HorizontalAlignment = Element.ALIGN_CENTER;
+            cell.Border = Rectangle.NO_BORDER;
+
+            headerTable.AddCell(cell);
+
+            doc.Add(headerTable);
+        }
+
+        private static void AddTitle(Document doc)
+        {
+            Paragraph title = new Paragraph("Detalles de la Factura", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18, BaseColor.BLACK));
+            title.Alignment = Element.ALIGN_CENTER;
+            title.SpacingAfter = 10;
+
+            doc.Add(title);
+        }
+
+        private static void AddDataWithoutBorders(Document doc, string header, string value)
+        {
+            Paragraph paragraph = new Paragraph();
+            paragraph.Add(new Chunk($"{header}: ", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10, BaseColor.BLACK)));
+            paragraph.Add(new Chunk(value, FontFactory.GetFont(FontFactory.HELVETICA, 10, BaseColor.BLACK)));
+            doc.Add(paragraph);
+        }
+
+        private static void AddFooter(Document doc)
+        {
+            // Agregar información adicional y agradecimiento
+            Paragraph footer = new Paragraph("Gracias por su preferencia. Para consultas, contacte a nuestro servicio al cliente.", FontFactory.GetFont(FontFactory.HELVETICA, 10, BaseColor.BLACK));
+            footer.Alignment = Element.ALIGN_CENTER;
+            footer.SpacingBefore = 10;
+
+            doc.Add(footer);
+        }
+
+        private static void AddCellWithBorders(PdfPTable table, PdfPCell cellHeader, PdfPCell cellValue, string header, string value)
+        {
+            cellHeader.Phrase = new Phrase(header, FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10, BaseColor.BLACK));
+            cellValue.Phrase = new Phrase(value, FontFactory.GetFont(FontFactory.HELVETICA, 10, BaseColor.BLACK));
+
+            table.AddCell(cellHeader);
+            table.AddCell(cellValue);
         }
     }
 }

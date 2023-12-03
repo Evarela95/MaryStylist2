@@ -280,12 +280,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="images\chelson-tamares-SyCC0GQi5S4-unsplash.jpg" />
-    <Content Include="images\FAUGET1.png" />
-    <Content Include="images\giorgio-trovato-gb6gtiTZKB8-unsplash.jpg" />
-    <Content Include="images\greg-trowman-jsuWg7IXx1k-unsplash.jpg" />
-    <Content Include="images\lindsay-cash-Md_DhaFsnCQ-unsplash.jpg" />
-    <Content Include="images\shari-sirotnak-oM5YoMhTf8E-unsplash.jpg" />
+    <Content Include="imagenes\chelson-tamares-SyCC0GQi5S4-unsplash.jpg" />
+    <Content Include="imagenes\FAUGET1.png" />
+    <Content Include="imagenes\giorgio-trovato-gb6gtiTZKB8-unsplash.jpg" />
+    <Content Include="imagenes\greg-trowman-jsuWg7IXx1k-unsplash.jpg" />
+    <Content Include="imagenes\lindsay-cash-Md_DhaFsnCQ-unsplash.jpg" />
+    <Content Include="imagenes\shari-sirotnak-oM5YoMhTf8E-unsplash.jpg" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -406,6 +406,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Facturas\" />
+    <Folder Include="images\" />
     <Folder Include="Planilla\" />
   </ItemGroup>
   <ItemGroup>
