@@ -11,15 +11,25 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Planilla
     {
+        [Display(Name = "ID de Planilla")]
         public int Id_Planilla { get; set; }
-        public System.DateTime Fecha_Ingreso { get; set; }
+
+        [Display(Name = "Fecha de Ingreso")]
+        public DateTime Fecha_Ingreso { get; set; }
+
+        [Display(Name = "Salario")]
         public decimal Salario { get; set; }
+
+        [Display(Name = "Especialización")]
         public string Especializacion { get; set; }
+
+        [Display(Name = "ID de Empleado")]
         public int Id_Empleado { get; set; }
-    
+
         public virtual Empleados Empleados { get; set; }
     }
 }

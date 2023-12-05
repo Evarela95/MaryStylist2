@@ -10,21 +10,17 @@
 namespace WebApplication1.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class Detalle_Ganancias_Facturas
+    public partial class sp_FacturasProductosPorUsuario_Result
     {
-        [Display(Name = "ID de Factura Ganancias")]
-        public int Id_Factura_Ganancias { get; set; }
-
         [Display(Name = "ID de Factura")]
         public int Id_Factura { get; set; }
 
-        [Display(Name = "ID de Ganancia")]
-        public int Id_Ganancia { get; set; }
+        [Display(Name = "Fecha")]
+        public DateTime Fecha { get; set; }
 
-        public virtual Facturas Facturas { get; set; }
-        public virtual GananciaDiaria GananciaDiaria { get; set; }
+        [Display(Name = "Total")]
+        public decimal Total { get; set; }
     }
 }

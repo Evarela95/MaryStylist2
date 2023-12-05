@@ -10,14 +10,20 @@
 namespace WebApplication1.Models
 {
     using System;
-    using System.Collections.Generic;
-    
-    public partial class sysdiagrams
+    using System.ComponentModel.DataAnnotations;
+
+    public partial class SP_MiCarrito_Result
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        [Display(Name = "Nombre")]
+        public string Nombre { get; set; }
+
+        [Display(Name = "ID de Producto")]
+        public int Id_Producto { get; set; }
+
+        [Display(Name = "Cantidad")]
+        public int Cantidad { get; set; }
+        public Nullable<decimal> PrecioFinal { get; set; }
+        public Nullable<decimal> Total { get; set; }
+        public Nullable<decimal> TotalAPagar { get; set; }
     }
 }

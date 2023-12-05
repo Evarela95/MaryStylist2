@@ -10,24 +10,34 @@
 namespace WebApplication1.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class Detalle_Factura_Productos
+    public partial class IMPRIMIR_FACTURA_PRODUCTOS_Result
     {
-        [Display(Name = "ID de Detalle")]
-        public int Id_Detalle { get; set; }
+        [Display(Name = "Fecha")]
+        public DateTime Fecha { get; set; }
+
+        [Display(Name = "Total")]
+        public decimal Total { get; set; }
 
         [Display(Name = "ID de Factura")]
-        public int? Id_Factura { get; set; }
+        public int Id_Factura { get; set; }
+
+        [Display(Name = "Nombre de Usuario")]
+        public string UserName { get; set; }
+
+        [Display(Name = "Nombre")]
+        public string Nombre { get; set; }
+
+        [Display(Name = "Descripción")]
+        public string Descripcion { get; set; }
 
         [Display(Name = "ID de Producto")]
         public int Id_Producto { get; set; }
 
         [Display(Name = "Cantidad")]
         public int Cantidad { get; set; }
-
-        public virtual Facturas Facturas { get; set; }
-        public virtual Servicios_Productos Servicios_Productos { get; set; }
+        public Nullable<decimal> PrecioFinal { get; set; }
+        public Nullable<decimal> TOTAL1 { get; set; }
     }
 }

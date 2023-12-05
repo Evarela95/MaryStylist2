@@ -51,7 +51,7 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id_Resena,Comentario,Calificacion,Id_Usuario")] Reseñas reseñas)
         {
-            
+
             if (ModelState.IsValid)
             {
                 db.Reseñas.Add(reseñas);

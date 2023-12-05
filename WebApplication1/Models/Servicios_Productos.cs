@@ -11,7 +11,8 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Servicios_Productos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,17 +22,34 @@ namespace WebApplication1.Models
             this.Citas = new HashSet<Citas>();
             this.Detalle_Factura_Productos = new HashSet<Detalle_Factura_Productos>();
         }
-    
+
+        [Display(Name = "ID")]
         public int Id { get; set; }
+
+        [Display(Name = "Nombre")]
         public string Nombre { get; set; }
+
+        [Display(Name = "Precio")]
         public decimal Precio { get; set; }
+
+        [Display(Name = "Promo")]
         public bool Promo { get; set; }
-        public Nullable<decimal> Precio_Promo { get; set; }
+
+        [Display(Name = "Precio de Promoción")]
+        public decimal? Precio_Promo { get; set; }
+
+        [Display(Name = "Descripción")]
         public string Descripcion { get; set; }
+
+        [Display(Name = "ID de Categoría")]
         public int Id_Categoria { get; set; }
+
+        [Display(Name = "Nombre de Archivo")]
         public string FileName { get; set; }
+
+        [Display(Name = "Datos de la Imagen")]
         public byte[] ImageData { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Carrito> Carrito { get; set; }
         public virtual Categorias Categorias { get; set; }

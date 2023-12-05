@@ -11,14 +11,22 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Reseñas
     {
+        [Display(Name = "ID de Reseña")]
         public int Id_Resena { get; set; }
+
+        [Display(Name = "Comentario")]
         public string Comentario { get; set; }
-        public Nullable<byte> Calificacion { get; set; }
+
+        [Display(Name = "Calificación")]
+        public byte? Calificacion { get; set; }
+
+        [Display(Name = "ID de Usuario")]
         public string Id_Usuario { get; set; }
-    
+
         public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

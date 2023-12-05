@@ -10,19 +10,10 @@
 namespace WebApplication1.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class Empleados
+    public partial class sp_ConsultaPlanillaConFiltro_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Empleados()
-        {
-            this.Citas = new HashSet<Citas>();
-            this.ImagenesEmpleados = new HashSet<ImagenesEmpleados>();
-            this.Planilla = new HashSet<Planilla>();
-        }
-
         [Display(Name = "ID de Empleado")]
         public int Id_Empleado { get; set; }
 
@@ -38,11 +29,10 @@ namespace WebApplication1.Models
         [Display(Name = "Correo del Empleado")]
         public string Correo_Empleado { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Citas> Citas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ImagenesEmpleados> ImagenesEmpleados { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Planilla> Planilla { get; set; }
+        [Display(Name = "Salario")]
+        public decimal Salario { get; set; }
+        public Nullable<decimal> CCSS { get; set; }
+        public Nullable<decimal> BP { get; set; }
+        public Nullable<decimal> SalarioNeto { get; set; }
     }
 }
