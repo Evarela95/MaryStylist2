@@ -186,6 +186,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PlanillasController.cs" />
     <Compile Include="Controllers\ReseñasAdminController.cs" />
     <Compile Include="Controllers\ReseñasController.cs" />
     <Compile Include="Controllers\Servicios_ProductosController.cs" />
@@ -411,12 +412,16 @@
     <Content Include="Views\Carrito\MiCarrito.cshtml" />
     <Content Include="Views\Carrito\PagoExitoso.cshtml" />
     <Content Include="Views\Facturas\ImprimirFacturaProductosPDF.cshtml" />
+    <Content Include="Views\Planillas\Create.cshtml" />
+    <Content Include="Views\Planillas\Delete.cshtml" />
+    <Content Include="Views\Planillas\Details.cshtml" />
+    <Content Include="Views\Planillas\Edit.cshtml" />
+    <Content Include="Views\Planillas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Facturas\" />
     <Folder Include="images\" />
-    <Folder Include="Planilla\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
