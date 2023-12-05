@@ -239,6 +239,9 @@
     <Compile Include="Models\ImagenesEmpleados.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IMPRIMIR_FACTURA_PRODUCTOS_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -255,6 +258,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ObtenerCitasPorUsuario_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Planilla.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -265,7 +271,19 @@
     <Compile Include="Models\Servicios_Productos.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
+    <Compile Include="Models\sp_ConsultaPlanillaConFiltro_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_DescargarFactura_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_FacturasPorUsuario_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_FacturasProductosPorUsuario_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_MiCarrito_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -365,11 +383,6 @@
     <Content Include="Views\Empleados\AddImage.cshtml" />
     <Content Include="Views\Empleados\EmpleadoImagen.cshtml" />
     <Content Include="Views\Empleados\DeleteImage.cshtml" />
-    <Content Include="Views\Reseñas\Create.cshtml" />
-    <Content Include="Views\Reseñas\Delete.cshtml" />
-    <Content Include="Views\Reseñas\Details.cshtml" />
-    <Content Include="Views\Reseñas\Edit.cshtml" />
-    <Content Include="Views\Reseñas\Index.cshtml" />
     <Content Include="Views\ReseñasAdmin\Create.cshtml" />
     <Content Include="Views\ReseñasAdmin\Delete.cshtml" />
     <Content Include="Views\ReseñasAdmin\Details.cshtml" />
@@ -417,6 +430,8 @@
     <Content Include="Views\Planillas\Details.cshtml" />
     <Content Include="Views\Planillas\Edit.cshtml" />
     <Content Include="Views\Planillas\Index.cshtml" />
+    <Content Include="Views\Reseñas\Index.cshtml" />
+    <Content Include="Views\Reseñas\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

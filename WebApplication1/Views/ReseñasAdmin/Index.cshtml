@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Administrador de reseñas</h2>
 
 <p>
     @Html.ActionLink("Crear Nueva", "Create")
@@ -35,7 +35,6 @@
             @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.Id_Resena }) |
             @Html.ActionLink("Detalles", "Details", new { id=item.Id_Resena }) |
             @Html.ActionLink("Eliminar", "Delete", new { id=item.Id_Resena })
         </td>

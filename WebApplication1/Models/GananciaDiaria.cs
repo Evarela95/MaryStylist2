@@ -11,7 +11,8 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class GananciaDiaria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,10 +20,15 @@ namespace WebApplication1.Models
         {
             this.Detalle_Ganancias_Facturas = new HashSet<Detalle_Ganancias_Facturas>();
         }
-    
+
+        [Display(Name = "ID de Ganancias")]
         public int Id_Ganancias { get; set; }
+
+        [Display(Name = "Ingresos")]
         public decimal Ingresos { get; set; }
-        public System.DateTime Fecha { get; set; }
+
+        [Display(Name = "Fecha de Ganancias")]
+        public DateTime Fecha { get; set; }
         public Nullable<decimal> Egresos { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

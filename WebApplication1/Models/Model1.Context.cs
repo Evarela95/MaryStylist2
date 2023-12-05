@@ -12,6 +12,8 @@ namespace WebApplication1.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class BD_MARYSTYLISEntities : DbContext
     {
@@ -42,6 +44,155 @@ namespace WebApplication1.Models
         public virtual DbSet<Planilla> Planilla { get; set; }
         public virtual DbSet<Reseñas> Reseñas { get; set; }
         public virtual DbSet<Servicios_Productos> Servicios_Productos { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+    
+        public virtual int CitaFinalizada(Nullable<int> idCita)
+        {
+            var idCitaParameter = idCita.HasValue ?
+                new ObjectParameter("IdCita", idCita) :
+                new ObjectParameter("IdCita", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CitaFinalizada", idCitaParameter);
+        }
+    
+        public virtual ObjectResult<IMPRIMIR_FACTURA_PRODUCTOS_Result> IMPRIMIR_FACTURA_PRODUCTOS(Nullable<int> id_Factura)
+        {
+            var id_FacturaParameter = id_Factura.HasValue ?
+                new ObjectParameter("Id_Factura", id_Factura) :
+                new ObjectParameter("Id_Factura", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<IMPRIMIR_FACTURA_PRODUCTOS_Result>("IMPRIMIR_FACTURA_PRODUCTOS", id_FacturaParameter);
+        }
+    
+        public virtual ObjectResult<ObtenerCitasPorUsuario_Result> ObtenerCitasPorUsuario(string idUsuario)
+        {
+            var idUsuarioParameter = idUsuario != null ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ObtenerCitasPorUsuario_Result>("ObtenerCitasPorUsuario", idUsuarioParameter);
+        }
+    
+        public virtual int SP_Agregar_producto_carrito(Nullable<int> id_Producto, string id_usuario, Nullable<int> cantidad)
+        {
+            var id_ProductoParameter = id_Producto.HasValue ?
+                new ObjectParameter("Id_Producto", id_Producto) :
+                new ObjectParameter("Id_Producto", typeof(int));
+    
+            var id_usuarioParameter = id_usuario != null ?
+                new ObjectParameter("Id_usuario", id_usuario) :
+                new ObjectParameter("Id_usuario", typeof(string));
+    
+            var cantidadParameter = cantidad.HasValue ?
+                new ObjectParameter("Cantidad", cantidad) :
+                new ObjectParameter("Cantidad", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Agregar_producto_carrito", id_ProductoParameter, id_usuarioParameter, cantidadParameter);
+        }
+    
+        public virtual int SP_AumentarCantidad(string idUsuario, Nullable<int> idProducto)
+        {
+            var idUsuarioParameter = idUsuario != null ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(string));
+    
+            var idProductoParameter = idProducto.HasValue ?
+                new ObjectParameter("IdProducto", idProducto) :
+                new ObjectParameter("IdProducto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_AumentarCantidad", idUsuarioParameter, idProductoParameter);
+        }
+    
+        public virtual ObjectResult<sp_ConsultaPlanillaConFiltro_Result> sp_ConsultaPlanillaConFiltro(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ConsultaPlanillaConFiltro_Result>("sp_ConsultaPlanillaConFiltro", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_DescargarFactura_Result> sp_DescargarFactura(Nullable<int> id_Factura)
+        {
+            var id_FacturaParameter = id_Factura.HasValue ?
+                new ObjectParameter("Id_Factura", id_Factura) :
+                new ObjectParameter("Id_Factura", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_DescargarFactura_Result>("sp_DescargarFactura", id_FacturaParameter);
+        }
+    
+        public virtual int SP_DisminuirCantidad(string idUsuario, Nullable<int> idProducto)
+        {
+            var idUsuarioParameter = idUsuario != null ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(string));
+    
+            var idProductoParameter = idProducto.HasValue ?
+                new ObjectParameter("IdProducto", idProducto) :
+                new ObjectParameter("IdProducto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DisminuirCantidad", idUsuarioParameter, idProductoParameter);
+        }
+    
+        public virtual int SP_EliminarProducto(string idUsuario, Nullable<int> idProducto)
+        {
+            var idUsuarioParameter = idUsuario != null ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(string));
+    
+            var idProductoParameter = idProducto.HasValue ?
+                new ObjectParameter("IdProducto", idProducto) :
+                new ObjectParameter("IdProducto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_EliminarProducto", idUsuarioParameter, idProductoParameter);
+        }
+    
+        public virtual ObjectResult<sp_FacturasPorUsuario_Result> sp_FacturasPorUsuario(string idUsuario)
+        {
+            var idUsuarioParameter = idUsuario != null ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_FacturasPorUsuario_Result>("sp_FacturasPorUsuario", idUsuarioParameter);
+        }
+    
+        public virtual ObjectResult<sp_FacturasProductosPorUsuario_Result> sp_FacturasProductosPorUsuario(string idUsuario)
+        {
+            var idUsuarioParameter = idUsuario != null ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_FacturasProductosPorUsuario_Result>("sp_FacturasProductosPorUsuario", idUsuarioParameter);
+        }
+    
+        public virtual ObjectResult<SP_MiCarrito_Result> SP_MiCarrito(string idUsuario)
+        {
+            var idUsuarioParameter = idUsuario != null ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_MiCarrito_Result>("SP_MiCarrito", idUsuarioParameter);
+        }
+    
+        public virtual int SP_ObtenerTotalAPagar(string idUsuario, ObjectParameter totalAPagar)
+        {
+            var idUsuarioParameter = idUsuario != null ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ObtenerTotalAPagar", idUsuarioParameter, totalAPagar);
+        }
+    
+        public virtual int SP_PagarCarrito(string idUsuario, Nullable<decimal> total)
+        {
+            var idUsuarioParameter = idUsuario != null ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(string));
+    
+            var totalParameter = total.HasValue ?
+                new ObjectParameter("Total", total) :
+                new ObjectParameter("Total", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_PagarCarrito", idUsuarioParameter, totalParameter);
+        }
     }
 }

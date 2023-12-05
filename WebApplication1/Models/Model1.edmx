@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BD_MARYSTYLISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BD_MARYSTYLISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -184,16 +184,6 @@
           <Property Name="Id_Categoria" Type="int" Nullable="false" />
           <Property Name="FileName" Type="nvarchar" MaxLength="200" />
           <Property Name="ImageData" Type="varbinary(max)" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK_Carrito_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
@@ -433,6 +423,55 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="CitaFinalizada" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCita" Type="int" Mode="In" />
+        </Function>
+        <Function Name="IMPRIMIR_FACTURA_PRODUCTOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Factura" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ObtenerCitasPorUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Agregar_producto_carrito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Producto" Type="int" Mode="In" />
+          <Parameter Name="Id_usuario" Type="nvarchar" Mode="In" />
+          <Parameter Name="Cantidad" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_AumentarCantidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="nvarchar" Mode="In" />
+          <Parameter Name="IdProducto" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_ConsultaPlanillaConFiltro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_DescargarFactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Factura" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_DisminuirCantidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="nvarchar" Mode="In" />
+          <Parameter Name="IdProducto" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_EliminarProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="nvarchar" Mode="In" />
+          <Parameter Name="IdProducto" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_FacturasPorUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_FacturasProductosPorUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_MiCarrito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_ObtenerTotalAPagar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="nvarchar" Mode="In" />
+          <Parameter Name="TotalAPagar" Type="decimal" Mode="InOut" />
+        </Function>
+        <Function Name="SP_PagarCarrito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="nvarchar" Mode="In" />
+          <Parameter Name="Total" Type="decimal" Mode="In" />
+        </Function>
         <EntityContainer Name="BD_MARYSTYLISModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -452,7 +491,6 @@
           <EntitySet Name="Planilla" EntityType="Self.Planilla" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reseñas" EntityType="Self.Reseñas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Servicios_Productos" EntityType="Self.Servicios_Productos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Carrito_AspNetUsers" Association="Self.FK_Carrito_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Carrito" EntitySet="Carrito" />
@@ -530,8 +568,7 @@
             <End Role="Servicios_Productos" EntitySet="Servicios_Productos" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BD_MARYSTYLISModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -742,16 +779,6 @@
           <NavigationProperty Name="Categorias" Relationship="Self.FK_Servicios_Productos_Categorias" FromRole="Servicios_Productos" ToRole="Categorias" />
           <NavigationProperty Name="Citas" Relationship="Self.FK_Citas_Servicios_Productos" FromRole="Servicios_Productos" ToRole="Citas" />
           <NavigationProperty Name="Detalle_Factura_Productos" Relationship="Self.FK_Detalle_Factura_Productos_Servicios_Productos" FromRole="Servicios_Productos" ToRole="Detalle_Factura_Productos" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -985,7 +1012,6 @@
           <EntitySet Name="Planilla" EntityType="Self.Planilla" />
           <EntitySet Name="Reseñas" EntityType="Self.Reseñas" />
           <EntitySet Name="Servicios_Productos" EntityType="Self.Servicios_Productos" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -1058,7 +1084,130 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <FunctionImport Name="CitaFinalizada">
+          <Parameter Name="IdCita" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="IMPRIMIR_FACTURA_PRODUCTOS" ReturnType="Collection(BD_MARYSTYLISModel.IMPRIMIR_FACTURA_PRODUCTOS_Result)">
+          <Parameter Name="Id_Factura" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ObtenerCitasPorUsuario" ReturnType="Collection(BD_MARYSTYLISModel.ObtenerCitasPorUsuario_Result)">
+          <Parameter Name="IdUsuario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Agregar_producto_carrito">
+            <Parameter Name="Id_Producto" Mode="In" Type="Int32" />
+            <Parameter Name="Id_usuario" Mode="In" Type="String" />
+            <Parameter Name="Cantidad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_AumentarCantidad">
+            <Parameter Name="IdUsuario" Mode="In" Type="String" />
+            <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ConsultaPlanillaConFiltro" ReturnType="Collection(BD_MARYSTYLISModel.sp_ConsultaPlanillaConFiltro_Result)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DescargarFactura" ReturnType="Collection(BD_MARYSTYLISModel.sp_DescargarFactura_Result)">
+          <Parameter Name="Id_Factura" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DisminuirCantidad">
+            <Parameter Name="IdUsuario" Mode="In" Type="String" />
+            <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_EliminarProducto">
+            <Parameter Name="IdUsuario" Mode="In" Type="String" />
+            <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_FacturasPorUsuario" ReturnType="Collection(BD_MARYSTYLISModel.sp_FacturasPorUsuario_Result)">
+          <Parameter Name="IdUsuario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_FacturasProductosPorUsuario" ReturnType="Collection(BD_MARYSTYLISModel.sp_FacturasProductosPorUsuario_Result)">
+          <Parameter Name="IdUsuario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_MiCarrito" ReturnType="Collection(BD_MARYSTYLISModel.SP_MiCarrito_Result)">
+          <Parameter Name="IdUsuario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ObtenerTotalAPagar">
+            <Parameter Name="IdUsuario" Mode="In" Type="String" />
+            <Parameter Name="TotalAPagar" Mode="InOut" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_PagarCarrito">
+            <Parameter Name="IdUsuario" Mode="In" Type="String" />
+            <Parameter Name="Total" Mode="In" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="IMPRIMIR_FACTURA_PRODUCTOS_Result">
+          <Property Type="DateTime" Name="Fecha" Nullable="false" />
+          <Property Type="Decimal" Name="Total" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="Id_Factura" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Descripcion" Nullable="false" />
+          <Property Type="Int32" Name="Id_Producto" Nullable="false" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Decimal" Name="PrecioFinal" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="TOTAL1" Nullable="true" Precision="29" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="ObtenerCitasPorUsuario_Result">
+          <Property Type="Int32" Name="Id_Cita" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha_Cita" Nullable="false" />
+          <Property Type="Time" Name="Hora_Cita" Nullable="false" />
+          <Property Type="String" Name="Id_Usuario" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="Id_Empleado" Nullable="false" />
+          <Property Type="Int32" Name="Id_Serv_Prod" Nullable="false" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Precio" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="Precio_Promo" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="Descripcion" Nullable="false" />
+          <Property Type="String" Name="Nombre_Empleado" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Apellido_Empleado" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="sp_ConsultaPlanillaConFiltro_Result">
+          <Property Type="Int32" Name="Id_Empleado" Nullable="false" />
+          <Property Type="String" Name="Nombre_Empleado" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Apellido_Empleado" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Descripcion_Empleado" Nullable="false" />
+          <Property Type="String" Name="Correo_Empleado" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Salario" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="CCSS" Nullable="true" Precision="27" Scale="6" />
+          <Property Type="Decimal" Name="BP" Nullable="true" Precision="25" Scale="6" />
+          <Property Type="Decimal" Name="SalarioNeto" Nullable="true" Precision="29" Scale="6" />
+        </ComplexType>
+        <ComplexType Name="sp_DescargarFactura_Result">
+          <Property Type="DateTime" Name="Fecha" Nullable="false" />
+          <Property Type="Decimal" Name="Total" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="Id_Factura" Nullable="false" />
+          <Property Type="String" Name="Nombre_Usuario" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Apellido_Usuario" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="Nombre_Empleado" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Apellido_Empleado" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Descripcion" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_FacturasPorUsuario_Result">
+          <Property Type="DateTime" Name="Fecha" Nullable="false" />
+          <Property Type="Decimal" Name="Total" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="Id_Factura" Nullable="false" />
+          <Property Type="String" Name="Nombre_Usuario" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Apellido_Usuario" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Nombre_Empleado" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Apellido_Empleado" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Descripcion" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_FacturasProductosPorUsuario_Result">
+          <Property Type="Int32" Name="Id_Factura" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" />
+          <Property Type="Decimal" Name="Total" Nullable="false" Precision="18" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="SP_MiCarrito_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Id_Producto" Nullable="false" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Decimal" Name="PrecioFinal" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="29" Scale="0" />
+          <Property Type="Decimal" Name="TotalAPagar" Nullable="true" Precision="38" Scale="0" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1251,17 +1400,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <AssociationSetMapping Name="AspNetUserRoles" TypeName="BD_MARYSTYLISModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
@@ -1270,6 +1408,115 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="CitaFinalizada" FunctionName="BD_MARYSTYLISModel.Store.CitaFinalizada" />
+          <FunctionImportMapping FunctionImportName="IMPRIMIR_FACTURA_PRODUCTOS" FunctionName="BD_MARYSTYLISModel.Store.IMPRIMIR_FACTURA_PRODUCTOS">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD_MARYSTYLISModel.IMPRIMIR_FACTURA_PRODUCTOS_Result">
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Id_Factura" ColumnName="Id_Factura" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id_Producto" ColumnName="Id_Producto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="PrecioFinal" ColumnName="PrecioFinal" />
+                <ScalarProperty Name="TOTAL1" ColumnName="TOTAL1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ObtenerCitasPorUsuario" FunctionName="BD_MARYSTYLISModel.Store.ObtenerCitasPorUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD_MARYSTYLISModel.ObtenerCitasPorUsuario_Result">
+                <ScalarProperty Name="Id_Cita" ColumnName="Id_Cita" />
+                <ScalarProperty Name="Fecha_Cita" ColumnName="Fecha_Cita" />
+                <ScalarProperty Name="Hora_Cita" ColumnName="Hora_Cita" />
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Id_Empleado" ColumnName="Id_Empleado" />
+                <ScalarProperty Name="Id_Serv_Prod" ColumnName="Id_Serv_Prod" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Precio_Promo" ColumnName="Precio_Promo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre_Empleado" ColumnName="Nombre_Empleado" />
+                <ScalarProperty Name="Apellido_Empleado" ColumnName="Apellido_Empleado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Agregar_producto_carrito" FunctionName="BD_MARYSTYLISModel.Store.SP_Agregar_producto_carrito" />
+          <FunctionImportMapping FunctionImportName="SP_AumentarCantidad" FunctionName="BD_MARYSTYLISModel.Store.SP_AumentarCantidad" />
+          <FunctionImportMapping FunctionImportName="sp_ConsultaPlanillaConFiltro" FunctionName="BD_MARYSTYLISModel.Store.sp_ConsultaPlanillaConFiltro">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD_MARYSTYLISModel.sp_ConsultaPlanillaConFiltro_Result">
+                <ScalarProperty Name="Id_Empleado" ColumnName="Id_Empleado" />
+                <ScalarProperty Name="Nombre_Empleado" ColumnName="Nombre_Empleado" />
+                <ScalarProperty Name="Apellido_Empleado" ColumnName="Apellido_Empleado" />
+                <ScalarProperty Name="Descripcion_Empleado" ColumnName="Descripcion_Empleado" />
+                <ScalarProperty Name="Correo_Empleado" ColumnName="Correo_Empleado" />
+                <ScalarProperty Name="Salario" ColumnName="Salario" />
+                <ScalarProperty Name="CCSS" ColumnName="CCSS" />
+                <ScalarProperty Name="BP" ColumnName="BP" />
+                <ScalarProperty Name="SalarioNeto" ColumnName="SalarioNeto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_DescargarFactura" FunctionName="BD_MARYSTYLISModel.Store.sp_DescargarFactura">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD_MARYSTYLISModel.sp_DescargarFactura_Result">
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Id_Factura" ColumnName="Id_Factura" />
+                <ScalarProperty Name="Nombre_Usuario" ColumnName="Nombre_Usuario" />
+                <ScalarProperty Name="Apellido_Usuario" ColumnName="Apellido_Usuario" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Nombre_Empleado" ColumnName="Nombre_Empleado" />
+                <ScalarProperty Name="Apellido_Empleado" ColumnName="Apellido_Empleado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_DisminuirCantidad" FunctionName="BD_MARYSTYLISModel.Store.SP_DisminuirCantidad" />
+          <FunctionImportMapping FunctionImportName="SP_EliminarProducto" FunctionName="BD_MARYSTYLISModel.Store.SP_EliminarProducto" />
+          <FunctionImportMapping FunctionImportName="sp_FacturasPorUsuario" FunctionName="BD_MARYSTYLISModel.Store.sp_FacturasPorUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD_MARYSTYLISModel.sp_FacturasPorUsuario_Result">
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Id_Factura" ColumnName="Id_Factura" />
+                <ScalarProperty Name="Nombre_Usuario" ColumnName="Nombre_Usuario" />
+                <ScalarProperty Name="Apellido_Usuario" ColumnName="Apellido_Usuario" />
+                <ScalarProperty Name="Nombre_Empleado" ColumnName="Nombre_Empleado" />
+                <ScalarProperty Name="Apellido_Empleado" ColumnName="Apellido_Empleado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_FacturasProductosPorUsuario" FunctionName="BD_MARYSTYLISModel.Store.sp_FacturasProductosPorUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD_MARYSTYLISModel.sp_FacturasProductosPorUsuario_Result">
+                <ScalarProperty Name="Id_Factura" ColumnName="Id_Factura" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_MiCarrito" FunctionName="BD_MARYSTYLISModel.Store.SP_MiCarrito">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD_MARYSTYLISModel.SP_MiCarrito_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id_Producto" ColumnName="Id_Producto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="PrecioFinal" ColumnName="PrecioFinal" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="TotalAPagar" ColumnName="TotalAPagar" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ObtenerTotalAPagar" FunctionName="BD_MARYSTYLISModel.Store.SP_ObtenerTotalAPagar" />
+          <FunctionImportMapping FunctionImportName="SP_PagarCarrito" FunctionName="BD_MARYSTYLISModel.Store.SP_PagarCarrito" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

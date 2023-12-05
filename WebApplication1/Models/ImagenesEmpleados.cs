@@ -11,14 +11,22 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class ImagenesEmpleados
     {
+        [Display(Name = "ID")]
         public int Id { get; set; }
+
+        [Display(Name = "ID de Empleado")]
         public int Id_Empleado { get; set; }
+
+        [Display(Name = "Nombre del Archivo")]
         public string FileName { get; set; }
+
+        [Display(Name = "Datos de la Imagen")]
         public byte[] ImageData { get; set; }
-    
+
         public virtual Empleados Empleados { get; set; }
     }
 }

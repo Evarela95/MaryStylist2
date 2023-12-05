@@ -11,7 +11,8 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Facturas
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,13 +21,22 @@ namespace WebApplication1.Models
             this.Detalle_Factura_Productos = new HashSet<Detalle_Factura_Productos>();
             this.Detalle_Ganancias_Facturas = new HashSet<Detalle_Ganancias_Facturas>();
         }
-    
+
+        [Display(Name = "ID de Factura")]
         public int Id_Factura { get; set; }
-        public Nullable<int> Id_Cita { get; set; }
-        public System.DateTime Fecha { get; set; }
+
+        [Display(Name = "ID de Cita")]
+        public int? Id_Cita { get; set; }
+
+        [Display(Name = "Fecha de Factura")]
+        public DateTime Fecha { get; set; }
+
+        [Display(Name = "Total")]
         public decimal Total { get; set; }
+
+        [Display(Name = "ID de Usuario")]
         public string User_Id { get; set; }
-    
+
         public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Citas Citas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

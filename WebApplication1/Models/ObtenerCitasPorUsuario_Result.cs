@@ -10,17 +10,10 @@
 namespace WebApplication1.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class Citas
+    public partial class ObtenerCitasPorUsuario_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Citas()
-        {
-            this.Facturas = new HashSet<Facturas>();
-        }
-
         [Display(Name = "ID de Cita")]
         public int Id_Cita { get; set; }
 
@@ -42,10 +35,22 @@ namespace WebApplication1.Models
         [Display(Name = "Estado")]
         public bool Estado { get; set; }
 
-        public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual Empleados Empleados { get; set; }
-        public virtual Servicios_Productos Servicios_Productos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Facturas> Facturas { get; set; }
+        [Display(Name = "Nombre del Servicio/Producto")]
+        public string Nombre { get; set; }
+
+        [Display(Name = "Precio")]
+        public decimal Precio { get; set; }
+
+        [Display(Name = "Precio de Promoción")]
+        public decimal? Precio_Promo { get; set; }
+
+        [Display(Name = "Descripción")]
+        public string Descripcion { get; set; }
+
+        [Display(Name = "Nombre del Empleado")]
+        public string Nombre_Empleado { get; set; }
+
+        [Display(Name = "Apellido del Empleado")]
+        public string Apellido_Empleado { get; set; }
     }
 }

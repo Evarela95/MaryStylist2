@@ -1,36 +1,30 @@
 ﻿@model IEnumerable<WebApplication1.Models.Reseñas>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Reseñas";
 }
 
-<style>
-    .review-card {
-        background-color: #F2F2F2;
-        padding: 15px;
-        margin: 10px auto;
-        max-width: 500px;
-        text-align: center;
-    }
-
-    .create-button {
-        margin-top: 20px;
-    }
-</style>
-
-<div class="container">
-    <div class="text-center create-button">
-        <a href="@Url.Action("Create")" class="btn btn-primary btn-lg">Crear Nueva Reseña</a>
-    </div>
-
+<div class="container mt-4">
     <h2 class="text-center">Reseñas</h2>
 
-    @foreach (var item in Model)
-    {
-        <div class="review-card">
-            <h5 style="color: gold;">@item.AspNetUsers.Email</h5>
-            <p style="color: black;">@item.Comentario</p>
-            <p style="color: gray;">Calificación: @item.Calificacion</p>
+    <p class="text-center">
+        @Html.ActionLink("Añadir una Reseña", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+            @foreach (var item in Model)
+            {
+                <div class="card mb-3" style="background-color: #f8f9fa;">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Comentario)</h5>
+                        <p class="card-text">Calificación: @Html.DisplayFor(modelItem => item.Calificacion)</p>
+                        <p class="card-text">Usuario: @Html.DisplayFor(modelItem => item.AspNetUsers.Email)</p>
+                        <div class="text-center">
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
-    }
+    </div>
 </div>
