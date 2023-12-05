@@ -23,11 +23,11 @@ namespace WebApplication1.Models
             string query = "EXEC sp_ConsultaPlanillaConFiltro @Id";
 
 
-            
-           
+
+
 
             // ERUTA DONDE SE GUARDA EL PDF
-            string rutaGuardado = "C:\\Users\\melme\\source\\repos\\MaryStylist2\\WebApplication1\\Planilla\\";
+            string rutaGuardado = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads\\";
 
             //OBTENER FECHA
             string fechaHoraActual = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");

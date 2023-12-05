@@ -17,6 +17,7 @@ namespace WebApplication1.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Servicios_Productos()
         {
+            this.Carrito = new HashSet<Carrito>();
             this.Citas = new HashSet<Citas>();
             this.Detalle_Factura_Productos = new HashSet<Detalle_Factura_Productos>();
         }
@@ -31,6 +32,8 @@ namespace WebApplication1.Models
         public string FileName { get; set; }
         public byte[] ImageData { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Carrito> Carrito { get; set; }
         public virtual Categorias Categorias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Citas> Citas { get; set; }

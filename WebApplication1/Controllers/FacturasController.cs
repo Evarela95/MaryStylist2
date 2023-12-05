@@ -40,10 +40,15 @@ namespace WebApplication1.Controllers
         public ActionResult MisFacturas(string idUsuario)
         {
             DataTable citasPorUsuario = ObtenerFacturasPorUsuario(idUsuario);
+            DataTable factProductoPorUsuario = ObtenerFacturasProductosPorUsuario(idUsuario);
 
-            // Pasar los datos a la vista
-            return View(citasPorUsuario);
+            // Pasar los datos a la vista usando ViewBag
+            ViewBag.CitasPorUsuario = citasPorUsuario;
+            ViewBag.FactProductoPorUsuario = factProductoPorUsuario;
+
+            return View();
         }
+
 
 
 
@@ -73,7 +78,30 @@ namespace WebApplication1.Controllers
         }
 
 
+        protected DataTable ObtenerFacturasProductosPorUsuario(string idUsuario)
+        {
+            string userId = User.Identity.GetUserId();
 
+            idUsuario = userId;
+
+            DataTable dataTable = new DataTable();
+            string connectionString = "Server=localhost\\sqlexpress;Database=BD_MARYSTYLIS;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True;";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("sp_FacturasProductosPorUsuario", connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@IdUsuario", idUsuario);
+
+                    connection.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    dataTable.Load(reader);
+                }
+            }
+
+            return dataTable;
+        }
         //----------------------------------------------------------------------------------------
 
         public ActionResult ImprimirFacturaPDF(int id)
@@ -84,6 +112,24 @@ namespace WebApplication1.Controllers
             }
             Facturas facturas = db.Facturas.Find(id);
             GenerarFacturaPDF.GenerateFacturaPDF(id);
+            if (facturas == null)
+            {
+                return HttpNotFound();
+            }
+            return View(facturas);
+        }
+
+
+
+        public ActionResult ImprimirFacturaProductosPDF(int id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Facturas facturas = db.Facturas.Find(id);
+
+            GenerateFacturasProductosPDF.GenerarFacturaProductosPDF(id);
             if (facturas == null)
             {
                 return HttpNotFound();

@@ -1,60 +1,142 @@
 ﻿@model IEnumerable<WebApplication1.Models.Servicios_Productos>
 
 @{
-    ViewBag.Title = "ProductosPromo";
+    ViewBag.Title = "Servicios";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Productos en promoción</h2>
+
+<style>
+    .service-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+
+    .service-item {
+        width: calc(30% - 10px); /* Ajusta el ancho restando el espacio que quieres entre los elementos */
+        margin-bottom: 20px;
+        text-align: center;
+        margin-right: 10px; /* Espacio entre elementos */
+        border: 1px solid #ccc; /* Borde alrededor de cada servicio */
+        padding: 10px; /* Espacio interno dentro de cada servicio */
+        border-radius: 8px; /* Redondear los bordes */
+        padding-bottom: 20px;
+    }
+
+    .service-image {
+        width: 350px;
+        height: 200px; /* Establece aquí la altura deseada */
+        object-fit: cover; /* Ajusta el tamaño sin deformar la imagen */
+        border-radius: 8px;
+        margin-bottom: 8px;
+    }
+
+    .service-name {
+        font-weight: bold;
+        margin-bottom: 4px;
+        font-size: 15px;
+    }
+
+    .service-price {
+        font-weight: bold;
+        margin-bottom: 8px;
+        font-size: 15px;
+        text-decoration: line-through
+    }
+
+    .service-price-promo {
+        font-weight: bold;
+        margin-bottom: 8px;
+        font-size: 20px;
+    }
+
+    .add-button {
+        padding: 8px 16px;
+        background-color: #B8860b;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        text-decoration: none;
+    }
+
+        .add-button:hover {
+            background-color: #f6cf70;
+            text-decoration: none;
+            color: black;
+        }
+
+    .Titulo {
+        align-content: center;
+    }
 
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Precio)
-        </th>
- 
-        <th>
-            @Html.DisplayNameFor(model => model.Precio_Promo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
+    .service-price,
+    .service-price-promo {
+        display: inline-block; /* o display: inline; */
+        margin-right: 5px; /* Ajusta el espacio entre el nombre y el precio si es necesario */
+    }
 
-        <th>
-            @Html.DisplayNameFor(model => model.ImageData)
-        </th>
+    .Titulo {
+        text-align: center;
+    }
+</style>
 
-        <th></th>
-    </tr>
+<h2 class="Titulo">Servicios en promoción</h2>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Precio)
-        </td>
-  
-        <td>
-            @Html.DisplayFor(modelItem => item.Precio_Promo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
-        </td>
- 
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageData)
-        </td>
-  
-        <td>
-            @Html.ActionLink("Adquirir", "", new { id=item.Id }) 
-        </td>
-    </tr>
-}
+<div class="service-container">
+    @foreach (var item in Model)
+    {
+        <div class="service-item">
+            <img class="service-image" src="@item.FileName" alt="Service Image">
+            <div class="service-details">
+                <div class="service-name">@item.Nombre</div>
+                <div class="service-price">Precio: ₡@item.Precio</div>
+                <div class="service-price-promo"> Promo: ₡@item.Precio_Promo</div>
+            </div>
 
-</table>
+            <a id="agregarCarrito" data-id="@item.Id" class="add-button">Agregar al carrito</a>
+        </div>
+    }
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+$(document).ready(function() {
+    $(document).on('click', '.add-button', function(event) {
+        event.preventDefault(); // Evita la acción predeterminada del enlace
+
+        var idProducto = $(this).data("id"); // Obtiene el ID del producto desde el atributo data
+        var idUsuario = '@ViewBag.UserId'; // Reemplaza con el ID del usuario
+
+        // Realizar la solicitud AJAX al controlador
+        $.ajax({
+            url: '/Carrito/AgregarProductoAlCarrito',
+            type: 'POST',
+            data: {
+                idProducto: idProducto,
+                idUsuario: idUsuario
+            },
+            success: function(response) {
+                // Muestra un mensaje Toastr cuando el producto se agrega correctamente
+                toastr.success('Producto agregado al carrito correctamente.');
+
+                // Puedes realizar alguna acción adicional después de agregar el producto al carrito si es necesario
+            },
+            error: function(xhr, status, error) {
+                // Muestra un mensaje Toastr en caso de error al agregar el producto
+                toastr.error('Error al agregar el producto al carrito.');
+            }
+        });
+    });
+});
+
+
+</script>

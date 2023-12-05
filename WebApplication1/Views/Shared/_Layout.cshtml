@@ -64,7 +64,7 @@
                         <ul class="dropdown-menu">
 
                             <li>@Html.ActionLink("Adm. Galería", "Index", "Image")</li>
-                           
+
                             <li>@Html.ActionLink("Usuarios", "Index", "AspNetUsers")</li>
 
 
@@ -89,7 +89,8 @@
         }*@
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Carrito", "", "", null, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Carrito", "MiCarrito", "Carrito", null, new { @class = "nav-link" })</li>
+
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

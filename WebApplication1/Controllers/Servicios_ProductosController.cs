@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -25,6 +26,8 @@ namespace WebApplication1.Controllers
 
         public ActionResult Servicios()
         {
+           
+
             var serviciosSinPromo = db.Servicios_Productos
                                         .Include(s => s.Categorias)
                                         .Where(s => s.Categorias.Id_Categoria == 1 && !s.Promo)
@@ -36,6 +39,10 @@ namespace WebApplication1.Controllers
 
         public ActionResult Productos()
         {
+            string userId = User.Identity.GetUserId();
+
+            ViewBag.UserId = userId;
+
             var Categoria2 = db.Servicios_Productos
                                         .Include(s => s.Categorias)
                                         .Where(s => s.Categorias.Id_Categoria == 2 && !s.Promo)
@@ -57,6 +64,11 @@ namespace WebApplication1.Controllers
 
         public ActionResult ProductosPromo()
         {
+            string userId = User.Identity.GetUserId();
+
+            ViewBag.UserId = userId;
+
+
             var productosCategoria1ConPromo = db.Servicios_Productos
                                                 .Include(s => s.Categorias)
                                                 .Where(s => s.Categorias.Id_Categoria == 2 && s.Promo)

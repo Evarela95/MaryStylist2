@@ -20,7 +20,8 @@ namespace WebApplication1.Models
             this.Detalle_Factura_Productos = new HashSet<Detalle_Factura_Productos>();
             this.Detalle_Ganancias_Facturas = new HashSet<Detalle_Ganancias_Facturas>();
         }
-    
+
+       
         public int Id_Factura { get; set; }
         public Nullable<int> Id_Cita { get; set; }
         public System.DateTime Fecha { get; set; }

@@ -12,14 +12,14 @@ namespace WebApplication1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Detalle_Factura_Productos
+    public partial class Carrito
     {
-        public int Id_Detalle { get; set; }
-        public Nullable<int> Id_Factura { get; set; }
+        public int Id_Carrito { get; set; }
+        public string User_Id { get; set; }
         public int Id_Producto { get; set; }
         public int Cantidad { get; set; }
     
-        public virtual Facturas Facturas { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Servicios_Productos Servicios_Productos { get; set; }
     }
 }

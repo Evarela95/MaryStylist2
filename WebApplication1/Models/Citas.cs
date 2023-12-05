@@ -18,7 +18,6 @@ namespace WebApplication1.Models
         public Citas()
         {
             this.Facturas = new HashSet<Facturas>();
-            Estado = true;
         }
     
         public int Id_Cita { get; set; }

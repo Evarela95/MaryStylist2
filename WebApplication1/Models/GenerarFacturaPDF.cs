@@ -17,7 +17,7 @@ namespace WebApplication1.Models
 
             string connectionString = "Server=localhost\\sqlexpress;Database=BD_MARYSTYLIS;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True;";
             string query = "EXEC sp_DescargarFactura @Id_Factura";
-            string rutaGuardado = "C:\\Users\\melme\\source\\repos\\MaryStylist2\\WebApplication1\\Facturas\\";
+            string rutaGuardado = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads\\";
             string fechaHoraActual = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
             string nombrePDF =  fechaHoraActual + ".pdf"; 
 

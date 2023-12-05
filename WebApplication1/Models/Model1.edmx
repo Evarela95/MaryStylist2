@@ -69,6 +69,15 @@
           <Property Name="Apellido_Usuario" Type="nvarchar" MaxLength="25" />
           <Property Name="Puntos_Usuario" Type="int" />
         </EntityType>
+        <EntityType Name="Carrito">
+          <Key>
+            <PropertyRef Name="Id_Carrito" />
+          </Key>
+          <Property Name="Id_Carrito" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Id_Producto" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Categorias">
           <Key>
             <PropertyRef Name="Id_Categoria" />
@@ -93,7 +102,7 @@
             <PropertyRef Name="Id_Detalle" />
           </Key>
           <Property Name="Id_Detalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Id_Factura" Type="int" Nullable="false" />
+          <Property Name="Id_Factura" Type="int" />
           <Property Name="Id_Producto" Type="int" Nullable="false" />
           <Property Name="Cantidad" Type="int" Nullable="false" />
         </EntityType>
@@ -186,6 +195,30 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <Association Name="FK_Carrito_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Carrito" Type="Self.Carrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Carrito">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Carrito_Servicios_Productos">
+          <End Role="Servicios_Productos" Type="Self.Servicios_Productos" Multiplicity="1" />
+          <End Role="Carrito" Type="Self.Carrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicios_Productos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Carrito">
+              <PropertyRef Name="Id_Producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Citas_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Citas" Type="Self.Citas" Multiplicity="*" />
@@ -279,7 +312,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Detalle_Factura_Productos_Facturas">
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
           <End Role="Detalle_Factura_Productos" Type="Self.Detalle_Factura_Productos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Facturas">
@@ -407,6 +440,7 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Carrito" EntityType="Self.Carrito" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Citas" EntityType="Self.Citas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Detalle_Factura_Productos" EntityType="Self.Detalle_Factura_Productos" Schema="dbo" store:Type="Tables" />
@@ -419,6 +453,14 @@
           <EntitySet Name="Reseñas" EntityType="Self.Reseñas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Servicios_Productos" EntityType="Self.Servicios_Productos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Carrito_AspNetUsers" Association="Self.FK_Carrito_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Carrito" EntitySet="Carrito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Carrito_Servicios_Productos" Association="Self.FK_Carrito_Servicios_Productos">
+            <End Role="Servicios_Productos" EntitySet="Servicios_Productos" />
+            <End Role="Carrito" EntitySet="Carrito" />
+          </AssociationSet>
           <AssociationSet Name="FK_Citas_AspNetUsers" Association="Self.FK_Citas_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Citas" EntitySet="Citas" />
@@ -552,10 +594,22 @@
           <Property Name="Puntos_Usuario" Type="Int32" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="Carrito" Relationship="Self.FK_Carrito_AspNetUsers" FromRole="AspNetUsers" ToRole="Carrito" />
           <NavigationProperty Name="Citas" Relationship="Self.FK_Citas_AspNetUsers" FromRole="AspNetUsers" ToRole="Citas" />
           <NavigationProperty Name="Facturas" Relationship="Self.FK_Facturas_AspNetUsers" FromRole="AspNetUsers" ToRole="Facturas" />
           <NavigationProperty Name="Reseñas" Relationship="Self.FK_Reseñas_AspNetUsers" FromRole="AspNetUsers" ToRole="Reseñas" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="Carrito">
+          <Key>
+            <PropertyRef Name="Id_Carrito" />
+          </Key>
+          <Property Name="Id_Carrito" Type="Int32" Nullable="false" />
+          <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id_Producto" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Carrito_AspNetUsers" FromRole="Carrito" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Servicios_Productos" Relationship="Self.FK_Carrito_Servicios_Productos" FromRole="Carrito" ToRole="Servicios_Productos" />
         </EntityType>
         <EntityType Name="Categorias">
           <Key>
@@ -575,18 +629,18 @@
           <Property Name="Id_Usuario" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Id_Empleado" Type="Int32" Nullable="false" />
           <Property Name="Id_Serv_Prod" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Citas_AspNetUsers" FromRole="Citas" ToRole="AspNetUsers" />
           <NavigationProperty Name="Empleados" Relationship="Self.FK_Citas_Empleados" FromRole="Citas" ToRole="Empleados" />
           <NavigationProperty Name="Servicios_Productos" Relationship="Self.FK_Citas_Servicios_Productos" FromRole="Citas" ToRole="Servicios_Productos" />
           <NavigationProperty Name="Facturas" Relationship="Self.FK_Facturas_Citas" FromRole="Citas" ToRole="Facturas" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Detalle_Factura_Productos">
           <Key>
             <PropertyRef Name="Id_Detalle" />
           </Key>
           <Property Name="Id_Detalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id_Factura" Type="Int32" Nullable="false" />
+          <Property Name="Id_Factura" Type="Int32" />
           <Property Name="Id_Producto" Type="Int32" Nullable="false" />
           <Property Name="Cantidad" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Facturas" Relationship="Self.FK_Detalle_Factura_Productos_Facturas" FromRole="Detalle_Factura_Productos" ToRole="Facturas" />
@@ -681,11 +735,12 @@
           <Property Name="Precio_Promo" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Id_Categoria" Type="Int32" Nullable="false" />
+          <Property Name="FileName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Carrito" Relationship="Self.FK_Carrito_Servicios_Productos" FromRole="Servicios_Productos" ToRole="Carrito" />
           <NavigationProperty Name="Categorias" Relationship="Self.FK_Servicios_Productos_Categorias" FromRole="Servicios_Productos" ToRole="Categorias" />
           <NavigationProperty Name="Citas" Relationship="Self.FK_Citas_Servicios_Productos" FromRole="Servicios_Productos" ToRole="Citas" />
           <NavigationProperty Name="Detalle_Factura_Productos" Relationship="Self.FK_Detalle_Factura_Productos_Servicios_Productos" FromRole="Servicios_Productos" ToRole="Detalle_Factura_Productos" />
-          <Property Name="FileName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -725,6 +780,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Carrito_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Carrito" Type="Self.Carrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Carrito">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Citas_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Citas" Type="Self.Citas" Multiplicity="*" />
@@ -758,6 +825,18 @@
             </Principal>
             <Dependent Role="Reseñas">
               <PropertyRef Name="Id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Carrito_Servicios_Productos">
+          <End Role="Servicios_Productos" Type="Self.Servicios_Productos" Multiplicity="1" />
+          <End Role="Carrito" Type="Self.Carrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicios_Productos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Carrito">
+              <PropertyRef Name="Id_Producto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -810,7 +889,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Detalle_Factura_Productos_Facturas">
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
           <End Role="Detalle_Factura_Productos" Type="Self.Detalle_Factura_Productos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Facturas">
@@ -893,6 +972,7 @@
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="Carrito" EntityType="Self.Carrito" />
           <EntitySet Name="Categorias" EntityType="Self.Categorias" />
           <EntitySet Name="Citas" EntityType="Self.Citas" />
           <EntitySet Name="Detalle_Factura_Productos" EntityType="Self.Detalle_Factura_Productos" />
@@ -913,6 +993,10 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
+          <AssociationSet Name="FK_Carrito_AspNetUsers" Association="Self.FK_Carrito_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Carrito" EntitySet="Carrito" />
+          </AssociationSet>
           <AssociationSet Name="FK_Citas_AspNetUsers" Association="Self.FK_Citas_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Citas" EntitySet="Citas" />
@@ -924,6 +1008,10 @@
           <AssociationSet Name="FK_Reseñas_AspNetUsers" Association="Self.FK_Reseñas_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Reseñas" EntitySet="Reseñas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Carrito_Servicios_Productos" Association="Self.FK_Carrito_Servicios_Productos">
+            <End Role="Servicios_Productos" EntitySet="Servicios_Productos" />
+            <End Role="Carrito" EntitySet="Carrito" />
           </AssociationSet>
           <AssociationSet Name="FK_Servicios_Productos_Categorias" Association="Self.FK_Servicios_Productos_Categorias">
             <End Role="Categorias" EntitySet="Categorias" />
@@ -1034,6 +1122,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Carrito">
+            <EntityTypeMapping TypeName="BD_MARYSTYLISModel.Carrito">
+              <MappingFragment StoreEntitySet="Carrito">
+                <ScalarProperty Name="Id_Carrito" ColumnName="Id_Carrito" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Id_Producto" ColumnName="Id_Producto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Categorias">
             <EntityTypeMapping TypeName="BD_MARYSTYLISModel.Categorias">
               <MappingFragment StoreEntitySet="Categorias">
@@ -1045,13 +1143,13 @@
           <EntitySetMapping Name="Citas">
             <EntityTypeMapping TypeName="BD_MARYSTYLISModel.Citas">
               <MappingFragment StoreEntitySet="Citas">
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="Id_Cita" ColumnName="Id_Cita" />
                 <ScalarProperty Name="Fecha_Cita" ColumnName="Fecha_Cita" />
                 <ScalarProperty Name="Hora_Cita" ColumnName="Hora_Cita" />
                 <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
                 <ScalarProperty Name="Id_Empleado" ColumnName="Id_Empleado" />
                 <ScalarProperty Name="Id_Serv_Prod" ColumnName="Id_Serv_Prod" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1140,8 +1238,6 @@
           <EntitySetMapping Name="Servicios_Productos">
             <EntityTypeMapping TypeName="BD_MARYSTYLISModel.Servicios_Productos">
               <MappingFragment StoreEntitySet="Servicios_Productos">
-                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
-                <ScalarProperty Name="FileName" ColumnName="FileName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Precio" ColumnName="Precio" />
@@ -1149,6 +1245,8 @@
                 <ScalarProperty Name="Precio_Promo" ColumnName="Precio_Promo" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Id_Categoria" ColumnName="Id_Categoria" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
