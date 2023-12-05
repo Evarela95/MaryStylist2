@@ -16,6 +16,7 @@ namespace WebApplication1.Controllers
         private BD_MARYSTYLISEntities db = new BD_MARYSTYLISEntities();
 
         // GET: Servicios_Productos
+        [Authorize(Roles = "Administrador")]
         public ActionResult Index()
         {
             var servicios_Productos = db.Servicios_Productos.Include(s => s.Categorias);
@@ -82,6 +83,7 @@ namespace WebApplication1.Controllers
 
 
         // GET: Servicios_Productos/Details/5
+        [Authorize(Roles = "Administrador")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -97,6 +99,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Servicios_Productos/Create
+        [Authorize(Roles = "Administrador")]
         public ActionResult Create()
         {
             ViewBag.Id_Categoria = new SelectList(db.Categorias, "Id_Categoria", "Nombre_Categoria");
@@ -122,6 +125,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Servicios_Productos/Edit/5
+        [Authorize(Roles = "Administrador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -155,6 +159,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Servicios_Productos/Delete/5
+        [Authorize(Roles = "Administrador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

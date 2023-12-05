@@ -17,6 +17,7 @@ namespace WebApplication1.Controllers
         private BD_MARYSTYLISEntities db = new BD_MARYSTYLISEntities();
 
         // GET: Facturas
+        [Authorize(Roles = "Administrador")]
         public ActionResult Index()
         {
             var facturas = db.Facturas.Include(f => f.AspNetUsers).Include(f => f.Citas);

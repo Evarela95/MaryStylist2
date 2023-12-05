@@ -17,6 +17,7 @@ namespace WebApplication1.Controllers
         private BD_MARYSTYLISEntities db = new BD_MARYSTYLISEntities();
 
         // GET: Citas
+        [Authorize(Roles = "Administrador")]
         public ActionResult Index()
         {
             var citas = db.Citas
@@ -32,7 +33,7 @@ namespace WebApplication1.Controllers
         }
 
         
-
+        [Authorize(Roles ="Administrador")]
              public ActionResult TodasLasCitas()
         {
             var citas = db.Citas
@@ -48,7 +49,7 @@ namespace WebApplication1.Controllers
         }
 
 
-
+        [Authorize(Roles = "Administrador")]
         public ActionResult CitasFinalizadas()
         {
             var citas = db.Citas
@@ -62,6 +63,8 @@ namespace WebApplication1.Controllers
             return View(citas.ToList());
         }
 
+
+        [Authorize(Roles = "Administrador")]
         // GET: Citas/Details/5
         public ActionResult Details(int? id)
         {
@@ -193,7 +196,7 @@ namespace WebApplication1.Controllers
             return View(citas);
         }
 
-//---------------------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------------------
 
 
 
@@ -202,6 +205,7 @@ namespace WebApplication1.Controllers
 
 
         // GET: Citas/Edit/5
+        [Authorize(Roles = "Administrador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -239,6 +243,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Citas/Delete/5
+        [Authorize(Roles = "Administrador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -321,7 +326,7 @@ namespace WebApplication1.Controllers
 
         ///----------------------------------------------------------------------------------------------------
 
-
+        [Authorize(Roles = "Administrador")]
         public ActionResult FinalizarCita(int id)
         {
             string connectionString = "Server=localhost\\sqlexpress;Database=BD_MARYSTYLIS;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True;";
