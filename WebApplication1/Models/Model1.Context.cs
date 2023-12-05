@@ -30,6 +30,7 @@ namespace WebApplication1.Models
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<Carrito> Carrito { get; set; }
         public virtual DbSet<Categorias> Categorias { get; set; }
         public virtual DbSet<Citas> Citas { get; set; }
         public virtual DbSet<Detalle_Factura_Productos> Detalle_Factura_Productos { get; set; }

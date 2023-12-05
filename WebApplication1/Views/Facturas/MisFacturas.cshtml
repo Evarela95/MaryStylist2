@@ -1,0 +1,105 @@
+﻿@model System.Data.DataTable
+
+@{
+    ViewBag.Title = "Mis Facturas";
+    System.Data.DataTable citasPorUsuario = ViewBag.CitasPorUsuario as System.Data.DataTable;
+    System.Data.DataTable factProductoPorUsuario = ViewBag.FactProductoPorUsuario as System.Data.DataTable;
+}
+
+<div class="container">
+    <h2>Facturas de citas</h2>
+    @if (citasPorUsuario != null && citasPorUsuario.Rows.Count > 0)
+    {
+        <div class="form-group mt-4">
+            <label for="searchCitas">Search:</label>
+            <input type="text" id="searchCitas" class="form-control" oninput="filterTable('Citas')" />
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <!-- Encabezados de la tabla para las citas -->
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha</th>
+                    <th>Servicio</th>
+                    <th>Descripción</th>
+                    <th>Total</th>
+                    <th>Atendió</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Filas de la tabla para las citas -->
+                @foreach (System.Data.DataRow row in citasPorUsuario.Rows)
+                {
+                    <tr>
+                        <td>@row["Id_Factura"]</td>
+                        <td>@row["Fecha"]</td>
+                        <td>@row["Nombre"]</td>
+                        <td>@row["Descripcion"]</td>
+                        <td>@row["Total"]</td>
+                        <td>@row["Nombre_Empleado"] @row["Apellido_Empleado"] </td>
+                        <td>
+                            @Html.ActionLink("Imprimir", "ImprimirFacturaPDF", new { id = @row["Id_Factura"] })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No se encontraron facturas de citas.</p>
+    }
+
+    <h2>Facturas de Productos</h2>
+    @if (factProductoPorUsuario != null && factProductoPorUsuario.Rows.Count > 0)
+    {
+        <div class="form-group mt-4">
+            <label for="searchFactProductos">Search:</label>
+            <input type="text" id="searchFactProductos" class="form-control" oninput="filterTable('FactProductos')" />
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <!-- Encabezados de la tabla para las facturas de productos -->
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha</th>
+                    <th>Total</th>
+                    
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Filas de la tabla para las facturas de productos -->
+                @foreach (System.Data.DataRow row in factProductoPorUsuario.Rows)
+                {
+                    <tr>
+                        <td>@row["Id_Factura"]</td>
+                        <td>@row["Fecha"]</td>
+                       <td>@row["Total"]</td>
+                        <td>
+                            @Html.ActionLink("Imprimir", "ImprimirFacturaProductosPDF", new { id = @row["Id_Factura"] })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No se encontraron facturas de productos.</p>
+    }
+</div>
+
+<script>
+    function filterTable() {
+        var searchText = $('#search').val().toLowerCase();
+
+        $('table tbody tr').each(function () {
+            var rowText = $(this).text().toLowerCase();
+            $(this).toggle(rowText.indexOf(searchText) > -1);
+        });
+    }
+</script>

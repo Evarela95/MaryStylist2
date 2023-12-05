@@ -15,7 +15,7 @@ namespace WebApplication1.Models
     public partial class Detalle_Factura_Productos
     {
         public int Id_Detalle { get; set; }
-        public int Id_Factura { get; set; }
+        public Nullable<int> Id_Factura { get; set; }
         public int Id_Producto { get; set; }
         public int Cantidad { get; set; }
     

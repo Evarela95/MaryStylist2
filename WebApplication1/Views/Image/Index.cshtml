@@ -5,7 +5,15 @@
     ViewBag.Title = "Gestión de Imágenes";
 }
 
-<h2>Imágenes en el proyecto</h2>
+<h2>Imágenes de la galería</h2>
+
+<h3>Subir una nueva imagen</h3>
+@using (Html.BeginForm("Upload", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="file" />
+    <input type="submit" value="Subir" />
+}
+
 
 @foreach (var imageName in Model)
 {
@@ -18,9 +26,3 @@
     </div>
 }
 
-<h3>Subir una nueva imagen</h3>
-@using (Html.BeginForm("Upload", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <input type="file" name="file" />
-    <input type="submit" value="Subir" />
-}

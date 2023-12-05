@@ -6,8 +6,8 @@
     <title>Salón de Belleza - Inicio</title>
     <link href="~/Content/HeaderFooter.css" rel="stylesheet" />
 
-    <link href="~/Content/Nosotros.css" rel="stylesheet" />
-    <link href="~/Content/Promociones.css" rel="stylesheet" />
+    <link href="~/Content/Generales.css" rel="stylesheet" />
+    <link href="~/Content/Reseñas.css" rel="stylesheet" />
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -30,11 +30,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
 
-                  
-                    <li>@Html.ActionLink("Galería", "Galeria", "Image")</li>
 
-                    <li>@Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" })</li>
-                   
+                    <li>@Html.ActionLink("Galería", "Galeria", "Image")</li>
 
                     <li>@Html.ActionLink("Nosotros", "Nosotros", "Home")</li>
                     <li>@Html.ActionLink("Reseñas", "Index", "Reseñas")</li>
@@ -42,49 +39,59 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Servicios <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Servicios", "Index", "Servicios")</li>
-                            <li>@Html.ActionLink("Promociones", "Index", "PromocionesServicios")</li>
+                            <li>@Html.ActionLink("Servicios", "Servicios", "Servicios_Productos")</li>
+                            <li>@Html.ActionLink("Promociones", "ServiciosPromo", "Servicios_Productos")</li>
 
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Productos <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Productos", "Index", "Productos")</li>
-                            <li>@Html.ActionLink("Promociones", "Index", "PromocionesProductos")</li>
+                            <li>@Html.ActionLink("Productos", "Productos", "Servicios_Productos")</li>
+                            <li>@Html.ActionLink("Promociones", "ProductosPromo", "Servicios_Productos")</li>
 
                         </ul>
                     </li>
-                     @*@if (User.Identity.IsAuthenticated)
-                     {
-                         if (User.IsInRole("Administrador"))
-                         {*@
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administración <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
 
-                            <li>@Html.ActionLink("Adm. Galería", "Index", "Image")</li>
-                            <li>@Html.ActionLink("Nosotros", "AdminNosotros", "Admin")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
 
-                            <li>@Html.ActionLink("Usuarios", "Index", "AspNetUsers")</li>
+                        if (User.IsInRole("Administrador"))
+                        {
 
 
-                            <li>@Html.ActionLink("Nosotros", "Index", "Empleados")</li>
-                            <li>@Html.ActionLink("ReseñasAdmin", "Index", "ReseñasAdmin")</li>
-                            <li>@Html.ActionLink("Servicios y Productos", "Index", "Servicios_Productos")</li>
-                           
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administración <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
 
-                            <li>@Html.ActionLink("GananciaDiarias1", "Index", "GananciaDiarias1")</li>
+                                    <li>@Html.ActionLink("Adm. Galería", "Index", "Image")</li>
+
+                                    <li>@Html.ActionLink("Usuarios", "Index", "AspNetUsers")</li>
+
+                                    <li>@Html.ActionLink("ReseñasAdmin", "Index", "ReseñasAdmin")</li>
+
+                                    <li>@Html.ActionLink("Servicios y Productos", "Index", "Servicios_Productos")</li>
 
 
-                            <li>@Html.ActionLink("Empleados", "Index", "Empleados")</li>
+                                    <li>@Html.ActionLink("Ganancias", "Index", "GananciaDiarias1")</li>
+
+
+                                    <li>@Html.ActionLink("Empleados", "Index", "Empleados")</li>
+
+                                    <li>@Html.ActionLink("Citas", "Index", "Citas")</li>
 
 
 
-                        </ul>
-                    </li>
-                        @*}
-                     }*@
+                                </ul>
+                            </li>
+
+                        }
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Carrito", "MiCarrito", "Carrito", null, new { @class = "nav-link" })</li>
+
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -106,7 +113,7 @@
                             <a href="#" class="fa fa-instagram"></a>
                         </div>
                         <a class="imgLogo">
-                            <img src="~/images/FAUGET1.png" width="150" height="150" class="d-inline-block align-top" alt="Logo">
+                            <img src="~/imagenes/FAUGET1.png" width="150" height="150" class="d-inline-block align-top" alt="Logo">
                         </a>
                     </div>
                     <div class="col-md-6 contact-form">

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -50,6 +51,7 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id_Resena,Comentario,Calificacion,Id_Usuario")] Reseñas reseñas)
         {
+            
             if (ModelState.IsValid)
             {
                 db.Reseñas.Add(reseñas);

@@ -7,22 +7,23 @@
 <body>
     <header>
         <div class="logo">
-            <img src="~/images/FAUGET1.png" />
+            <img src="~/imagenes/FAUGET1.png" />
         </div>
         <div class="texto">
             <p>Tu destino para la belleza y el bienestar</p>
         </div>
-        <a href="#reserva" class="cta-button">Reserva ahora</a>
+        @Html.ActionLink("Agendar Cita", "CitasNoPromo", "Citas", null, new { @class = "cta-button", id = "reserva" })
+
     </header>
 
     <section class="servicios-info">
         <h2>Nuestros Servicios</h2>
         <!-- Aquí puedes agregar descripciones e imágenes de tus servicios -->
         <div class="gallery">
-            <img src="~/images/chelson-tamares-SyCC0GQi5S4-unsplash.jpg" alt="Servicio 1">
-            <img src="~/images/giorgio-trovato-gb6gtiTZKB8-unsplash.jpg" alt="Servicio 2">
-            <img src="~/images/lindsay-cash-Md_DhaFsnCQ-unsplash.jpg" />
-            <img src="~/images/shari-sirotnak-oM5YoMhTf8E-unsplash.jpg" />
+            <img src="~/imagenes/chelson-tamares-SyCC0GQi5S4-unsplash.jpg" alt="Servicio 1">
+            <img src="~/imagenes/giorgio-trovato-gb6gtiTZKB8-unsplash.jpg" alt="Servicio 2">
+            <img src="~/imagenes/lindsay-cash-Md_DhaFsnCQ-unsplash.jpg" />
+            <img src="~/imagenes/shari-sirotnak-oM5YoMhTf8E-unsplash.jpg" />
             <!-- Agrega más imágenes según sea necesario -->
         </div>
     </section>

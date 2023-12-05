@@ -1,0 +1,97 @@
+﻿@model IEnumerable<WebApplication1.Models.Citas>
+
+@{
+    ViewBag.Title = "TodasLasCitas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br>
+<br>
+<br>
+<p>
+    @Html.ActionLink("Atrás", "Index")
+</p>
+
+<h2>Todas las citas</h2>
+
+<div class="form-group mt-4">
+    <label for="search">Search:</label>
+    <input type="text" id="search" class="form-control" oninput="filterTable()" />
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha_Cita)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hora_Cita)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Empleados.Nombre_Empleado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Servicios_Productos.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Servicios_Productos.Precio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Servicios_Productos.Precio_Promo)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha_Cita)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hora_Cita)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Empleados.Nombre_Empleado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Servicios_Productos.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Servicios_Productos.Precio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Servicios_Productos.Precio_Promo)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = item.Id_Cita }) |
+            @Html.ActionLink("Detalles", "Details", new { id = item.Id_Cita }) |
+            @Html.ActionLink("Cancelar", "Delete", new { id = item.Id_Cita })
+            @Html.ActionLink("Finalizar", "FinalizarCita", new { id = item.Id_Cita })
+        </td>
+    </tr>
+}
+
+</table>
+
+<script>
+    function filterTable() {
+        var searchText = $('#search').val().toLowerCase();
+
+        $('table tr').each(function () {
+            var rowText = $(this).text().toLowerCase();
+            $(this).toggle(rowText.indexOf(searchText) > -1);
+        });
+    }
+</script>

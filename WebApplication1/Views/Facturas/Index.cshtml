@@ -1,0 +1,58 @@
+﻿@model IEnumerable<WebApplication1.Models.Facturas>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Facturas</h2>
+
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Id_Factura)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Total)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Citas.Empleados.Nombre_Empleado)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id_Factura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Citas.Empleados.Nombre_Empleado)
+            </td>
+            <td>
+                @Html.ActionLink("Imprimir", "ImprimirFacturaPDF", new { id = item.Id_Factura, 
+               Nombre_Usuario = item.AspNetUsers.Nombre_Usuario, 
+               Apellido_Usuario = item.AspNetUsers.Apellido_Usuario, })
+            </td>
+        </tr>
+    }
+  
+</table>

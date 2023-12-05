@@ -5,26 +5,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="titEmp">
+<section class="tit">
     <h1>Lista de Empleados</h1>
 </section>
 
 <body>
     <p class="crearBTN">
-        @Html.ActionLink("Crear Nuevo Empleado", "Create")
+        @Html.ActionLink("Crear Nuevo Empleado", "Create") |
+        @Html.ActionLink("Agregar Planilla de Empleados", "Index", "Planillas")
     </p>
-    <table class="formEmp">
+   
+        
+    
+    <table class="form">
         <tr>
-            <th class="atributosEmp">
+            <th class="atributos">
                 @Html.DisplayNameFor(model => model.Nombre_Empleado)
             </th>
-            <th class="atributosEmp">
+            <th class="atributos">
                 @Html.DisplayNameFor(model => model.Apellido_Empleado)
             </th>
-            <th>
+            <th class="atributos">
                 @Html.DisplayNameFor(model => model.Descripcion_Empleado)
             </th>
-            <th class="atributosEmp">
+            <th class="atributos">
                 @Html.DisplayNameFor(model => model.Correo_Empleado)
             </th>
             <th></th>
@@ -33,28 +37,27 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td class="atributosEmp">
+                <td class="atributos">
                     @Html.DisplayFor(modelItem => item.Nombre_Empleado)
                 </td>
-                <td class="atributosEmp">
+                <td class="atributos">
                     @Html.DisplayFor(modelItem => item.Apellido_Empleado)
                 </td>
-                <td class="atributosEmp">
+                <td class="atributos">
                     @Html.DisplayFor(modelItem => item.Descripcion_Empleado)
                 </td>
-                <td class="atributosEmp">
+                <td class="atributos">
                     @Html.DisplayFor(modelItem => item.Correo_Empleado)
                 </td>
-                <td class="linkEmpleados">
-                    @Html.ActionLink("Editar", "Edit", new { id = item.Id_Empleado }) |
-                    @Html.ActionLink("Detalles", "Details", new { id = item.Id_Empleado }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id_Empleado }) |
-                    @Html.ActionLink("Imagen", "EmpleadoImagen", new { id = item.Id_Empleado })
-                    @Html.ActionLink("Planilla", "Planilla", new { id = item.Id_Empleado, nombre = item.Nombre_Empleado, apellido = item.Apellido_Empleado })
-
+                <td class="links">
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id_Empleado }, new { @class = "btn btn-primary btn-sm" }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.Id_Empleado }, new { @class = "btn btn-indo btn-sm" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id_Empleado }, new { @class = "btn btn-danger btn-sm" }) |
+                    @Html.ActionLink("Imagen", "EmpleadoImagen", new { id = item.Id_Empleado }, new { @class = "btn btn-warning btn-sm" })|
+                    @Html.ActionLink("Descargar Planilla", "Planilla", new { id = item.Id_Empleado, nombre = item.Nombre_Empleado, apellido = item.Apellido_Empleado }, new { @class = "btn btn-success btn-sm" })|
+                    
                 </td>
             </tr>
         }
-
     </table>
 </body>

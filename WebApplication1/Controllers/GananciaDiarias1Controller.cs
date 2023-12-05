@@ -10,6 +10,7 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class GananciaDiarias1Controller : Controller
     {
         private BD_MARYSTYLISEntities db = new BD_MARYSTYLISEntities();

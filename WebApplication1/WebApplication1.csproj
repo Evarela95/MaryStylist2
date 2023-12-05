@@ -178,11 +178,15 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AspNetUsersController.cs" />
+    <Compile Include="Controllers\CarritoController.cs" />
+    <Compile Include="Controllers\CitasController.cs" />
     <Compile Include="Controllers\EmpleadosController.cs" />
+    <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\GananciaDiarias1Controller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PlanillasController.cs" />
     <Compile Include="Controllers\ReseñasAdminController.cs" />
     <Compile Include="Controllers\ReseñasController.cs" />
     <Compile Include="Controllers\Servicios_ProductosController.cs" />
@@ -200,6 +204,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUsers.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Carrito.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Categorias.cs">
@@ -226,6 +233,8 @@
     <Compile Include="Models\GananciaDiaria.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GenerarFacturaPDF.cs" />
+    <Compile Include="Models\GenerateFacturasProductosPDF.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ImagenesEmpleados.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -272,17 +281,18 @@
     <Content Include="Content\Index.css" />
     <Content Include="Content\Login.css" />
     <Content Include="Content\Nosotros.css" />
-    <Content Include="Content\Promociones.css" />
+    <Content Include="Content\Generales.css" />
+    <Content Include="Content\Reseñas.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="images\chelson-tamares-SyCC0GQi5S4-unsplash.jpg" />
-    <Content Include="images\FAUGET1.png" />
-    <Content Include="images\giorgio-trovato-gb6gtiTZKB8-unsplash.jpg" />
-    <Content Include="images\greg-trowman-jsuWg7IXx1k-unsplash.jpg" />
-    <Content Include="images\lindsay-cash-Md_DhaFsnCQ-unsplash.jpg" />
-    <Content Include="images\shari-sirotnak-oM5YoMhTf8E-unsplash.jpg" />
+    <Content Include="imagenes\chelson-tamares-SyCC0GQi5S4-unsplash.jpg" />
+    <Content Include="imagenes\FAUGET1.png" />
+    <Content Include="imagenes\giorgio-trovato-gb6gtiTZKB8-unsplash.jpg" />
+    <Content Include="imagenes\greg-trowman-jsuWg7IXx1k-unsplash.jpg" />
+    <Content Include="imagenes\lindsay-cash-Md_DhaFsnCQ-unsplash.jpg" />
+    <Content Include="imagenes\shari-sirotnak-oM5YoMhTf8E-unsplash.jpg" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -348,12 +358,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Image\Index.cshtml" />
     <Content Include="Views\Image\Galeria.cshtml" />
-    <Content Include="Views\AspNetUsers\Create.cshtml" />
-    <Content Include="Views\AspNetUsers\Delete.cshtml" />
-    <Content Include="Views\AspNetUsers\Details.cshtml" />
-    <Content Include="Views\AspNetUsers\Edit.cshtml" />
-    <Content Include="Views\AspNetUsers\Index.cshtml" />
-    <Content Include="Views\Empleados\Create.cshtml" />
     <Content Include="Views\Empleados\Delete.cshtml" />
     <Content Include="Views\Empleados\Details.cshtml" />
     <Content Include="Views\Empleados\Edit.cshtml" />
@@ -378,11 +382,6 @@
     <Content Include="Views\GananciaDiarias1\Index.cshtml" />
     <Content Include="Views\Empleados\Planilla.cshtml" />
     <Content Include="Views\Home\Contacto.cshtml" />
-    <Content Include="Views\AspNetUsers\Create.cshtml" />
-    <Content Include="Views\AspNetUsers\Delete.cshtml" />
-    <Content Include="Views\AspNetUsers\Details.cshtml" />
-    <Content Include="Views\AspNetUsers\Edit.cshtml" />
-    <Content Include="Views\AspNetUsers\Index.cshtml" />
     <Content Include="Views\Servicios_Productos\Create.cshtml" />
     <Content Include="Views\Servicios_Productos\Delete.cshtml" />
     <Content Include="Views\Servicios_Productos\Details.cshtml" />
@@ -392,10 +391,37 @@
     <Content Include="Views\Servicios_Productos\Productos.cshtml" />
     <Content Include="Views\Servicios_Productos\ServiciosPromo.cshtml" />
     <Content Include="Views\Servicios_Productos\ProductosPromo.cshtml" />
+    <Content Include="Views\Citas\Delete.cshtml" />
+    <Content Include="Views\Citas\Details.cshtml" />
+    <Content Include="Views\Citas\Edit.cshtml" />
+    <Content Include="Views\Citas\Index.cshtml" />
+    <Content Include="Views\Citas\CitasFinalizadas.cshtml" />
+    <Content Include="Views\Citas\CitaExitosa.cshtml" />
+    <Content Include="Views\Citas\MisCitas.cshtml" />
+    <Content Include="Views\Citas\TodasLasCitas.cshtml" />
+    <Content Include="Views\Citas\CitasNoPromo.cshtml" />
+    <Content Include="Views\Citas\CitasPromo.cshtml" />
+    <Content Include="Views\Facturas\Index.cshtml" />
+    <Content Include="Views\Facturas\MisFacturas.cshtml" />
+    <Content Include="Views\Facturas\ImprimirFacturaPDF.cshtml" />
+    <Content Include="Views\AspNetUsers\Delete.cshtml" />
+    <Content Include="Views\AspNetUsers\Details.cshtml" />
+    <Content Include="Views\AspNetUsers\Edit.cshtml" />
+    <Content Include="Views\AspNetUsers\Index.cshtml" />
+    <Content Include="Views\Empleados\Create.cshtml" />
+    <Content Include="Views\Carrito\MiCarrito.cshtml" />
+    <Content Include="Views\Carrito\PagoExitoso.cshtml" />
+    <Content Include="Views\Facturas\ImprimirFacturaProductosPDF.cshtml" />
+    <Content Include="Views\Planillas\Create.cshtml" />
+    <Content Include="Views\Planillas\Delete.cshtml" />
+    <Content Include="Views\Planillas\Details.cshtml" />
+    <Content Include="Views\Planillas\Edit.cshtml" />
+    <Content Include="Views\Planillas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Planilla\" />
+    <Folder Include="Facturas\" />
+    <Folder Include="images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

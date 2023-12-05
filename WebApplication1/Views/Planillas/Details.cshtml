@@ -1,0 +1,51 @@
+﻿@model WebApplication1.Models.Planilla
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Planilla</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha_Ingreso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha_Ingreso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Salario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Salario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Especializacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Especializacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Empleados.Nombre_Empleado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empleados.Nombre_Empleado)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Planilla }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
