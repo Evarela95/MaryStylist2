@@ -1,0 +1,56 @@
+﻿/* index.css */
+
+/* Aplica un margen alrededor de la tabla */
+.table {
+    margin: 20px;
+}
+
+    /* Estilo para las filas de la tabla */
+    .table tr {
+        background-color: #f9f9f9; /* Fondo gris claro */
+    }
+
+    /* Estilo para las celdas de la tabla */
+    .table td, .table th {
+        padding: 10px;
+        border: 1px solid #ddd; /* Borde delgado gris */
+    }
+
+    /* Estilo para los enlaces de acción (Editar, Detalles, Cancelar, Finalizar) */
+    .table a {
+        color: #007bff; /* Color azul */
+        margin-right: 10px;
+    }
+
+        /* Aplica un fondo gris oscuro para los enlaces de acción cuando se pasa el ratón sobre ellos */
+        .table a:hover {
+            background-color: #ddd; /* Fondo gris claro al pasar el ratón */
+        }
+
+    /* Estilo para el encabezado de la tabla */
+    .table th {
+        background-color: #343a40; /* Fondo gris oscuro para el encabezado */
+        color: #fff; /* Texto blanco */
+    }
+
+/* Estilo para el título principal */
+h2 {
+    color: #343a40; /* Color gris oscuro */
+}
+
+/* Estilo para el párrafo con los enlaces de filtrado */
+p {
+    margin-bottom: 20px;
+}
+
+/* Estilo para el contenedor principal */
+body {
+    background-color: #f4f4f4; /* Fondo gris claro */
+}
+
+    body > div {
+        margin: 20px;
+        max-width: 1200px; /* Ajusta el ancho máximo según tus preferencias */
+        margin-left: auto;
+        margin-right: auto;
+    }

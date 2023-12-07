@@ -1,18 +1,14 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
-using System.Web;
 
 namespace WebApplication1.Models
 {
     public class GenerateFacturasProductosPDF
     {
-
         public static void GenerarFacturaProductosPDF(int id)
         {
             string connectionString = "Server=localhost\\sqlexpress;Database=BD_MARYSTYLIS;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True;";
@@ -38,77 +34,73 @@ namespace WebApplication1.Models
                 // Agregar detalles del salón
                 AddDetails(doc);
 
-                
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
 
-                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        connection.Open();
+                        command.Parameters.AddWithValue("@Id_Factura", id);
 
-                        using (SqlCommand command = new SqlCommand(query, connection))
+                        using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
                         {
-                            command.Parameters.AddWithValue("@Id_Factura", id);
+                            DataTable dataTable = new DataTable();
+                            dataAdapter.Fill(dataTable);
 
-                            using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
+                            if (dataTable.Rows.Count > 0)
                             {
-                                DataTable dataTable = new DataTable();
-                                dataAdapter.Fill(dataTable);
+                                PdfPTable detailsTable = new PdfPTable(2); // 2 columnas para nombre de columna y valor
+                                detailsTable.WidthPercentage = 100;
+                                detailsTable.SpacingBefore = 10;
 
-                                if (dataTable.Rows.Count > 0)
+                                foreach (DataColumn column in dataTable.Columns)
                                 {
-                                    PdfPTable detailsTable = new PdfPTable(dataTable.Columns.Count);
-                                    detailsTable.WidthPercentage = 100;
-                                    detailsTable.SpacingBefore = 10;
+                                    // Agregar nombre de columna en una celda
+                                    PdfPCell cellHeader = new PdfPCell(new Phrase(column.ColumnName, FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10, BaseColor.BLACK)));
+                                    cellHeader.BackgroundColor = BaseColor.LIGHT_GRAY;
+                                    cellHeader.HorizontalAlignment = Element.ALIGN_CENTER;
+                                    cellHeader.VerticalAlignment = Element.ALIGN_MIDDLE;
+                                    cellHeader.Padding = 5;
+                                    cellHeader.FixedHeight = 20f;
+                                    cellHeader.NoWrap = true;
+                                    detailsTable.AddCell(cellHeader);
 
-                                    foreach (DataColumn column in dataTable.Columns)
-                                    {
-                                        PdfPCell cellHeader = new PdfPCell();
-                                        cellHeader.BackgroundColor = BaseColor.LIGHT_GRAY;
-                                        cellHeader.HorizontalAlignment = Element.ALIGN_CENTER;
-                                        cellHeader.VerticalAlignment = Element.ALIGN_MIDDLE;
-                                        cellHeader.Padding = 5;
-                                        cellHeader.Phrase = new Phrase(column.ColumnName, FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10, BaseColor.BLACK));
-
-                                        detailsTable.AddCell(cellHeader);
-                                    }
-
+                                    // Agregar valores en celdas adicionales
                                     foreach (DataRow dataRow in dataTable.Rows)
                                     {
-                                        foreach (DataColumn column in dataTable.Columns)
-                                        {
-                                            PdfPCell cellValue = new PdfPCell();
-                                            cellValue.HorizontalAlignment = Element.ALIGN_CENTER;
-                                            cellValue.VerticalAlignment = Element.ALIGN_MIDDLE;
-                                            cellValue.Padding = 5;
-                                            cellValue.Phrase = new Phrase(dataRow[column].ToString(), FontFactory.GetFont(FontFactory.HELVETICA, 10, BaseColor.BLACK));
-
-                                            detailsTable.AddCell(cellValue);
-                                        }
+                                        PdfPCell cellValue = new PdfPCell(new Phrase(dataRow[column].ToString(), FontFactory.GetFont(FontFactory.HELVETICA, 10, BaseColor.BLACK)));
+                                        cellValue.HorizontalAlignment = Element.ALIGN_CENTER;
+                                        cellValue.VerticalAlignment = Element.ALIGN_MIDDLE;
+                                        cellValue.Padding = 5;
+                                        cellValue.FixedHeight = 20f;
+                                        cellValue.NoWrap = true;
+                                        detailsTable.AddCell(cellValue);
                                     }
-
-                                    doc.Add(detailsTable);
                                 }
+
+                                doc.Add(detailsTable);
                             }
                         }
                     }
-                
+                }
 
                 // Agregar footer
                 AddFooter(doc);
 
                 doc.Close();
             }
-
         }
 
         private static void AddHeader(Document doc)
         {
-
             PdfPTable headerTable = new PdfPTable(1);
             headerTable.WidthPercentage = 100;
 
             PdfPCell cell = new PdfPCell(new Phrase("FACTURA ELECTRÓNICA", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16, BaseColor.BLACK)));
             cell.HorizontalAlignment = Element.ALIGN_CENTER;
             cell.Border = Rectangle.NO_BORDER;
+            cell.FixedHeight = 20f;
+            cell.NoWrap = true;
 
             headerTable.AddCell(cell);
 
@@ -142,15 +134,6 @@ namespace WebApplication1.Models
             doc.Add(footer);
         }
 
-        private static void AddCellWithBorders(PdfPTable table, PdfPCell cellHeader, PdfPCell cellValue, string header, string value)
-        {
-            cellHeader.Phrase = new Phrase(header, FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10, BaseColor.BLACK));
-            cellValue.Phrase = new Phrase(value, FontFactory.GetFont(FontFactory.HELVETICA, 10, BaseColor.BLACK));
-
-            table.AddCell(cellHeader);
-            table.AddCell(cellValue);
-        }
-
         private static void AddDetails(Document doc)
         {
             Paragraph title = new Paragraph("Mary Stilist. Barva, Heredia, Costa Rica. (506) 6060 2509", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 15, BaseColor.BLUE));
@@ -161,5 +144,3 @@ namespace WebApplication1.Models
         }
     }
 }
-
-

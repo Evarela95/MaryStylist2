@@ -294,13 +294,27 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\citas\index.css" />
+    <Content Include="Content\citas\todaslascitas.css" />
+    <Content Include="Content\citas\miscitas.css" />
+    <Content Include="Content\citas\edit.css" />
+    <Content Include="Content\citas\details.css" />
+    <Content Include="Content\citas\delete.css" />
     <Content Include="Content\Contacto.css" />
     <Content Include="Content\HeaderFooter.css" />
+    <Content Include="Content\reseñas\delete.css" />
+    <Content Include="Content\reseñas\index.css" />
+    <Content Include="Content\serviciosproductos\ServiciosPromo.css" />
+    <Content Include="Content\serviciosproductos\Servicios.css" />
+    <Content Include="Content\serviciosproductos\productos.css" />
+    <Content Include="Content\serviciosproductos\details.css" />
+    <Content Include="Content\serviciosproductos\productospromo.css" />
+    <Content Include="Content\serviciosproductos\edit.css" />
+    <Content Include="Content\serviciosproductos\serviciosproductos.css" />
     <Content Include="Content\Index.css" />
     <Content Include="Content\Login.css" />
     <Content Include="Content\Nosotros.css" />
     <Content Include="Content\Generales.css" />
-    <Content Include="Content\Reseñas.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -384,12 +398,8 @@
     <Content Include="Views\Empleados\EmpleadoImagen.cshtml" />
     <Content Include="Views\Empleados\DeleteImage.cshtml" />
     <Content Include="Views\ReseñasAdmin\Create.cshtml" />
-    <Content Include="Views\ReseñasAdmin\Delete.cshtml" />
-    <Content Include="Views\ReseñasAdmin\Details.cshtml" />
-    <Content Include="Views\ReseñasAdmin\Edit.cshtml" />
     <Content Include="Views\ReseñasAdmin\Index.cshtml" />
     <Content Include="Views\GananciaDiarias1\Create.cshtml" />
-    <Content Include="Views\GananciaDiarias1\Delete.cshtml" />
     <Content Include="Views\GananciaDiarias1\Details.cshtml" />
     <Content Include="Views\GananciaDiarias1\Edit.cshtml" />
     <Content Include="Views\GananciaDiarias1\Index.cshtml" />
@@ -432,6 +442,7 @@
     <Content Include="Views\Planillas\Index.cshtml" />
     <Content Include="Views\Reseñas\Index.cshtml" />
     <Content Include="Views\Reseñas\Create.cshtml" />
+    <Content Include="Views\ReseñasAdmin\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

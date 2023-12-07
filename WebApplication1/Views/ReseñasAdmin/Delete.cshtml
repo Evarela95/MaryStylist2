@@ -1,47 +1,48 @@
 ﻿@model WebApplication1.Models.Reseñas
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Eliminar";
 }
+
+<head>
+    <link href="~/Content/reseñas/delete.css" rel="stylesheet" />
+    <link href="~/Content/resenas/delete.css" rel="stylesheet" />
+    <!-- Ajusta la ruta según la ubicación de tus archivos CSS -->
+</head>
 
 <h2>Eliminar</h2>
 
-<h3>¿Está seguro de eliminar esta reseña?</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Comentario)
-        </dt>
+<div class="delete-container">
+    <h3>¿Estás seguro de que deseas eliminar esto?</h3>
+    <div>
+        <h4>Reseñas</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Comentario)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Comentario)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Comentario)
-        </dd>
+            <!-- Repite este patrón para otros campos -->
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Calificacion)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.AspNetUsers.Email)
+            </dd>
+        </dl>
 
-        <dd>
-            @Html.DisplayFor(model => model.Calificacion)
-        </dd>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AspNetUsers.Email)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-default" /> |
-            @Html.ActionLink("Atrás", "Index")
-        </div>
-    }
+            <div class="form-actions no-color">
+                <input type="submit" value="Eliminar" class="btn btn-default" /> |
+                @Html.ActionLink("Volver a la lista", "Index", new { @class = "action-link" })
+            </div>
+        }
+    </div>
 </div>

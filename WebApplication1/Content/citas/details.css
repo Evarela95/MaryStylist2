@@ -1,0 +1,39 @@
+﻿/* /Content/resenas/delete.css */
+
+/* Estilo para la sección de eliminación */
+.delete-container {
+    width: 50%;
+    margin: 20px auto;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+    /* Estilo para las etiquetas de la lista horizontal */
+    .delete-container .dl-horizontal dt {
+        text-align: left;
+        width: 120px;
+    }
+
+    /* Estilo para los valores de la lista horizontal */
+    .delete-container .dl-horizontal dd {
+        margin-left: 140px;
+    }
+
+    /* Estilo para el formulario de eliminación */
+    .delete-container form {
+        margin-top: 20px;
+    }
+
+    /* Estilo para los botones del formulario de eliminación */
+    .delete-container .form-actions input[type="submit"],
+    .delete-container .form-actions a {
+        background-color: #555;
+        color: #fff;
+        text-decoration: none;
+        padding: 10px;
+        border-radius: 5px;
+        margin-right: 10px;
+    }

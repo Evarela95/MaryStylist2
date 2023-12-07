@@ -1,51 +1,85 @@
 ﻿@model WebApplication1.Models.Reseñas
 
 @{
-    ViewBag.Title = "Ingrese su Reseña";
+    ViewBag.Title = "Nueva Reseña";
 }
 
-<h2>Create</h2>
+<style>
+    .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+    }
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+    h2, h4 {
+        text-align: center;
+    }
 
-    <div class="form-horizontal">
-        <h4>Reseñas</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Comentario, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Comentario, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Comentario, "", new { @class = "text-danger" })
+    .rating-container {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .rating-star {
+        cursor: pointer;
+    }
+
+        .rating-star.active {
+            color: orange;
+        }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<div class="form-container">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Detalles de la Reseña</h4>
+            <hr />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Comentario, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Comentario, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Comentario, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Calificacion, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    <div class="rating-container">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <span class="rating-star" onclick="setRating(@i)" aria-hidden="true">★</span>
+                        }
+                        @Html.HiddenFor(model => model.Calificacion, new { @id = "Calificacion" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Calificacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-8">
+                    <button type="submit" class="btn btn-primary">Guardar Reseña</button>
+                </div>
             </div>
         </div>
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Calificacion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Calificacion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Calificacion, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Id_Usuario, "Tu correo", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Id_Usuario", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Id_Usuario, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+    <div style="text-align: center; margin-top: 20px;">
+        @Html.ActionLink("Regresar a la Lista", "Index")
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+
+<script>
+    function setRating(value) {
+        $(".rating-star").removeClass("active");
+        $(".rating-star:lt(" + value + ")").addClass("active");
+        $("#Calificacion").val(value);
+    }
+</script>

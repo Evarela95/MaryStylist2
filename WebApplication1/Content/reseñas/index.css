@@ -1,0 +1,32 @@
+﻿/* /Content/resenas/index.css */
+
+/* Estilo para la tabla de reseñas */
+.table {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #333;
+    color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+    /* Estilo para las celdas de encabezado */
+    .table th {
+        text-align: center;
+    }
+
+    /* Estilo para las celdas de datos */
+    .table td {
+        text-align: center;
+    }
+
+    /* Estilo para los enlaces */
+    .table a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+        /* Estilo para los enlaces de acción */
+        .table a.action-link {
+            margin-right: 10px;
+        }

@@ -1,0 +1,35 @@
+﻿/* /Content/serviciosproductos.css */
+
+/* Estilo para el cuerpo de la tabla */
+.table {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #333;
+    color: #fff;
+    border-radius: 8px; /* Agrega bordes redondeados */
+    overflow: hidden; /* Oculta el desbordamiento de las esquinas redondeadas */
+}
+
+    /* Estilo para las celdas de encabezado */
+    .table th {
+        text-align: center;
+        background-color: #555;
+        padding: 10px; /* Añade espacio interno */
+    }
+
+    /* Estilo para las celdas de datos */
+    .table td {
+        text-align: center;
+        padding: 8px; /* Añade espacio interno */
+    }
+
+    /* Estilo para los enlaces */
+    .table a {
+        color: #fff;
+        text-decoration: none; /* Elimina el subrayado de los enlaces */
+    }
+
+    /* Estilo para las filas impares (opcional) */
+    .table tr:nth-child(odd) {
+        background-color: #666;
+    }

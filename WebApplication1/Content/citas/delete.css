@@ -1,0 +1,51 @@
+﻿/* /Content/citas/delete.css */
+
+/* Estilo para el contenedor de eliminación */
+.delete-container {
+    width: 60%;
+    margin: 20px auto;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+    /* Estilo para las etiquetas de la lista horizontal */
+    .delete-container dl {
+        margin-bottom: 20px;
+    }
+
+    .delete-container .dl-horizontal dt {
+        text-align: left;
+        width: 150px;
+        font-weight: bold;
+    }
+
+    /* Estilo para los valores de la lista horizontal */
+    .delete-container .dl-horizontal dd {
+        margin-left: 160px;
+    }
+
+    /* Estilo para el formulario de eliminación */
+    .delete-container form {
+        margin-top: 20px;
+    }
+
+    /* Estilo para los botones del formulario de eliminación */
+    .delete-container .form-actions input[type="submit"],
+    .delete-container .form-actions a {
+        background-color: #555;
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+        .delete-container .form-actions input[type="submit"]:hover,
+        .delete-container .form-actions a:hover {
+            background-color: #333;
+        }

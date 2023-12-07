@@ -4,25 +4,45 @@
     ViewBag.Title = "Reseñas";
 }
 
+<style>
+    .reseña-container {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #c0c0c0;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+        text-align: center;
+        margin-left: 380px;
+    }
+</style>
+
 <div class="container mt-4">
     <h2 class="text-center">Reseñas</h2>
 
-    <p class="text-center">
-        @Html.ActionLink("Añadir una Reseña", "Create", null, new { @class = "btn btn-primary" })
-    </p>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p class="text-center">
+            @Html.ActionLink("Añadir una Reseña", "Create", null, new { @class = "btn btn-primary" })
+        </p>
+    }
 
     <div class="row justify-content-center">
         <div class="col-12 col-lg-8">
             @foreach (var item in Model)
             {
-                <div class="card mb-3" style="background-color: #f8f9fa;">
-                    <div class="card-body">
-                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Comentario)</h5>
-                        <p class="card-text">Calificación: @Html.DisplayFor(modelItem => item.Calificacion)</p>
-                        <p class="card-text">Usuario: @Html.DisplayFor(modelItem => item.AspNetUsers.Email)</p>
-                        <div class="text-center">
-                        </div>
+                <div class="reseña-container">
+                    <h5>@Html.DisplayFor(modelItem => item.Comentario)</h5>
+
+                    <div class="rating-container">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <span class="rating-star" style="color: @(i <= item.Calificacion ? "yellow" : "black")">★</span>
+                        }
                     </div>
+
+                    <p>Usuario: @Html.DisplayFor(modelItem => item.AspNetUsers.Email)</p>
+                    <!-- Agrega más contenido aquí si es necesario -->
                 </div>
             }
         </div>

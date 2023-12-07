@@ -54,6 +54,9 @@ namespace WebApplication1.Controllers
 
             if (ModelState.IsValid)
             {
+                string userId = User.Identity.GetUserId();
+
+                reseñas.Id_Usuario = userId;
                 db.Reseñas.Add(reseñas);
                 db.SaveChanges();
                 return RedirectToAction("Index");
