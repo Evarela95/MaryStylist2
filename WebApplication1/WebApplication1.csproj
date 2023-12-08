@@ -447,6 +447,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Facturas\" />
+    <Folder Include="imagenes\ImagenesProductosServicios\" />
     <Folder Include="images\" />
   </ItemGroup>
   <ItemGroup>

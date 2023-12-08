@@ -12,6 +12,8 @@ namespace WebApplication1.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web;
 
     public partial class Servicios_Productos
     {
@@ -49,6 +51,10 @@ namespace WebApplication1.Models
 
         [Display(Name = "Datos de la Imagen")]
         public byte[] ImageData { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Subir Imagen")]
+        public HttpPostedFileBase ImageFile { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Carrito> Carrito { get; set; }

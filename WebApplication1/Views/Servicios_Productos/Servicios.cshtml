@@ -17,7 +17,7 @@
     @foreach (var item in Model)
     {
     <div class="service-item">
-        <img class="service-image" src="@item.FileName" alt="Service Image">
+        <img src="@Url.Content("~/imagenes/ImagenesProductosServicios/" + item.FileName)" alt="Imagen" width="100" height="100" />
         <div class="service-details">
             <div class="service-name">@item.Nombre</div>
             <div class="service-price">Precio: ₡@item.Precio</div>
