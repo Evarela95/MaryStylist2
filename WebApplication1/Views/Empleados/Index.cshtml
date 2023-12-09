@@ -12,27 +12,25 @@
         <div class="col">
             @Html.ActionLink("Crear Nuevo Empleado", "Create", new { @class = "btn btn-primary" })
         </div>
-        <div class="col text-right">
-            @Html.ActionLink("Agregar Planilla de Empleados", "Index", "Planillas", new { @class = "btn btn-secondary" })
+        <div class="col">
+            @Html.ActionLink("Agregar Planilla de Empleados", "Index", "Planillas")
         </div>
     </div>
-
+    <br />
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
             <tr>
-                <th>@Html.DisplayNameFor(model => model.Nombre_Empleado)</th>
-                <th>@Html.DisplayNameFor(model => model.Apellido_Empleado)</th>
-                <th>@Html.DisplayNameFor(model => model.Descripcion_Empleado)</th>
-                <th>@Html.DisplayNameFor(model => model.Correo_Empleado)</th>
-                <th>Acciones</th>
+                <th class="text-center">Empleado</th>
+                <th class="text-center">Descripción</th>
+                <th class="text-center">Correo</th>
+                <th class="text-center">Acciones</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => item.Nombre_Empleado)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Apellido_Empleado)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Nombre_Empleado) @Html.DisplayFor(modelItem => item.Apellido_Empleado)</td>
                     <td>@Html.DisplayFor(modelItem => item.Descripcion_Empleado)</td>
                     <td>@Html.DisplayFor(modelItem => item.Correo_Empleado)</td>
                     <td>
