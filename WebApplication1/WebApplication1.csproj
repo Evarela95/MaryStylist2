@@ -306,7 +306,7 @@
     <Content Include="Content\reseñas\index.css" />
     <Content Include="Content\serviciosproductos\ServiciosPromo.css" />
     <Content Include="Content\serviciosproductos\Servicios.css" />
-    <Content Include="Content\serviciosproductos\productos.css" />
+    <Content Include="Content\serviciosproductos\catalogoproducoss.css" />
     <Content Include="Content\serviciosproductos\details.css" />
     <Content Include="Content\serviciosproductos\productospromo.css" />
     <Content Include="Content\serviciosproductos\edit.css" />

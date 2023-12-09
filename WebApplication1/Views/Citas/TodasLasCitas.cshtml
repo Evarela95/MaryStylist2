@@ -81,8 +81,8 @@
         <td>
             @Html.ActionLink("Editar", "Edit", new { id = item.Id_Cita }) |
             @Html.ActionLink("Detalles", "Details", new { id = item.Id_Cita }) |
-            @Html.ActionLink("Cancelar", "Delete", new { id = item.Id_Cita })
-            @Html.ActionLink("Finalizar", "FinalizarCita", new { id = item.Id_Cita })
+            @Html.ActionLink("Cancelar", "Delete", new { id = item.Id_Cita }) |
+            @Html.ActionLink("Finalizar", "FinalizarCita", new { id = item.Id_Cita }, new { onclick = "return confirm('¿Estás seguro de finalizar esta cita?');" })
         </td>
     </tr>
 }

@@ -329,24 +329,49 @@ namespace WebApplication1.Controllers
         [Authorize(Roles = "Administrador")]
         public ActionResult FinalizarCita(int id)
         {
-            string connectionString = "Server=localhost\\sqlexpress;Database=BD_MARYSTYLIS;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True;";
-            string storedProcedure = "CitaFinalizada";
+            // Obtener la cita por su ID
+            Citas cita = db.Citas.Find(id);
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            // Verificar si la cita existe
+            if (cita == null)
             {
-                using (SqlCommand cmd = new SqlCommand(storedProcedure, connection))
-                {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@IdCita", id);
-
-                    connection.Open();
-                    cmd.ExecuteNonQuery();
-                }
+                return HttpNotFound();
             }
 
-            // Redireccionar a la acción Index
-            return RedirectToAction("Index");
+            // Verificar si la cita ya está finalizada
+            if (!cita.Estado)
+            {
+                // Si ya está finalizada, redirigir a la acción Index
+                return RedirectToAction("Index");
+            }
+
+            // Marcar la cita como finalizada
+            cita.Estado = false;
+
+            // Guardar los cambios en la base de datos
+            db.SaveChanges();
+
+            // Crear una instancia de GananciaDiaria
+            var gananciaDiaria = new GananciaDiaria
+            {
+                // Puedes asignar valores específicos o calcularlos según tus necesidades
+                Ingresos = cita.Servicios_Productos.Precio_Promo ?? cita.Servicios_Productos.Precio,
+                Fecha = DateTime.Today,
+                Egresos = 0 // Otra lógica de cálculo de egresos, si es necesario
+            };
+
+            // Agregar la instancia de GananciaDiaria a la base de datos
+            db.GananciaDiaria.Add(gananciaDiaria);
+
+            // Guardar los cambios en la base de datos
+            db.SaveChanges();
+
+            // Redirigir a la acción Index de GananciaDiaria
+            return RedirectToAction("Index", "GananciaDiarias1");
         }
+
+
+
     }
 }
 
