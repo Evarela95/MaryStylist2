@@ -1,8 +1,5 @@
-﻿
-@{
-    ViewBag.Title = "PagoExitoso";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@{ ViewBag.Title = "PaginaPago";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
 <br>
 <br>
 <br>
@@ -29,11 +26,11 @@
 </style>
 
 <div style="text-align: center;">
-    <h2>PAGO EXITOSO</h2>
+    <h2>ATENCIÓN</h2>
+
+    <p>Proceda a pagar el monto presencialmente en el salón para poder retirar sus productos.</p>
 
     <div class="button-container">
-       
         @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "btn btn-default" })
     </div>
 </div>
-

@@ -5,59 +5,47 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="tit">
-    <h1>Lista de Empleados</h1>
-</section>
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Lista de Empleados</h2>
 
-<body>
-    <p class="crearBTN">
-        @Html.ActionLink("Crear Nuevo Empleado", "Create") |
-        @Html.ActionLink("Agregar Planilla de Empleados", "Index", "Planillas")
-    </p>
-   
-        
-    
-    <table class="form">
-        <tr>
-            <th class="atributos">
-                @Html.DisplayNameFor(model => model.Nombre_Empleado)
-            </th>
-            <th class="atributos">
-                @Html.DisplayNameFor(model => model.Apellido_Empleado)
-            </th>
-            <th class="atributos">
-                @Html.DisplayNameFor(model => model.Descripcion_Empleado)
-            </th>
-            <th class="atributos">
-                @Html.DisplayNameFor(model => model.Correo_Empleado)
-            </th>
-            <th></th>
-        </tr>
+    <div class="row mb-3">
+        <div class="col">
+            @Html.ActionLink("Crear Nuevo Empleado", "Create", new { @class = "btn btn-primary" })
+        </div>
+        <div class="col text-right">
+            @Html.ActionLink("Agregar Planilla de Empleados", "Index", "Planillas", new { @class = "btn btn-secondary" })
+        </div>
+    </div>
 
-        @foreach (var item in Model)
-        {
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
             <tr>
-                <td class="atributos">
-                    @Html.DisplayFor(modelItem => item.Nombre_Empleado)
-                </td>
-                <td class="atributos">
-                    @Html.DisplayFor(modelItem => item.Apellido_Empleado)
-                </td>
-                <td class="atributos">
-                    @Html.DisplayFor(modelItem => item.Descripcion_Empleado)
-                </td>
-                <td class="atributos">
-                    @Html.DisplayFor(modelItem => item.Correo_Empleado)
-                </td>
-                <td class="links">
-                    @Html.ActionLink("Editar", "Edit", new { id = item.Id_Empleado }, new { @class = "btn btn-primary btn-sm" }) |
-                    @Html.ActionLink("Detalles", "Details", new { id = item.Id_Empleado }, new { @class = "btn btn-indo btn-sm" }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id_Empleado }, new { @class = "btn btn-danger btn-sm" }) |
-                    @Html.ActionLink("Imagen", "EmpleadoImagen", new { id = item.Id_Empleado }, new { @class = "btn btn-warning btn-sm" })|
-                    @Html.ActionLink("Descargar Planilla", "Planilla", new { id = item.Id_Empleado, nombre = item.Nombre_Empleado, apellido = item.Apellido_Empleado }, new { @class = "btn btn-success btn-sm" })|
-                    
-                </td>
+                <th>@Html.DisplayNameFor(model => model.Nombre_Empleado)</th>
+                <th>@Html.DisplayNameFor(model => model.Apellido_Empleado)</th>
+                <th>@Html.DisplayNameFor(model => model.Descripcion_Empleado)</th>
+                <th>@Html.DisplayNameFor(model => model.Correo_Empleado)</th>
+                <th>Acciones</th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Nombre_Empleado)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Apellido_Empleado)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Descripcion_Empleado)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Correo_Empleado)</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            @Html.ActionLink("Editar", "Edit", new { id = item.Id_Empleado }, new { @class = "btn btn-warning btn-sm" })
+                            @Html.ActionLink("Detalles", "Details", new { id = item.Id_Empleado }, new { @class = "btn btn-info btn-sm" })
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.Id_Empleado }, new { @class = "btn btn-danger btn-sm" })
+                            @Html.ActionLink("Imagen", "EmpleadoImagen", new { id = item.Id_Empleado }, new { @class = "btn btn-warning btn-sm" })
+                            @Html.ActionLink("Descargar Planilla", "Planilla", new { id = item.Id_Empleado, nombre = item.Nombre_Empleado, apellido = item.Apellido_Empleado }, new { @class = "btn btn-success btn-sm" })
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
-</body>
+</div>

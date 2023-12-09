@@ -6,44 +6,57 @@
 
 <h2>Mis citas agendadas</h2>
 
+<div class="row col-md-12">
+    <div class="col-md-4 mx-auto">
+        <label for="search">Buscar:</label>
+        <input type="text" id="search" class="form-control" oninput="filterTable()" />
+    </div>
+</div>
+<br />
 @if (Model != null && Model.Rows.Count > 0)
 {
-    <table class="table">
-        <thead>
+    <table class="table table-bordered table-striped mt-4">
+        <thead class="thead-dark">
             <tr>
-
                 <th>Fecha Cita</th>
-
                 <th>Hora Cita</th>
                 <th>Servicio</th>
                 <th>Precio</th>
                 <th>Promoción</th>
                 <th>Descrición</th>
                 <th>Atiende</th>
-             
             </tr>
         </thead>
         <tbody>
             @foreach (System.Data.DataRow row in Model.Rows)
             {
-            <tr>
-
-                <td>@row["Fecha_Cita"]</td>
-
-                <td>@row["Hora_Cita"]</td>
-                <td>@row["Nombre"]</td>
-
-                <td>@row["Precio"]</td>
-                <td>@(string.IsNullOrEmpty(row["Precio_Promo"].ToString()) ? "N/A" : row["Precio_Promo"])</td>
-                <td>@row["Descripcion"]</td>
-                <td>@row["Nombre_Empleado"] @row["Apellido_Empleado"] </td>
-             
-            </tr>
+                <tr>
+                    <td>@row["Fecha_Cita"]</td>
+                    <td>@row["Hora_Cita"]</td>
+                    <td>@row["Nombre"]</td>
+                    <td>@row["Precio"]</td>
+                    <td>@(string.IsNullOrEmpty(row["Precio_Promo"].ToString()) ? "N/A" : row["Precio_Promo"])</td>
+                    <td>@row["Descripcion"]</td>
+                    <td>@row["Nombre_Empleado"] @row["Apellido_Empleado"] </td>
+                </tr>
             }
         </tbody>
     </table>
 }
 else
 {
-    <p>No se encontraron citas para este usuario.</p>
+    <p class="mt-4">No se encontraron citas para este usuario.</p>
+}
+
+@section scripts {
+    <script>
+        function filterTable() {
+            var searchText = $('#search').val().toLowerCase();
+
+            $('table tbody tr').each(function () {
+                var rowText = $(this).text().toLowerCase();
+                $(this).toggle(rowText.indexOf(searchText) > -1);
+            });
+        }
+    </script>
 }

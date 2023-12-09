@@ -1,45 +1,56 @@
 ﻿@using WebApplication1.Models;
 
-@{
-    ViewBag.Title = "ImagenesEmp";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@{ ViewBag.Title = "ImagenesEmp";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 @model Empleados
 
 <head>
     <link href="~/Content/Nosotros.css" rel="stylesheet" />
+    <style>
+        /* Agrega estilos CSS para controlar el tamaño de la imagen */
+        .imagenEmpleado {
+            max-width: 200px; /* Establece el ancho máximo de la imagen */
+            max-height: 150px; /* Establece la altura máxima de la imagen */
+        }
+    </style>
 </head>
 
-<section class="titEmp">
-    <h1>Imágenes del Empleado</h1>
-    <p>Nombre del Empleado: @Model.Nombre_Empleado</p>
-</section>
-
 <body>
-    <p class="crearBTN">
-        @Html.ActionLink("Añadir Imagen", "AddImage", new { id = Model.Id_Empleado }) |
-        @Html.ActionLink("Atrás", "Index")
-    </p>
-    <table class="formEmp">
-        <tr>
-            <th class="atributosEmp">Descripción</th>
-            <th class="atributosEmp">Imagen</th>
-            <th class="atributosEmp">Acción</th>
-        </tr>
-        @foreach (var imagen in Model.ImagenesEmpleados)
-        {
-            <tr>
-                <td>@imagen.FileName</td>
-                <td>
-                    <img src="data:image/png;base64,@Convert.ToBase64String(imagen.ImageData)" />
-                </td>
-                <td class="linkEmpleados">
-                    @Html.ActionLink("Eliminar", "DeleteImage", new { id = imagen.Id })
-                </td>
-            </tr>
-        }
-    </table>
 
+    <section class="titEmp">
+        <h1>Imágenes del Empleado</h1>
+        <p>Nombre del Empleado: @Model.Nombre_Empleado</p>
+    </section>
+
+    <div class="accionesEmp">
+        <p class="crearBTN">
+            @Html.ActionLink("Añadir Imagen", "AddImage", new { id = Model.Id_Empleado }, new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Atrás", "Index", null, new { @class = "btn btn-secondary" })
+        </p>
+    </div>
+
+    <table class="table formEmp">
+        <thead>
+            <tr>
+                <th class="atributosEmp">Descripción</th>
+                <th class="atributosEmp">Imagen</th>
+                <th class="atributosEmp">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var imagen in Model.ImagenesEmpleados)
+            {
+<tr>
+    <td>@imagen.FileName</td>
+    <td>
+        <img src="data:image/png;base64,@Convert.ToBase64String(imagen.ImageData)" alt="Imagen del empleado" class="imagenEmpleado" />
+    </td>
+    <td class="linkEmpleados">
+        @Html.ActionLink("Eliminar", "DeleteImage", new { id = imagen.Id }, new { @class = "btn btn-danger" })
+    </td>
+</tr>            }
+        </tbody>
+    </table>
 
 </body>

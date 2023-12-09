@@ -4,70 +4,44 @@
     ViewBag.Title = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container mt-1">
+    <div class="col-md-12">
+        <h2 class="text-center">Eliminar Cita</h2>
 
-<h2>Eliminar Cita</h2>
+        <div class="row col-md-12">
+            <div class="col-md-12">
+                <h3 class="text-danger">¿Está seguro de eliminar esta cita?</h3>
 
-<h3>¿Está seguro de eliminar esta cita?</h3>
-<div>
-    <h4>Citas</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Fecha_Cita)
-        </dt>
+                <dl class="row">
+                    <dt class="col-sm-4">Fecha</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Fecha_Cita)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Fecha_Cita)
-        </dd>
+                    <dt class="col-sm-4">Hora</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Hora_Cita)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Hora_Cita)
-        </dt>
+                    <dt class="col-sm-4">Estado</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Estado)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Hora_Cita)
-        </dd>
+                    <dt class="col-sm-4">Usuario</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.AspNetUsers.Email)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
+                    <dt class="col-sm-4">Empleado</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Empleados.Nombre_Empleado)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
+                    <dt class="col-sm-4">Servicio/Producto</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Servicios_Productos.Nombre)</dd>
+                </dl>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
-        </dt>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
 
-        <dd>
-            @Html.DisplayFor(model => model.AspNetUsers.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Empleados.Nombre_Empleado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Empleados.Nombre_Empleado)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Servicios_Productos.Nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Servicios_Productos.Nombre)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-default" /> |
-            @Html.ActionLink("Atrás", "Index")
+                    <div class="form-group text-center">
+                        <input type="submit" value="Eliminar" class="btn btn-danger" />
+                        <a class="btn btn-secondary" href="@Url.Action("Index")">Atrás</a>
+                    </div>
+                }
+            </div>
         </div>
-    }
+    </div>
 </div>

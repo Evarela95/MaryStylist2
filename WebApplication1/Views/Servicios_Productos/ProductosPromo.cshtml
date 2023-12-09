@@ -5,87 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<style>
-    .service-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        margin-top: 20px;
-    }
-
-    .service-item {
-        width: calc(30% - 10px); /* Ajusta el ancho restando el espacio que quieres entre los elementos */
-        margin-bottom: 20px;
-        text-align: center;
-        margin-right: 10px; /* Espacio entre elementos */
-        border: 1px solid #ccc; /* Borde alrededor de cada servicio */
-        padding: 10px; /* Espacio interno dentro de cada servicio */
-        border-radius: 8px; /* Redondear los bordes */
-        padding-bottom: 20px;
-    }
-
-    .service-image {
-        width: 350px;
-        height: 200px; /* Establece aquí la altura deseada */
-        object-fit: cover; /* Ajusta el tamaño sin deformar la imagen */
-        border-radius: 8px;
-        margin-bottom: 8px;
-    }
-
-    .service-name {
-        font-weight: bold;
-        margin-bottom: 4px;
-        font-size: 15px;
-    }
-
-    .service-price {
-        font-weight: bold;
-        margin-bottom: 8px;
-        font-size: 15px;
-        text-decoration: line-through
-    }
-
-    .service-price-promo {
-        font-weight: bold;
-        margin-bottom: 8px;
-        font-size: 20px;
-    }
-
-    .add-button {
-        padding: 8px 16px;
-        background-color: #B8860b;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        text-decoration: none;
-    }
-
-        .add-button:hover {
-            background-color: #f6cf70;
-            text-decoration: none;
-            color: black;
-        }
-
-    .Titulo {
-        align-content: center;
-    }
-
-
-    .service-price,
-    .service-price-promo {
-        display: inline-block; /* o display: inline; */
-        margin-right: 5px; /* Ajusta el espacio entre el nombre y el precio si es necesario */
-    }
-
-    .Titulo {
-        text-align: center;
-    }
-</style>
-
-<h2 class="Titulo">Servicios en promoción</h2>
+<h2 class="Titulo">Productos en promoción</h2>
 
 <div class="service-container">
     @foreach (var item in Model)
@@ -106,6 +26,7 @@
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Content/ProductosPromo.css" />
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script>

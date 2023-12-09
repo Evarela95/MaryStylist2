@@ -297,7 +297,7 @@
     <Content Include="Content\Contacto.css" />
     <Content Include="Content\HeaderFooter.css" />
     <Content Include="Content\Index.css" />
-    <Content Include="Content\Login.css" />
+    <Content Include="Content\ProductosPromo.css" />
     <Content Include="Content\Nosotros.css" />
     <Content Include="Content\Generales.css" />
     <Content Include="Content\Reseñas.css" />
@@ -423,7 +423,7 @@
     <Content Include="Views\AspNetUsers\Index.cshtml" />
     <Content Include="Views\Empleados\Create.cshtml" />
     <Content Include="Views\Carrito\MiCarrito.cshtml" />
-    <Content Include="Views\Carrito\PagoExitoso.cshtml" />
+    <Content Include="Views\Carrito\PaginaPago.cshtml" />
     <Content Include="Views\Facturas\ImprimirFacturaProductosPDF.cshtml" />
     <Content Include="Views\Planillas\Create.cshtml" />
     <Content Include="Views\Planillas\Delete.cshtml" />
@@ -432,6 +432,7 @@
     <Content Include="Views\Planillas\Index.cshtml" />
     <Content Include="Views\Reseñas\Index.cshtml" />
     <Content Include="Views\Reseñas\Create.cshtml" />
+    <Content Include="Views\Empleados\Nosotros.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

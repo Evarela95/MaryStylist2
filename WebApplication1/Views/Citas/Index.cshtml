@@ -5,79 +5,56 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Citas de hoy</h2>
 
-<p>
-    @Html.ActionLink("Citas Finalizadas", "CitasFinalizadas") |
-    @Html.ActionLink("Todas las citas", "TodasLasCitas")
-</p>
-
-
-<h2>Citas de hoy</h2>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Fecha_Cita)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Hora_Cita)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Estado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Empleados.Nombre_Empleado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Servicios_Productos.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Servicios_Productos.Precio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Servicios_Productos.Precio_Promo)
-        </th>
-        <th></th>
-    </tr>
-
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fecha_Cita)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hora_Cita)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Empleados.Nombre_Empleado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Servicios_Productos.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Servicios_Productos.Precio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Servicios_Productos.Precio_Promo)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.Id_Cita }) |
-                @Html.ActionLink("Detalles", "Details", new { id = item.Id_Cita }) |
-                @Html.ActionLink("Cancelar", "Delete", new { id = item.Id_Cita }) |
-                @Html.ActionLink("Finalizar", "FinalizarCita", new { id = item.Id_Cita })
-            </td>
-        </tr>
-    }
-
-</table>
+    <div class="row mb-3">
+        <div class="col">
+            @Html.ActionLink("Citas Finalizadas", "CitasFinalizadas", new { @class = "btn btn-secondary" })
+        </div>
+        <div class="col">
+            @Html.ActionLink("Todas las citas", "TodasLasCitas", new { @class = "btn btn-secondary" })
+        </div>
+        <div class="col justify-content-end">
+            @Html.ActionLink("Crear nueva cita", "Create", new { @class = "btn btn-primary" })
+        </div>
+    </div>
+    <br />
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th style="text-align: center;">@Html.DisplayNameFor(model => model.Fecha_Cita)</th>
+                <th style="text-align: center;">@Html.DisplayNameFor(model => model.Hora_Cita)</th>
+                <th style="text-align: center;">@Html.DisplayNameFor(model => model.Estado)</th>
+                <th style="text-align: center;">@Html.DisplayNameFor(model => model.AspNetUsers.Email)</th>
+                <th style="text-align: center;">@Html.DisplayNameFor(model => model.Empleados.Nombre_Empleado)</th>
+                <th style="text-align: center;">@Html.DisplayNameFor(model => model.Servicios_Productos.Nombre)</th>
+                <th style="text-align: center;">@Html.DisplayNameFor(model => model.Servicios_Productos.Precio)</th>
+                <th style="text-align: center;">@Html.DisplayNameFor(model => model.Servicios_Productos.Precio_Promo)</th>
+                <th style="text-align: center;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="text-align: center;">@Html.DisplayFor(modelItem => item.Fecha_Cita)</td>
+                    <td style="text-align: center;">@Html.DisplayFor(modelItem => item.Hora_Cita)</td>
+                    <td style="text-align: center;">@Html.DisplayFor(modelItem => item.Estado)</td>
+                    <td style="text-align: center;">@Html.DisplayFor(modelItem => item.AspNetUsers.Email)</td>
+                    <td style="text-align: center;">@Html.DisplayFor(modelItem => item.Empleados.Nombre_Empleado)</td>
+                    <td style="text-align: center;">@Html.DisplayFor(modelItem => item.Servicios_Productos.Nombre)</td>
+                    <td style="text-align: center;">@Html.DisplayFor(modelItem => item.Servicios_Productos.Precio)</td>
+                    <td style="text-align: center;">@Html.DisplayFor(modelItem => item.Servicios_Productos.Precio_Promo)</td>
+                    <td style="text-align: center;">
+                        <div class="btn-group" role="group">
+                            @Html.ActionLink("Editar", "Edit", new { id = item.Id_Cita }, new { @class = "btn btn-warning btn-sm" })
+                            @Html.ActionLink("Cancelar", "Delete", new { id = item.Id_Cita }, new { @class = "btn btn-danger btn-sm" })
+                            @Html.ActionLink("Finalizar", "FinalizarCita", new { id = item.Id_Cita }, new { @class = "btn btn-success btn-sm" })
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

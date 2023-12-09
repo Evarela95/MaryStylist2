@@ -56,7 +56,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Iniciar sesión" class="btn btn-default" />
+                        <input type="submit" value="Iniciar sesión" class="btn btn-default" onclick="redirectToHome()" />
                         <br />
                         <br />
                         <p>
@@ -75,6 +75,17 @@
             </section>
         </div>*@
 </div>
+
+
+<script>
+    function redirectToHome() {
+        // Genera la URL para la acción 'Index' en el controlador 'Home'
+        var url = '@Url.Action("Index", "Home")';
+
+        // Redirige a la URL generada
+        window.location.href = url;
+    }
+</script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

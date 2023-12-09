@@ -5,20 +5,31 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Añadir Imagen</h2>
+<div class="container">
+    <div class="card p-4">
+        <h2 class="mb-4 text-center">Añadir Imagen</h2>
 
-@using (Html.BeginForm("AddImage", "Empleados", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.HiddenFor(model => model.Id_Empleado)
+        @using (Html.BeginForm("AddImage", "Empleados", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(model => model.Id_Empleado)
 
-    <div>
-        @Html.LabelFor(model => model.FileName)
-        @Html.TextBoxFor(model => model.FileName)
+            <div class="form-group row justify-content-center">
+                <div class="col-sm-6">
+                    @Html.LabelFor(model => model.FileName, "Nombre del archivo", new { @class = "col-form-label" })
+                    @Html.TextBoxFor(model => model.FileName, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <div class="col-sm-6 text-center">
+                    <label class="col-form-label">Seleccionar Imagen</label>
+                    <input type="file" name="file" class="form-control-file" />
+                </div>
+            </div>
+
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary">Añadir Imagen</button>
+            </div>
+        }
     </div>
-    <div>
-        <input type="file" name="file" />
-    </div>
-    <input type="submit" value="Add Image" />
-}
-
-
+</div>
