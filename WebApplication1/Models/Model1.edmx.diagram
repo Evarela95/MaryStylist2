@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="079c924219b04c62975d5aefbab3312a" Name="Diagram1">
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.AspNetUsers" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.Carrito" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.Categorias" Width="1.5" PointX="3.75" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.Citas" Width="1.5" PointX="8.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.Detalle_Factura_Productos" Width="1.5" PointX="12.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.Detalle_Ganancias_Facturas" Width="1.5" PointX="12.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.Empleados" Width="1.5" PointX="6" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.Facturas" Width="1.5" PointX="10.5" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.GananciaDiaria" Width="1.5" PointX="10.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.ImagenesEmpleados" Width="1.5" PointX="8.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.Planilla" Width="1.5" PointX="8.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.Reseñas" Width="1.5" PointX="5.25" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_MARYSTYLISModel.Servicios_Productos" Width="1.5" PointX="6" PointY="22.375" IsExpanded="true" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK_Carrito_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK_Citas_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK_Facturas_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK_Reseñas_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK_Carrito_Servicios_Productos" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK_Servicios_Productos_Categorias" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK_Citas_Empleados" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK_Citas_Servicios_Productos" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK_Facturas_Citas" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK_Detalle_Factura_Productos_Facturas" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK_Detalle_Factura_Productos_Servicios_Productos" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK_Detalle_Ganancias_Facturas_Facturas" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK_Detalle_Ganancias_Facturas_GananciaDiaria" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK_ImagenesEmpleados_Empleados_Id_Empleado" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.FK_Planilla_Empleados" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_MARYSTYLISModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
