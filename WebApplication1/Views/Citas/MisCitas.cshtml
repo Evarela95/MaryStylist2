@@ -9,22 +9,21 @@
 <div class="row col-md-12">
     <div class="col-md-4 mx-auto">
         <label for="search">Buscar:</label>
-        <input type="text" id="search" class="form-control" oninput="filterTable()" />
+        <input type="date" id="search" class="form-control" oninput="filterTable()" />
     </div>
 </div>
-<br />
 @if (Model != null && Model.Rows.Count > 0)
 {
     <table class="table table-bordered table-striped mt-4">
         <thead class="thead-dark">
             <tr>
-                <th>Fecha Cita</th>
-                <th>Hora Cita</th>
-                <th>Servicio</th>
-                <th>Precio</th>
-                <th>Promoción</th>
-                <th>Descrición</th>
-                <th>Atiende</th>
+                <th class="text-center">Fecha Cita</th>
+                <th class="text-center">Hora Cita</th>
+                <th class="text-center">Servicio</th>
+                <th class="text-center">Precio</th>
+                <th class="text-center">Promoción</th>
+                <th class="text-center">Descrición</th>
+                <th class="text-center">Atiende</th>
             </tr>
         </thead>
         <tbody>
