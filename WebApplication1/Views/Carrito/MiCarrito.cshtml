@@ -91,7 +91,7 @@
         <thead>
             <tr>
                 <th hidden>ID</th>
-                <th>Producto</th>
+                <th>Nombre</th>
                 <th>Precio</th>
                 <th>Cantidad</th>
                 <th>Total</th>
@@ -124,12 +124,13 @@
             }
         </tbody>
     </table>
-
+    <br />
     <!-- Muestra el TotalAPagar debajo de la tabla -->
     <div>
         <strong>Total a Pagar:</strong> <span id="totalAPagar">@Model.Rows[0]["TotalAPagar"]</span>
 
     </div>
+    <br />
     if (Model.Rows.Count >= 1)
     {
         <!-- Mostrar el botón de pago solo si hay más de un producto -->
@@ -189,7 +190,7 @@ $(document).ready(function() {
                 success: function(response) {
                     toastr.success('Exitoso.');
                     setTimeout(function () {
-                        window.location.href = '/Carrito/PagoExitoso';
+                        window.location.href = '/Carrito/PaginaPago';
                     }, 2000);
                 },
                 error: function(xhr, status, error) {
@@ -307,12 +308,6 @@ $(document).on('click', '.delete-button', function (event) {
         }
     });
 });
-
-
-
-
-
-
 
 });
 </script>

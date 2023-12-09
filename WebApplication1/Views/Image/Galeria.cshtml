@@ -4,6 +4,18 @@
     ViewBag.Title = "Image Carousel";
 }
 
+<style>
+    #carousel-container {
+        max-width: 600px;
+        margin: 20px auto 0; /* Agrega un margen de 20px arriba, 0 en los lados y automático en la parte inferior */
+    }
+
+    #imageCarousel img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+    }
+</style>
 
 <div id="carousel-container">
     <div id="imageCarousel" class="carousel slide" data-ride="carousel">
@@ -25,8 +37,6 @@
 </div>
 
 @section scripts {
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#imageCarousel').carousel();
