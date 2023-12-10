@@ -1,56 +1,76 @@
-﻿/* index.css */
-
-/* Aplica un margen alrededor de la tabla */
-.table {
-    margin: 20px;
+﻿﻿.service-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
 }
 
-    /* Estilo para las filas de la tabla */
-    .table tr {
-        background-color: #f9f9f9; /* Fondo gris claro */
-    }
-
-    /* Estilo para las celdas de la tabla */
-    .table td, .table th {
-        padding: 10px;
-        border: 1px solid #ddd; /* Borde delgado gris */
-    }
-
-    /* Estilo para los enlaces de acción (Editar, Detalles, Cancelar, Finalizar) */
-    .table a {
-        color: #007bff; /* Color azul */
-        margin-right: 10px;
-    }
-
-        /* Aplica un fondo gris oscuro para los enlaces de acción cuando se pasa el ratón sobre ellos */
-        .table a:hover {
-            background-color: #ddd; /* Fondo gris claro al pasar el ratón */
-        }
-
-    /* Estilo para el encabezado de la tabla */
-    .table th {
-        background-color: #343a40; /* Fondo gris oscuro para el encabezado */
-        color: #fff; /* Texto blanco */
-    }
-
-/* Estilo para el título principal */
-h2 {
-    color: #343a40; /* Color gris oscuro */
-}
-
-/* Estilo para el párrafo con los enlaces de filtrado */
-p {
+.service-item {
+    width: calc(30% - 10px); /* Ajusta el ancho restando el espacio que quieres entre los elementos */
     margin-bottom: 20px;
+    text-align: center;
+    margin-right: 10px; /* Espacio entre elementos */
+    border: 1px solid #ccc; /* Borde alrededor de cada servicio */
+    padding: 10px; /* Espacio interno dentro de cada servicio */
+    border-radius: 8px; /* Redondear los bordes */
+    padding-bottom: 20px;
 }
 
-/* Estilo para el contenedor principal */
-body {
-    background-color: #f4f4f4; /* Fondo gris claro */
+.service-image {
+    width: 350px;
+    height: 200px; /* Establece aquí la altura deseada */
+    object-fit: cover; /* Ajusta el tamaño sin deformar la imagen */
+    border-radius: 8px;
+    margin-bottom: 8px;
 }
 
-    body > div {
-        margin: 20px;
-        max-width: 1200px; /* Ajusta el ancho máximo según tus preferencias */
-        margin-left: auto;
-        margin-right: auto;
+.service-name {
+    font-weight: bold;
+    margin-bottom: 4px;
+    font-size: 15px;
+}
+
+.service-price {
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 15px;
+    text-decoration: line-through
+}
+
+.service-price-promo {
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 20px;
+}
+
+.add-button {
+    padding: 8px 16px;
+    background-color: #B8860b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+    .add-button:hover {
+        background-color: #f6cf70;
+        text-decoration: none;
+        color: black;
     }
+
+.Titulo {
+    align-content: center;
+}
+
+
+.service-price,
+.service-price-promo {
+    display: inline-block; /* o display: inline; */
+    margin-right: 5px; /* Ajusta el espacio entre el nombre y el precio si es necesario */
+}
+
+.Titulo {
+    text-align: center;
+}

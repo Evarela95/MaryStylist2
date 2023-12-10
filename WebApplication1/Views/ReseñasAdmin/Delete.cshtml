@@ -4,45 +4,40 @@
     ViewBag.Title = "Eliminar";
 }
 
-<head>
-    <link href="~/Content/reseñas/delete.css" rel="stylesheet" />
-    <link href="~/Content/resenas/delete.css" rel="stylesheet" />
-    <!-- Ajusta la ruta según la ubicación de tus archivos CSS -->
-</head>
 
-<h2>Eliminar</h2>
 
-<div class="delete-container">
-    <h3>¿Estás seguro de que deseas eliminar esto?</h3>
-    <div>
-        <h4>Reseñas</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Comentario)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Comentario)
-            </dd>
+<div class="container mt-4">
+    <h2 class="text-center">Eliminar</h2>
 
-            <!-- Repite este patrón para otros campos -->
+    <div class="delete-container">
+        <h3>¿Estás seguro de que deseas eliminar esto?</h3>
+        <div>
+            <h4>Reseñas</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-3">Comentario</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Comentario)</dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.AspNetUsers.Email)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.AspNetUsers.Email)
-            </dd>
-        </dl>
+                <!-- Repite este patrón para otros campos -->
 
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
+                <dt class="col-sm-3">Usuario</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.AspNetUsers.Email)</dd>
+            </dl>
 
-            <div class="form-actions no-color">
-                <input type="submit" value="Eliminar" class="btn btn-default" /> |
-                @Html.ActionLink("Volver a la lista", "Index", new { @class = "action-link" })
-            </div>
-        }
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color text-center mt-4">
+                    <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+                    @Html.ActionLink("Volver a la lista", "Index", new { @class = "btn btn-secondary" })
+                </div>
+            }
+        </div>
     </div>
 </div>
+
+<!-- Agregamos Bootstrap para el script y JQuery -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
