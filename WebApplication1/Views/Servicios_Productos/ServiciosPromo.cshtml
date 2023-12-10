@@ -16,16 +16,18 @@
 <div class="service-container">
     @foreach (var item in Model)
     {
-    <div class="service-item">
-        <img class="service-image" src="@item.FileName" alt="Service Image">
-        <div class="service-details">
-            <div class="service-name">@item.Nombre</div>
-            <div class="service-price">Precio: ₡@item.Precio</div>
-            <div class="service-price-promo"> Promo: ₡@item.Precio_Promo</div>
+        <div class="service-item">
+            <img src="@Url.Content("~/imagenes/ImagenesProductosServicios/" + item.FileName)" alt="Imagen" width="400" height="400" />
+            <div class="service-details">
+                <div class="service-name">@item.Nombre</div>
+                <div class="service-price">Precio: ₡@item.Precio</div>
+                <div class="service-price-promo"> Promo: ₡@item.Precio_Promo</div>
+            </div>
+            <a href="@Url.Action("CitasNoPromo", "Citas", new { id = item.Id })" class="add-button">Agendar cita</a>
+
         </div>
 
-        <a href="@Url.Action("CitasPromo", "Citas", new { id = item.Id })" class="add-button">Agendar cita</a>
 
-    </div>
+
     }
 </div>

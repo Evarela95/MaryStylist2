@@ -19,18 +19,17 @@
     @foreach (var item in Model)
     {
         <div class="service-item">
-            <img class="service-image" src="@item.FileName" alt="Service Image">
+            <img src="@Url.Content("~/imagenes/ImagenesProductosServicios/" + item.FileName)" alt="Imagen" width="400" height="400" />
             <div class="service-details">
                 <div class="service-name">@item.Nombre</div>
                 <div class="service-price">Precio: ₡@item.Precio</div>
                 <div class="service-price-promo"> Promo: ₡@item.Precio_Promo</div>
-            </div>
 
+            </div>
             <a id="agregarCarrito" data-id="@item.Id" class="add-button">Agregar al carrito</a>
         </div>
     }
 </div>
-
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
