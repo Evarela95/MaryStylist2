@@ -1,62 +1,57 @@
-﻿﻿@model WebApplication1.Models.Citas
+﻿@model WebApplication1.Models.Citas
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<br>
-<br>
+<div class="container mt-4">
+    <h2 class="text-center">Crear nueva cita</h2>
+    <hr />
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Citas</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Fecha_Cita, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label for="Fecha_Cita" class="control-label col-md-2">Fecha Cita:</label>
+            <div class="col-md-4">
                 @Html.EditorFor(model => model.Fecha_Cita, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
                 @Html.ValidationMessageFor(model => model.Fecha_Cita, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Hora_Cita, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <label for="Hora_Cita" class="control-label col-md-2">Hora Cita:</label>
+            <div class="col-md-4">
                 @Html.EditorFor(model => model.Hora_Cita, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
                 @Html.ValidationMessageFor(model => model.Hora_Cita, "", new { @class = "text-danger" })
             </div>
         </div>
 
-
-
         <div class="form-group">
-            @Html.LabelFor(model => model.Id_Empleado, "Id Empleado", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <label for="Id_Empleado" class="control-label col-md-2">Id Empleado:</label>
+            <div class="col-md-4">
                 @Html.DropDownList("Id_Empleado", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Id_Empleado, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Id_Serv_Prod, "Id Servicio/Producto", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <label for="Id_Serv_Prod" class="control-label col-md-2">Id Servicio/Producto:</label>
+            <div class="col-md-4">
                 @Html.DropDownList("Id_Serv_Prod", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Id_Serv_Prod, "", new { @class = "text-danger" })
             </div>
         </div>
-
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Agendar" class="btn btn-default" />
+        <div class="form-group text-center" style="margin-bottom: 20px;">
+            <div class="col-md-offset-2 col-md-8">
+                <input type="submit" value="Agendar" class="btn btn-primary" />
             </div>
         </div>
-    </div>
-}
-
+    }
+</div>

@@ -11,17 +11,23 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    [Authorize(Roles = "Administrador")]
     public class EmpleadosController : Controller
     {
         private BD_MARYSTYLISEntities db = new BD_MARYSTYLISEntities();
 
         // GET: Empleados
+        [Authorize(Roles = "Administrador")]
         public ActionResult Index()
         {
             return View(db.Empleados.ToList());
         }
 
+        public ActionResult Nosotros()
+        {
+            return View(db.Empleados.ToList());
+        }
+
+        [Authorize(Roles = "Administrador")]
         // GET: Empleados/Details/5
         public ActionResult Details(int? id)
         {
@@ -36,13 +42,14 @@ namespace WebApplication1.Controllers
             }
             return View(empleados);
         }
-
+        [Authorize(Roles = "Administrador")]
         // GET: Empleados/Create
         public ActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Roles = "Administrador")]
         // POST: Empleados/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -60,6 +67,7 @@ namespace WebApplication1.Controllers
             return View(empleados);
         }
 
+        [Authorize(Roles = "Administrador")]
         // GET: Empleados/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -75,6 +83,7 @@ namespace WebApplication1.Controllers
             return View(empleados);
         }
 
+        [Authorize(Roles = "Administrador")]
         // POST: Empleados/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -91,6 +100,7 @@ namespace WebApplication1.Controllers
             return View(empleados);
         }
 
+        [Authorize(Roles = "Administrador")]
         // GET: Empleados/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -107,6 +117,7 @@ namespace WebApplication1.Controllers
         }
 
         // POST: Empleados/Delete/5
+        [Authorize(Roles = "Administrador")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -160,7 +171,7 @@ namespace WebApplication1.Controllers
                     image.ImageData = reader.ReadBytes(file.ContentLength);
                 }
 
-                // Establece la relación entre la imagen y el producto
+                // Establece la relación entre la imagen y el empleado
                 image.Empleados = db.Empleados.Find(image.Id_Empleado);
 
                 db.ImagenesEmpleados.Add(image);

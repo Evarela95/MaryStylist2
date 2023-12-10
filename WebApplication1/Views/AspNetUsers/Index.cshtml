@@ -5,49 +5,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Usuarios</h2>
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Usuarios</h2>
 
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-
-
-
-        <th>
-            @Html.DisplayNameFor(model => model.Puntos_Usuario)
-        </th>
-
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
-       
-        <td>
-            @Html.DisplayFor(modelItem => item.Puntos_Usuario)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th style="text-align: center;">@Html.DisplayNameFor(model => model.Email)</th>
+                <th style="text-align: center;">Teléfono</th>
+                <th style="text-align: center;">Puntos</th>
+                <th style="text-align: center;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="text-align: center;">@Html.DisplayFor(modelItem => item.Email)</td>
+                    <td style="text-align: center;">@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                    <td style="text-align: center;">@Html.DisplayFor(modelItem => item.Puntos_Usuario)</td>
+                    <td style="text-align: center;">
+                        @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

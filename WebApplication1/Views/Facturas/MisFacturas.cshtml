@@ -11,21 +11,21 @@
     <h2>Facturas de citas</h2>
     @if (citasPorUsuario != null && citasPorUsuario.Rows.Count > 0)
     {
-        <div class="form-group mt-4">
-            <label for="searchCitas">Search:</label>
-            <input type="text" id="searchCitas" class="form-control" oninput="filterTable('Citas')" />
+        <div class="form-group col-md-6">
+            <label for="searchCitas">Buscar:</label>
+            <input type="date" id="searchCitas" class="form-control" oninput="filterTable('Citas')" />
         </div>
 
         <table class="table table-striped Citas">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Fecha</th>
-                    <th>Servicio</th>
-                    <th>Descripción</th>
-                    <th>Total</th>
-                    <th>Atendió</th>
-                    <th>Acciones</th>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">Fecha</th>
+                    <th class="text-center">Servicio</th>
+                    <th class="text-center">Descripción</th>
+                    <th class="text-center">Total</th>
+                    <th class="text-center">Atendió</th>
+                    <th class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,18 +54,18 @@
     <h2>Facturas de Productos</h2>
     @if (factProductoPorUsuario != null && factProductoPorUsuario.Rows.Count > 0)
     {
-        <div class="form-group mt-4">
-            <label for="searchFactProductos">Search:</label>
-            <input type="text" id="searchFactProductos" class="form-control" oninput="filterTable('FactProductos')" />
+        <div class="form-group col-md-6">
+            <label for="searchFactProductos">Buscar:</label>
+            <input type="date" id="searchFactProductos" class="form-control" oninput="filterTable('FactProductos')" />
         </div>
 
         <table class="table table-striped FactProductos">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Fecha</th>
-                    <th>Total</th>
-                    <th>Acciones</th>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">Fecha</th>
+                    <th class="text-center">Total</th>
+                    <th class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>

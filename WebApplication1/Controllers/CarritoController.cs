@@ -261,7 +261,7 @@ namespace WebApplication1.Controllers
                     try
                     {
                         command.ExecuteNonQuery();
-                        return View("PagoExitoso");
+                        return View("PaginaPago");
                     }
                     catch (SqlException ex)
                     {
@@ -272,7 +272,7 @@ namespace WebApplication1.Controllers
             }
         }
 
-        public ActionResult PagoExitoso( )
+        public ActionResult PaginaPago( )
         {
             
 

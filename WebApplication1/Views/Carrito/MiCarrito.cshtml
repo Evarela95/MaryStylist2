@@ -12,16 +12,16 @@
         border-collapse: collapse;
     }
 
-        .table th,
-        .table td {
-            border: 1px solid #ccc; /* Bordes de celdas */
-            padding: 8px; /* Espaciado interno de celdas */
-            text-align: center; /* Centra el texto en las celdas */
-        }
+    .table th,
+    .table td {
+        border: 1px solid #ccc; /* Bordes de celdas */
+        padding: 8px; /* Espaciado interno de celdas */
+        text-align: center; /* Centra el texto en las celdas */
+    }
 
-        .table th {
-            background-color: #f2f2f2; /* Color de fondo de encabezados */
-        }
+    .table th {
+        background-color: #f2f2f2; /* Color de fondo de encabezados */
+    }
 
     .total {
         margin-top: 20px; /* Margen superior para el total a pagar */
@@ -40,12 +40,11 @@
         margin-right: 15px;
     }
 
-        .down-button:hover {
-            background-color: #f6cf70;
-            text-decoration: none;
-            color: black;
-        }
-
+    .down-button:hover {
+        background-color: #f6cf70;
+        text-decoration: none;
+        color: black;
+    }
 
     .up-button {
         padding: 6px 13px;
@@ -59,12 +58,11 @@
         margin-left: 15px;
     }
 
-        .up-button:hover {
-            background-color: #f6cf70;
-            text-decoration: none;
-            color: black;
-        }
-
+    .up-button:hover {
+        background-color: #f6cf70;
+        text-decoration: none;
+        color: black;
+    }
 
     .add-button {
         padding: 8px 16px;
@@ -77,11 +75,11 @@
         text-decoration: none;
     }
 
-        .add-button:hover {
-            background-color: #f6cf70;
-            text-decoration: none;
-            color: black;
-        }
+    .add-button:hover {
+        background-color: #f6cf70;
+        text-decoration: none;
+        color: black;
+    }
 </style>
 <h2>Productos en el carrito</h2>
 @if (Model != null && Model.Rows.Count > 0)
@@ -91,7 +89,7 @@
         <thead>
             <tr>
                 <th hidden>ID</th>
-                <th>Producto</th>
+                <th>Nombre</th>
                 <th>Precio</th>
                 <th>Cantidad</th>
                 <th>Total</th>
@@ -119,17 +117,16 @@
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </td>
-
                 </tr>
             }
         </tbody>
     </table>
-
+    <br />
     <!-- Muestra el TotalAPagar debajo de la tabla -->
     <div>
         <strong>Total a Pagar:</strong> <span id="totalAPagar">@Model.Rows[0]["TotalAPagar"]</span>
-
     </div>
+    <br />
     if (Model.Rows.Count >= 1)
     {
         <!-- Mostrar el botón de pago solo si hay más de un producto -->
@@ -143,36 +140,118 @@
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script>
-$(document).ready(function() {
-   function actualizarTotalAPagar() {
-        var idUsuario = '@ViewBag.UserId';
-        $.ajax({
-            url: '/Carrito/ObtenerTotalAPagar',
-            type: 'GET',
-            data: { idUsuario: idUsuario },
-            success: function(response) {
-                var totalAPagar = 0;
-                var productos = response; // Supongamos que response es un array de objetos con información de productos
-
-                // Calcular el total tomando en cuenta la cantidad por el precio de cada producto
-                for (var i = 0; i < productos.length; i++) {
-                    var cantidad = productos[i].Cantidad;
-                    var precio = productos[i].Precio;
-
-                    totalAPagar += cantidad * precio;
+    $(document).ready(function () {
+        function actualizarTotalAPagar() {
+            var idUsuario = '@ViewBag.UserId';
+            $.ajax({
+                url: '/Carrito/ObtenerTotalAPagar',
+                type: 'GET',
+                data: { idUsuario: idUsuario },
+                success: function (response) {
+                    var totalAPagar = parseFloat(response);
+                    $('#totalAPagar').text(totalAPagar.toFixed(2)); // Actualiza el total a pagar en el HTML
+                },
+                error: function (xhr, status, error) {
+                    toastr.error('Error al obtener el Total a Pagar.');
                 }
+            });
+        }
 
-                $('#totalAPagar').text(totalAPagar.toFixed(2)); // Mostrar el total a pagar en el HTML
-            },
-            error: function(xhr, status, error) {
-                toastr.error('Error al obtener el Total a Pagar.');
-            }
+        $(document).on('click', '.up-button', function (event) {
+            event.preventDefault();
+            var idProducto = $(this).data("id");
+            var idUsuario = '@ViewBag.UserId';
+            var $cantidadElement = $(this).parent().find('.cantidad');
+            var $totalElement = $(this).closest('tr').find('td:eq(4)');
+
+            $.ajax({
+                url: '/Carrito/AumentarCantidad',
+                type: 'POST',
+                data: {
+                    idProducto: idProducto,
+                    idUsuario: idUsuario
+                },
+                success: function (response) {
+                    toastr.success('Aumentado.');
+                    var cantidadActual = parseInt($cantidadElement.text());
+                    $cantidadElement.text(cantidadActual + 1);
+                    var precio = parseFloat($cantidadElement.closest('tr').find('td:eq(2)').text());
+                    $totalElement.text((cantidadActual + 1) * precio);
+                    actualizarTotalAPagar();
+                },
+                error: function (xhr, status, error) {
+                    toastr.error('Error.');
+                }
+            });
         });
-    }
 
+        $(document).on('click', '.down-button', function (event) {
+            event.preventDefault();
+            var idProducto = $(this).data("id");
+            var idUsuario = '@ViewBag.UserId';
+            var $cantidadElement = $(this).parent().find('.cantidad');
+            var $totalElement = $(this).closest('tr').find('td:eq(4)');
 
+            $.ajax({
+                url: '/Carrito/DisminuirCantidad',
+                type: 'POST',
+                data: {
+                    idProducto: idProducto,
+                    idUsuario: idUsuario
+                },
+                success: function (response) {
+                    toastr.success('Disminuido.');
+                    var cantidadActual = parseInt($cantidadElement.text());
+                    var nuevaCantidad = cantidadActual - 1;
 
-  $(document).ready(function() {
+                    if (nuevaCantidad >= 1) {
+                        $cantidadElement.text(nuevaCantidad);
+                    } else {
+                        $cantidadElement.text(1);
+                        nuevaCantidad = 1;
+                    }
+
+                    var precio = parseFloat($cantidadElement.closest('tr').find('td:eq(2)').text());
+                    $totalElement.text(nuevaCantidad * precio);
+
+                    actualizarTotalAPagar();
+                },
+                error: function (xhr, status, error) {
+                    toastr.error('Error.');
+                }
+            });
+        });
+
+        $(document).on('click', '.delete-button', function (event) {
+            event.preventDefault();
+            var idProducto = $(this).data("id");
+            var idUsuario = '@ViewBag.UserId';
+            var fila = $(this).closest('tr'); // Obtener la fila a eliminar
+
+            $.ajax({
+                url: '/Carrito/EliminarProducto',
+                type: 'POST',
+                data: {
+                    idProducto: idProducto,
+                    idUsuario: idUsuario
+                },
+                success: function (response) {
+                    toastr.success('Eliminado.');
+                    fila.remove();
+                    actualizarTotalAPagar();
+
+                    var totalProductos = $('.table tbody tr').length;
+                    if (totalProductos <= 0) {
+                        $('#pagarCarrito-btn').hide();
+                    }
+                },
+                error: function (xhr, status, error) {
+                    toastr.error('Error al eliminar el producto.');
+                }
+            });
+        });
+
+         $(document).ready(function() {
         $('#pagarCarrito-btn').on('click', function(event) {
             event.preventDefault();
 
@@ -189,7 +268,7 @@ $(document).ready(function() {
                 success: function(response) {
                     toastr.success('Exitoso.');
                     setTimeout(function () {
-                        window.location.href = '/Carrito/PagoExitoso';
+                        window.location.href = '/Carrito/PaginaPago';
                     }, 2000);
                 },
                 error: function(xhr, status, error) {
@@ -198,122 +277,5 @@ $(document).ready(function() {
             });
         });
   });
-
-    $(document).on('click', '.up-button', function(event) {
-        event.preventDefault();
-
-        var idProducto = $(this).data("id");
-        var idUsuario = '@ViewBag.UserId';
-        var $cantidadElement = $(this).parent().find('.cantidad');
-        var $totalElement = $(this).closest('tr').find('td:eq(4)');
-
-        $.ajax({
-            url: '/Carrito/AumentarCantidad',
-            type: 'POST',
-            data: {
-                idProducto: idProducto,
-                idUsuario: idUsuario
-            },
-            success: function(response) {
-                toastr.success('Aumentado.');
-
-                var cantidadActual = parseInt($cantidadElement.text());
-                $cantidadElement.text(cantidadActual + 1);
-
-                var precio = parseFloat($cantidadElement.closest('tr').find('td:eq(2)').text());
-                $totalElement.text((cantidadActual + 1) * precio);
-
-                actualizarTotalAPagar();
-            },
-            error: function(xhr, status, error) {
-                toastr.error('Error.');
-            }
-        });
     });
-
-    $(document).on('click', '.down-button', function(event) {
-        event.preventDefault();
-
-        var idProducto = $(this).data("id");
-        var idUsuario = '@ViewBag.UserId';
-        var $cantidadElement = $(this).parent().find('.cantidad');
-        var $totalElement = $(this).closest('tr').find('td:eq(4)');
-
-        $.ajax({
-            url: '/Carrito/DisminuirCantidad',
-            type: 'POST',
-            data: {
-                idProducto: idProducto,
-                idUsuario: idUsuario
-            },
-            success: function(response) {
-                toastr.success('Disminuido.');
-
-                var cantidadActual = parseInt($cantidadElement.text());
-                var nuevaCantidad = cantidadActual - 1;
-
-                if (nuevaCantidad >= 1) {
-                    $cantidadElement.text(nuevaCantidad);
-                } else {
-                    $cantidadElement.text(1);
-                    nuevaCantidad = 1;
-                }
-
-                var precio = parseFloat($cantidadElement.closest('tr').find('td:eq(2)').text());
-                $totalElement.text(nuevaCantidad * precio);
-
-                actualizarTotalAPagar();
-            },
-            error: function(xhr, status, error) {
-                toastr.error('Error.');
-            }
-        });
-    });
-
-
-
-$(document).on('click', '.delete-button', function (event) {
-    event.preventDefault();
-
-    var idProducto = $(this).data("id");
-    var idUsuario = '@ViewBag.UserId';
-
-    var fila = $(this).closest('tr'); // Obtener la fila a eliminar
-
-    $.ajax({
-        url: '/Carrito/EliminarProducto',
-        type: 'POST',
-        data: {
-            idProducto: idProducto,
-            idUsuario: idUsuario
-        },
-        success: function(response) {
-            toastr.success('Eliminado.');
-
-            // Eliminar la fila correspondiente de la tabla HTML
-            fila.remove();
-
-            // Actualizar el total a pagar después de eliminar el producto
-            actualizarTotalAPagar();
-
-            // Verificar si el carrito está vacío después de eliminar el producto
-            var totalProductos = $('.table tbody tr').length;
-            if (totalProductos <= 0) {
-                $('#pagarCarrito-btn').hide(); // Ocultar el botón de pago si el carrito está vacío
-            }
-        },
-        error: function(xhr, status, error) {
-            toastr.error('Error al eliminar el producto.');
-        }
-    });
-});
-
-
-
-
-
-
-
-});
 </script>
-

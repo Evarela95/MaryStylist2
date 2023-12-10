@@ -1,0 +1,117 @@
+﻿@model IEnumerable<WebApplication1.Models.Empleados>
+
+@{ ViewBag.Title = "Nosotros";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #f8f8f8;
+        color: #333;
+    }
+
+    .service-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+
+    .service-item {
+        width: calc(30% - 10px);
+        margin-bottom: 20px;
+        text-align: center;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 8px;
+        padding-bottom: 20px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+    }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+        }
+
+    .service-image {
+        width: 350px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 8px;
+    }
+
+    .service-details {
+        padding: 10px;
+    }
+
+    .service-name {
+        font-weight: bold;
+        margin-bottom: 4px;
+        font-size: 15px;
+    }
+
+    .vision-mision-text {
+        margin-top: 20px;
+        font-size: 18px;
+        line-height: 1.6;
+        color: #555;
+    }
+
+        .vision-mision-text strong {
+            font-weight: bold;
+            color: #0066cc;
+        }
+
+    .add-button {
+        padding: 8px 16px;
+        background-color: #B8860b;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        text-decoration: none;
+    }
+
+        .add-button:hover {
+            background-color: #f6cf70;
+            text-decoration: none;
+            color: black;
+        }
+
+    .Titulo {
+        text-align: center;
+        margin-top: 60px;
+        color: #333;
+    }
+</style>
+
+<body>
+    <h2 class="Titulo">Nosotros</h2>
+    <div class="container">
+        <div class="centered-div">
+            <p class="vision-mision-text">Visión: Buscar oportunidades para crecer y aprender continuamente, contribuyendo al éxito de la empresa y desarrollando habilidades que me permitan alcanzar mis metas profesionales a largo plazo</p>
+            <br />
+            <p class="vision-mision-text">Misión: Trabajar de manera diligente y ética para cumplir con las responsabilidades asignadas, colaborar con compañeros de trabajo para lograr objetivos comunes y contribuir positivamente al ambiente de trabajo. Buscar activamente formas de mejorar habilidades y desempeño para agregar valor constante al equipo y alcanzar el progreso profesional.</p>
+        </div>
+    </div>
+    <div class="service-container">
+        @foreach (var empleado in Model)
+        {
+<div class="service-item">
+    @foreach (var imagen in empleado.ImagenesEmpleados)
+    {
+        var base64Imagen = Convert.ToBase64String(imagen.ImageData);
+        var imagenDataUri = $"data:image/png;base64,{base64Imagen}";
+<img class="service-image" src="@imagenDataUri" alt="Service Image">}
+
+    <div class="service-details">
+        <div class="service-name">@($"{empleado.Nombre_Empleado} {empleado.Apellido_Empleado}")</div>
+        <div class="service-name">@($"Descripción: {empleado.Descripcion_Empleado}")</div>
+    </div>
+</div>}
+    </div>
+</body>
