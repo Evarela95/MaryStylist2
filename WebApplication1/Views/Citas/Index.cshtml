@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplication1.Models.Citas>
+﻿﻿@model IEnumerable<WebApplication1.Models.Citas>
 
 @{
     ViewBag.Title = "Index";
@@ -16,7 +16,9 @@
             @Html.ActionLink("Todas las citas", "TodasLasCitas", new { @class = "btn btn-secondary" })
         </div>
         <div class="col justify-content-end">
+
             @Html.ActionLink("Crear nueva cita", "CitasNoPromo", new { @class = "btn btn-primary" })
+
         </div>
     </div>
     <br />
@@ -57,4 +59,7 @@
             }
         </tbody>
     </table>
+
+</div>
+
 </div>

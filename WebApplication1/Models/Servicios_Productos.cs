@@ -11,7 +11,11 @@ namespace WebApplication1.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web;
+
+
     public partial class Servicios_Productos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -31,7 +35,12 @@ namespace WebApplication1.Models
         public int Id_Categoria { get; set; }
         public string FileName { get; set; }
         public byte[] ImageData { get; set; }
-    
+
+        [NotMapped]
+        [Display(Name = "Subir Imagen")]
+        public HttpPostedFileBase ImageFile { get; set; }
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Carrito> Carrito { get; set; }
         public virtual Categorias Categorias { get; set; }

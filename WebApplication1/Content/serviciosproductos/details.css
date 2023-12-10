@@ -1,0 +1,39 @@
+﻿/* /Content/serviciosproductos/details.css */
+
+/* Estilo para la sección de detalles */
+.details-container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Estilo para la lista horizontal */
+.dl-horizontal {
+    margin-left: 20px; /* Añade un margen a la lista horizontal */
+}
+
+    /* Estilo para las etiquetas de la lista horizontal */
+    .dl-horizontal dt {
+        text-align: left;
+        width: 120px; /* Ancho fijo para las etiquetas */
+    }
+
+    /* Estilo para los valores de la lista horizontal */
+    .dl-horizontal dd {
+        margin-left: 140px; /* Margen izquierdo para los valores */
+    }
+
+/* Estilo para los enlaces */
+.details-container a {
+    color: #fff;
+    text-decoration: none;
+}
+
+    /* Estilo para los enlaces de acciones */
+    .details-container a.action-link {
+        margin-right: 10px; /* Margen derecho entre enlaces de acción */
+    }

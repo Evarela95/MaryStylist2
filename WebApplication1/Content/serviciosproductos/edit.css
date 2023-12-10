@@ -1,0 +1,30 @@
+﻿/* /Content/serviciosproductos/edit.css */
+
+/* Estilo para el formulario de edición */
+.form-horizontal {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+    /* Estilo para las etiquetas de formulario */
+    .form-horizontal .control-label {
+        text-align: right;
+        padding: 8px;
+    }
+
+    /* Estilo para los campos de formulario */
+    .form-horizontal .form-control {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Estilo para los botones de formulario */
+    .form-horizontal .btn {
+        background-color: #555;
+        color: #fff;
+    }

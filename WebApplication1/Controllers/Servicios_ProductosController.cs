@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -111,10 +112,20 @@ namespace WebApplication1.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nombre,Precio,Promo,Precio_Promo,Descripcion,Id_Categoria,FileName,ImageData")] Servicios_Productos servicios_Productos)
+        public ActionResult Create([Bind(Include = "Id,Nombre,Precio,Promo,Precio_Promo,Descripcion,Id_Categoria,FileName,ImageData")] Servicios_Productos servicios_Productos, HttpPostedFileBase imagenFile)
         {
             if (ModelState.IsValid)
             {
+                if (imagenFile != null && imagenFile.ContentLength > 0)
+                {
+                    // Guardar la imagen en la carpeta deseada
+                    var imagePath = Path.Combine(Server.MapPath("~/imagenes/ImagenesProductosServicios/"), Path.GetFileName(imagenFile.FileName));
+                    imagenFile.SaveAs(imagePath);
+
+                    // Asignar el nombre de la imagen al modelo
+                    servicios_Productos.FileName = imagenFile.FileName;
+                }
+
                 db.Servicios_Productos.Add(servicios_Productos);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -1,47 +1,43 @@
 ﻿@model WebApplication1.Models.Reseñas
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Eliminar";
 }
 
-<h2>Eliminar</h2>
 
-<h3>¿Está seguro de eliminar esta reseña?</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Comentario)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Comentario)
-        </dd>
+<div class="container mt-4">
+    <h2 class="text-center">Eliminar</h2>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Calificacion)
-        </dt>
+    <div class="delete-container">
+        <h3>¿Estás seguro de que deseas eliminar esto?</h3>
+        <div>
+            <h4>Reseñas</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-3">Comentario</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Comentario)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Calificacion)
-        </dd>
+                <!-- Repite este patrón para otros campos -->
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
-        </dt>
+                <dt class="col-sm-3">Usuario</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.AspNetUsers.Email)</dd>
+            </dl>
 
-        <dd>
-            @Html.DisplayFor(model => model.AspNetUsers.Email)
-        </dd>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-default" /> |
-            @Html.ActionLink("Atrás", "Index")
+                <div class="form-actions no-color text-center mt-4">
+                    <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+                    @Html.ActionLink("Volver a la lista", "Index", new { @class = "btn btn-secondary" })
+                </div>
+            }
         </div>
-    }
+    </div>
 </div>
+
+<!-- Agregamos Bootstrap para el script y JQuery -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
