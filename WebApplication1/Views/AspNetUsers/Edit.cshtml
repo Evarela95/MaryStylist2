@@ -12,48 +12,47 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
+        <div class="form-group row">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.Id)
+        </div>
 
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Correo Electrónico</label>
-                <div class="col-sm-6">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group row">
+            @Html.Label("Correo Electrónico", htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+            <div class="col-sm-6">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Número de Teléfono</label>
-                <div class="col-sm-6">
-                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group row">
+            @Html.Label("Número de Teléfono", htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+            <div class="col-sm-6">
+                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Nombre de Usuario</label>
-                <div class="col-sm-6">
-                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group row">
+            @Html.Label("Nombre de Usuario", htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+            <div class="col-sm-6">
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Puntos de Usuario</label>
-                <div class="col-sm-6">
-                    @Html.EditorFor(model => model.Puntos_Usuario, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Puntos_Usuario, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group row">
+            @Html.Label("Puntos de Usuario", htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+            <div class="col-sm-6">
+                @Html.EditorFor(model => model.Puntos_Usuario, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Puntos_Usuario, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <div class="form-group row">
-                <div class="col-sm-9 offset-sm-3">
-                    <input type="submit" value="Guardar" class="btn btn-default" />
-                    <div class="btn btn-secondary">
-                        @Html.ActionLink("Atrás", "Index", null, new { @style = "color: white;" })
-                    </div>
+        <div class="form-group row">
+            <div class="col-sm-12 offset-sm-3">
+                <input type="submit" value="Guardar" class="btn btn-primary mr-2" />
+                <div class="btn btn-secondary">
+                    @Html.ActionLink("Atrás", "Index", null, new { @style = "color: white;" })
                 </div>
             </div>
         </div>

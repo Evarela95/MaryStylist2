@@ -7,19 +7,19 @@
 
 <div class="container mt-4">
     <h2 class="text-center">Mis citas agendadas</h2>
-
+    <br />
     @if (Model != null && Model.Rows.Count > 0)
     {
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>
-                    <th>Fecha Cita</th>
-                    <th>Hora Cita</th>
-                    <th>Servicio</th>
-                    <th>Precio</th>
-                    <th>Promoción</th>
-                    <th>Descrición</th>
-                    <th>Atiende</th>
+                    <th class="text-center">Fecha</th>
+                    <th class="text-center">Hora</th>
+                    <th class="text-center">Servicio</th>
+                    <th class="text-center">Precio</th>
+                    <th class="text-center">Promoción</th>
+                    <th class="text-center">Descripción</th>
+                    <th class="text-center">Atendió</th>
                 </tr>
             </thead>
             <tbody>

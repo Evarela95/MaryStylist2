@@ -5,52 +5,55 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container mt-5">
-    <h2>Editar</h2>
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Editar Empleado</h2>
 
     @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal" }))
     {
         @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group row">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        </div>
 
         @Html.HiddenFor(model => model.Id_Empleado)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nombre_Empleado, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nombre_Empleado, new { htmlAttributes = new { @class = "form-control" } })
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Nombre_Empleado, "Nombre", htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+            <div class="col-sm-6">
+                @Html.EditorFor(model => model.Nombre_Empleado, new { htmlAttributes = new { @class = "form-control", placeholder = "Nombre" } })
                 @Html.ValidationMessageFor(model => model.Nombre_Empleado, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Apellido_Empleado, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Apellido_Empleado, new { htmlAttributes = new { @class = "form-control" } })
+        <div class="form-group row">
+            @Html.Label("Empleado", htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+            <div class="col-sm-6">
+                @Html.EditorFor(model => model.Apellido_Empleado, new { htmlAttributes = new { @class = "form-control", placeholder = "Apellido" } })
                 @Html.ValidationMessageFor(model => model.Apellido_Empleado, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Descripcion_Empleado, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Descripcion_Empleado, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Descripcion_Empleado, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Correo_Empleado, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Correo_Empleado, new { htmlAttributes = new { @class = "form-control" } })
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Correo_Empleado, "Correo", htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+            <div class="col-sm-6">
+                @Html.EditorFor(model => model.Correo_Empleado, new { htmlAttributes = new { @class = "form-control", placeholder = "Correo" } })
                 @Html.ValidationMessageFor(model => model.Correo_Empleado, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Descripcion_Empleado, "Descripción", htmlAttributes: new { @class = "col-sm-3 col-form-label" })
+            <div class="col-sm-6">
+                @Html.EditorFor(model => model.Descripcion_Empleado, new { htmlAttributes = new { @class = "form-control", placeholder = "Descripción" } })
+                @Html.ValidationMessageFor(model => model.Descripcion_Empleado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-offset-5 col-md-6">
                 <button type="submit" class="btn btn-primary">Guardar</button>
-                @Html.ActionLink("Volver a la Lista", "Index")
+                @Html.ActionLink("Volver a la Lista", "Index", null, new { @class = "btn btn-secondary ml-2" })
             </div>
         </div>
     }
@@ -59,4 +62,3 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-

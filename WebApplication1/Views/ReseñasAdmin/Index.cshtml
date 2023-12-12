@@ -10,16 +10,15 @@
     <h2 class="text-center mb-4">Administrador de reseñas</h2>
 
     <p>
-        @Html.ActionLink("Crear Nueva", "Create", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Crear Nueva", "Create", null, new { })
     </p>
-
     <table class="table table-bordered">
         <thead class="thead-dark">
             <tr>
-                <th>@Html.DisplayNameFor(model => model.Comentario)</th>
-                <th>@Html.DisplayNameFor(model => model.Calificacion)</th>
-                <th>@Html.DisplayNameFor(model => model.AspNetUsers.Email)</th>
-                <th>Acciones</th>
+                <th class="text-center">@Html.DisplayNameFor(model => model.Comentario)</th>
+                <th class="text-center">@Html.DisplayNameFor(model => model.Calificacion)</th>
+                <th class="text-center">@Html.DisplayNameFor(model => model.AspNetUsers.Email)</th>
+                <th class="text-center">Acciones</th>
             </tr>
         </thead>
         <tbody>
