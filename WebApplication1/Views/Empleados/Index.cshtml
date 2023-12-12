@@ -36,9 +36,8 @@
                     <td>
                         <div class="btn-group" role="group">
                             @Html.ActionLink("Editar", "Edit", new { id = item.Id_Empleado }, new { @class = "btn btn-warning btn-sm" })
-                            @Html.ActionLink("Detalles", "Details", new { id = item.Id_Empleado }, new { @class = "btn btn-info btn-sm" })
                             @Html.ActionLink("Eliminar", "Delete", new { id = item.Id_Empleado }, new { @class = "btn btn-danger btn-sm" })
-                            @Html.ActionLink("Imagen", "EmpleadoImagen", new { id = item.Id_Empleado }, new { @class = "btn btn-warning btn-sm" })
+                            @Html.ActionLink("Imagen", "EmpleadoImagen", new { id = item.Id_Empleado }, new { @class = "btn btn-info btn-sm" })
                             @Html.ActionLink("Descargar Planilla", "Planilla", new { id = item.Id_Empleado, nombre = item.Nombre_Empleado, apellido = item.Apellido_Empleado }, new { @class = "btn btn-success btn-sm" })
                         </div>
                     </td>

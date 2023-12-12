@@ -1,28 +1,80 @@
-﻿
-@model List<string>
+﻿@model List<string>
 
 @{
     ViewBag.Title = "Gestión de Imágenes";
 }
 
-<h2>Imágenes de la galería</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <style>
+        .image-container {
+            margin-bottom: 20px;
+            overflow: hidden;
+            text-align: center;
+        }
 
-<h3>Subir una nueva imagen</h3>
-@using (Html.BeginForm("Upload", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <input type="file" name="file" />
-    <input type="submit" value="Subir" />
-}
+        img {
+            max-width: 100%;
+            height: auto; /* Ajusta automáticamente la altura para mantener la proporción de aspecto */
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+            display: inline-block;
+        }
 
+        .medium-image {
+            max-width: 600px; /* Tamaño mediano aumentado */
+        }
 
-@foreach (var imageName in Model)
-{
-    <div class="image-container">
-        <img src="~/images/@imageName" alt="@imageName" width="400" height="400" />
-        @using (Html.BeginForm("Delete", "Image", new { imageName = imageName }, FormMethod.Post))
+        input[type="file"] {
+            display: block;
+            margin: 10px auto;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+            display: block;
+            margin: 10px auto;
+        }
+
+            input[type="submit"]:hover {
+                background-color: #0056b3;
+            }
+
+        form {
+            display: inline-block; /* Permite que los formularios estén uno al lado del otro */
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Gestión de Imágenes</h2>
+
+        <h3>Subir una nueva imagen</h3>
+        @using (Html.BeginForm("Upload", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
-            <input type="submit" value="Eliminar" onclick="return confirm('¿Estás seguro de que deseas eliminar esta imagen?');" />
+            <input type="file" name="file" />
+            <input type="submit" value="Subir" />
+        }
+
+        @foreach (var imageName in Model)
+        {
+            <div class="image-container">
+                <img src="~/images/@imageName" alt="@imageName" class="medium-image" />
+                @using (Html.BeginForm("Delete", "Image", new { imageName = imageName }, FormMethod.Post))
+                {
+                    <input type="submit" value="Eliminar" onclick="return confirm('¿Estás seguro de que deseas eliminar esta imagen?');" />
+                }
+            </div>
         }
     </div>
-}
-
+</body>
+</html>

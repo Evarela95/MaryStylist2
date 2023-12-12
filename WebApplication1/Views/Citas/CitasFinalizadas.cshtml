@@ -17,16 +17,16 @@
             @Html.ActionLink("Atrás", "Index", new { @class = "btn btn-secondary" })
         </div>
     </div>
-
+    <br />
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
             <tr>
-                <th style="text-align: center;">@Html.DisplayNameFor(model => model.Fecha_Cita)</th>
-                <th style="text-align: center;">@Html.DisplayNameFor(model => model.Hora_Cita)</th>
+                <th style="text-align: center;">Fecha</th>
+                <th style="text-align: center;">Hora</th>
                 <th style="text-align: center;">@Html.DisplayNameFor(model => model.Estado)</th>
                 <th style="text-align: center;">@Html.DisplayNameFor(model => model.AspNetUsers.Email)</th>
-                <th style="text-align: center;">@Html.DisplayNameFor(model => model.Empleados.Nombre_Empleado)</th>
-                <th style="text-align: center;">@Html.DisplayNameFor(model => model.Servicios_Productos.Nombre)</th>
+                <th style="text-align: center;">Empleado</th>
+                <th style="text-align: center;">Servicio</th>
                 <th style="text-align: center;">Acciones</th>
             </tr>
         </thead>
@@ -42,7 +42,7 @@
                     <td style="text-align: center;">@Html.DisplayFor(modelItem => item.Servicios_Productos.Nombre)</td>
                     <td style="text-align: center;">
                         <div class="btn-group" role="group">
-                            @Html.ActionLink("Editar", "Edit", new { id = item.Id_Cita }, new { @class = "btn btn-warning btn-sm" }) |
+                            @Html.ActionLink("Editar", "Edit", new { id = item.Id_Cita }, new { @class = "btn btn-warning btn-sm" }) 
                             @Html.ActionLink("Eliminar", "Delete", new { id = item.Id_Cita }, new { @class = "btn btn-danger btn-sm" })
                         </div>
                     </td>
